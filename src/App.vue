@@ -1,10 +1,28 @@
 <template>
-  <div class="container"></div>
+  <div class="container">
+    <div class="card">
+      <h2 :id @click="console.log('id', id)">header</h2>
+      <Child />
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import Child from './Child.vue'
+
+const id = ref('some_id')
+</script>
 
 <style>
+.wrapper {
+  color: blue;
+}
+body {
+  all: unset;
+  background: #17153d;
+  font-family: 'Roboto';
+}
 h1,
 h2,
 h3,
