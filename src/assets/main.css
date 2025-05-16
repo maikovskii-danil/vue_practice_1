@@ -1,35 +1,48 @@
-@import './base.css';
-
 #app {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+body {
+  all: unset;
+  background: #17153d;
+  font-family: 'Roboto';
 }
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+ul {
+  all: unset;
+}
+li {
+  all: unset;
+}
+a {
+  all: unset;
+  cursor: pointer;
+}
+button {
+  all: unset;
+}
+.active-link {
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  padding-top: 8px;
+}
+.card {
+  background: #fff;
+  width: 600px;
+  margin: auto;
+  padding: 8px;
+  border-radius: 4px;
 }
