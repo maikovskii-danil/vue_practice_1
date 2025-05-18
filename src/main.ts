@@ -1,6 +1,7 @@
 import '@fontsource/roboto'
 import './assets/main.css'
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import Button from './uikit/button.vue'
 import Input from './uikit/input.vue'
@@ -10,7 +11,9 @@ import Select from './uikit/select.vue'
 import Alert from './uikit/alert.vue'
 import Loader from './uikit/loader.vue'
 import Modal from './uikit/modal.vue'
+import router from './router'
 
+const pinia = createPinia()
 const app = createApp(App)
 
 app.component('AppButton', Button)
@@ -21,5 +24,8 @@ app.component('AppSelect', Select)
 app.component('AppAlert', Alert)
 app.component('AppLoader', Loader)
 app.component('AppModal', Modal)
+
+app.use(pinia)
+app.use(router)
 
 app.mount('#app')

@@ -5,7 +5,7 @@
 
 body {
   all: unset;
-  background: #17153d;
+  background: #191921;
   font-family: 'Roboto';
 }
 h1,
@@ -37,7 +37,6 @@ button {
   flex-direction: column;
   gap: 8px;
   justify-content: center;
-  padding-top: 8px;
 }
 .card {
   background: #fff;

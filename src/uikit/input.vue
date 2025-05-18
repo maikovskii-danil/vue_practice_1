@@ -1,6 +1,6 @@
 <script>
 export default {
-  emits: "update:modelValue",
+  emits: ['update:modelValue'],
   props: {
     id: {
       type: String,
@@ -9,6 +9,10 @@ export default {
     type: {
       type: String,
       default: null,
+    },
+    autocomplete: {
+      type: String,
+      default: 'off',
     },
     name: {
       type: String,
@@ -25,49 +29,49 @@ export default {
     renderStrategy: {
       type: String,
       required: false,
-      default: "default", // 'default' | 'number'
+      default: 'default', // 'default' | 'number'
     },
     changeStrategy: {
       type: String,
       required: false,
-      default: "default", // 'default' | 'number'
+      default: 'default', // 'default' | 'number'
     },
   },
   data() {
     return {
-      prevValue: this.value ?? "",
-    };
+      prevValue: this.value ?? '',
+    }
   },
   methods: {
     handleInput(evt) {
-      if (this.changeStrategy === "number") {
-        const trimmedTextValue = evt.target.value.trim();
+      if (this.changeStrategy === 'number') {
+        const trimmedTextValue = evt.target.value.trim()
 
         if (trimmedTextValue) {
-          const numValue = parseInt(evt.target.value);
+          const numValue = parseInt(evt.target.value)
 
           if (isNaN(numValue)) {
-            evt.target.value = this.prevValue;
+            evt.target.value = this.prevValue
           } else {
-            evt.target.value = numValue.toString();
+            evt.target.value = numValue.toString()
           }
         }
       }
 
-      this.prevValue = evt.target.value;
-      this.$emit("update:modelValue", evt.target.value);
+      this.prevValue = evt.target.value
+      this.$emit('update:modelValue', evt.target.value)
     },
   },
   computed: {
     calculatedType() {
-      if (this.renderStrategy === "number") {
-        return "number";
+      if (this.renderStrategy === 'number') {
+        return 'number'
       }
 
-      return "text";
+      return 'text'
     },
   },
-};
+}
 </script>
 
 <template>
@@ -80,6 +84,7 @@ export default {
       :name="name"
       :value="modelValue"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
       @input="handleInput($event)"
     />
     <input
@@ -89,6 +94,7 @@ export default {
       :type="type ?? calculatedType"
       :name="name"
       :placeholder="placeholder"
+      :autocomplete="autocomplete"
       @input="handleInput($event)"
     />
   </label>

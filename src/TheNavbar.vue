@@ -1,33 +1,40 @@
 <template>
   <header class="header" v-if="visible">
-    <h3>Project</h3>
+    <h1>Tinkoff</h1>
     <ul class="navbar-menu">
       <li>
-        <a href="#">About</a>
+        <router-link :to="{ name: 'applications' }">Заявки</router-link>
       </li>
       <li>
-        <a href="#">Myself</a>
+        <router-link :to="{ name: 'help' }">Помощь</router-link>
+      </li>
+      <li>
+        <a href="#">Сообщения</a>
+      </li>
+      <li>
+        <a href="#" @click.prevent="userStore.logout">Выйти</a>
       </li>
     </ul>
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import useUserStore from './store'
 
-export default defineComponent({
-  props: {
-    visible: {
-      type: Boolean,
-      default: false,
-    },
+const userStore = useUserStore()
+
+defineProps({
+  visible: {
+    type: Boolean,
+    default: false,
   },
 })
 </script>
 
 <style scoped>
-h3 {
+h1 {
   cursor: default;
+  font-size: 24px;
 }
 .header {
   background: #fff;
@@ -43,7 +50,8 @@ h3 {
 .navbar-menu {
   all: unset;
   display: flex;
-  gap: 8px;
+  gap: 24px;
+  margin-right: 32px;
   a {
     cursor: pointer;
     &:hover {

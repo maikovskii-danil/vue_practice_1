@@ -1,15 +1,47 @@
 <template>
-  <TheNavbar visible />
-  <div class="container">
-    <div class="card">
-      <h2 :id @click="console.log('id', id)">header</h2>
+  <div class="full-min-height" :class="{ centered: !userStore.isLoggedIn }">
+    <TheNavbar :visible="userStore.isLoggedIn" />
+    <Teleport to="body">
+      <app-alert
+        v-show="userStore.errors.api"
+        type="danger"
+        title="Ошибка!"
+        :text="userStore.errors.api"
+        class="fixed width-350"
+        @click="userStore.errors.api = ''"
+      ></app-alert>
+    </Teleport>
+    <div class="container" :class="{ uncentered: userStore.isLoggedIn }">
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import TheNavbar from './TheNavbar.vue'
+import useUserStore from './store'
 
-const id = ref('some_id')
+const userStore = useUserStore()
 </script>
+
+<style>
+.full-min-height {
+  min-height: 100vh;
+}
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.uncentered {
+  padding-top: 8px;
+}
+.fixed {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+}
+.width-350 {
+  width: 350px;
+}
+</style>

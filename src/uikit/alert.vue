@@ -1,34 +1,32 @@
 <template>
-  <div class="alert" :class="type">
+  <div class="alert" :="$attrs" :class="type">
     <div class="title" :class="type">{{ title }}</div>
     <div class="text">{{ text }}</div>
-    <app-button type="button" :renderStrategy="type" @click="$emit('close')">
-      Закрыть
-    </app-button>
+    <app-button type="button" :renderStrategy="type" @click="$emit('close')"> Закрыть </app-button>
   </div>
 </template>
 
 <script>
 export default {
-  emits: ["close"],
+  emits: ['close'],
   props: {
     type: {
       type: String,
       required: false,
-      default: "primary",
+      default: 'primary',
     },
     title: {
       type: String,
       required: false,
-      default: "Alert Title",
+      default: 'Alert Title',
     },
     text: {
       type: String,
       required: false,
-      default: "Some text description",
+      default: 'Some text description',
     },
   },
-};
+}
 </script>
 
 <style scoped>

@@ -1,28 +1,41 @@
-<script>
-export default {
-  props: {
-    options: {
-      type: Array, // [{ id: "default", displayName: "value" }]
-      required: true,
-    },
-  },
-};
-</script>
-
 <template>
-  <select class="select">
-    <option
-      v-for="option in options"
-      class="option"
-      :key="option.id"
-      :value="option.id"
-    >
-      {{ option.displayName }}
-    </option>
-  </select>
+  <div class="select-wrapper">
+    <select ref="selectRef" class="select" :="$attrs">
+      <option v-for="option in options" class="option" :key="option.id" :value="option.id">
+        {{ option.displayName || 'Не выбрано' }}
+      </option>
+    </select>
+    <div class="arrow">
+      <img :src="ArrowSvgLink" alt="" />
+    </div>
+  </div>
 </template>
 
+<script setup lang="ts">
+import ArrowSvgLink from '@/assets/arrow.svg'
+import { useTemplateRef } from 'vue'
+
+const selectTemplateRef = useTemplateRef<HTMLSelectElement>('selectRef')
+
+interface Props {
+  options: Array<{ id: string; displayName: string }>
+}
+
+const { options } = defineProps<Props>()
+</script>
+
 <style scoped>
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+.arrow {
+  position: absolute;
+  top: 14px;
+  right: 4px;
+  width: 18px;
+  height: 15px;
+}
 .select {
   all: unset;
   box-sizing: border-box;

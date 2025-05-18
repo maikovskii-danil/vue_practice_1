@@ -4,29 +4,41 @@ export default {
     renderStrategy: {
       type: String,
       required: false,
-      default: "primary",
+      default: 'primary',
     },
     disabled: {
       type: Boolean,
       required: false,
       default: false,
     },
+    small: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       required: false,
-      default: "button",
+      default: 'button',
     },
   },
   data() {
     return {
-      emits: ["click"],
-    };
+      emits: ['click'],
+    }
   },
-};
+}
 </script>
 
 <template>
-  <button :type="type" :class="`btn ${renderStrategy}`" :disabled="disabled">
+  <button
+    :type="type"
+    :class="{
+      btn: true,
+      'btn-small': small,
+      [renderStrategy]: true,
+    }"
+    :disabled="disabled"
+  >
     <slot />
   </button>
 </template>
@@ -56,6 +68,12 @@ export default {
     color: #aaa;
     cursor: not-allowed;
   }
+}
+.btn-small {
+  font-size: 12px;
+  padding: 3px 6px;
+  min-width: 40px;
+  min-height: 20px;
 }
 .primary {
   border: 2px solid #138b4d;

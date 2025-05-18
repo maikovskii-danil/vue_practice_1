@@ -1,12 +1,12 @@
 <template>
   <div class="modal-backdrop" @click="$emit('close')"></div>
-  <div class="modal">Модалка</div>
+  <div class="modal"><slot /></div>
 </template>
 
 <script>
 export default {
-  emits: ["close"],
-};
+  emits: ['close'],
+}
 </script>
 
 <style scoped>
@@ -20,7 +20,10 @@ export default {
   opacity: 0.4;
 }
 .modal {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   display: flex;
   align-items: center;
