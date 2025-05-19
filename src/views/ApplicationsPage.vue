@@ -22,6 +22,16 @@
       </div>
     </app-modal>
   </Teleport>
+  <Teleport to="body">
+    <app-alert
+      v-if="isSuccessfullyCreated"
+      type="primary"
+      title="Успешно!"
+      text="Заявка обновлена"
+      class="fixed width-350"
+      @close="isSuccessfullyCreated = false"
+    ></app-alert>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -35,10 +45,12 @@ import type { IApplication } from '@/types'
 const router = useRouter()
 const applicationsStore = useApplicationsStore()
 const isOpenedModal = ref(false)
+const isSuccessfullyCreated = ref(false)
 
 const submit = (evt: IApplication) => {
   applicationsStore.create(evt)
   isOpenedModal.value = false
+  isSuccessfullyCreated.value = true
 }
 
 const openApplication = (id: string) => {
