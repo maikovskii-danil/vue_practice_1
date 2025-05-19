@@ -9,9 +9,6 @@
         <router-link :to="{ name: 'help' }">Помощь</router-link>
       </li>
       <li>
-        <a href="#">Сообщения</a>
-      </li>
-      <li>
         <a href="#" @click.prevent="userStore.logout">Выйти</a>
       </li>
     </ul>
