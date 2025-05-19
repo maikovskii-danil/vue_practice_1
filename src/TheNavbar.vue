@@ -18,14 +18,13 @@
 <script setup lang="ts">
 import useUserStore from './stores/user'
 
+interface Props {
+  visible: boolean
+}
+
 const userStore = useUserStore()
 
-defineProps({
-  visible: {
-    type: Boolean,
-    default: false,
-  },
-})
+const { visible = false } = defineProps<Props>()
 </script>
 
 <style scoped>
