@@ -1,10 +1,10 @@
 import { userSchema } from '@/types/validation'
-import type { TUserData } from '@/types'
+import type { IUserData } from '@/types'
 
 class LocalStorage {
   USER_KEY = 'user'
 
-  getUser(): TUserData {
+  getUser(): IUserData {
     const storedUser = localStorage.getItem(this.USER_KEY)
 
     try {
@@ -17,7 +17,7 @@ class LocalStorage {
 
     return { email: '', password: '' }
   }
-  setUser(user: TUserData) {
+  setUser(user: IUserData) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user))
   }
 }
