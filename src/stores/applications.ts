@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { reactive, ref } from 'vue'
 import type { IApplication } from '@/types'
-import { INITIAL_APPLICATIONS } from '@/consts'
+import { INITIAL_APPLICATIONS, INITIAL_LAST_ID } from '@/consts'
 
 const useApplicationsStore = defineStore('applications', () => {
-  const lastId = ref(7)
+  const lastId = ref(INITIAL_LAST_ID)
   const applications = reactive<IApplication[]>(INITIAL_APPLICATIONS)
 
   const create = (newApplication: Omit<IApplication, 'id'>) => {

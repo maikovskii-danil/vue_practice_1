@@ -59,6 +59,8 @@ export const INITIAL_APPLICATIONS: IApplication[] = [
   },
 ]
 
+export const INITIAL_LAST_ID = (INITIAL_APPLICATIONS.at(-1)?.id ?? 0).toString()
+
 export const REGISTERED_USERS_DATA: IUserData[] = [
   {
     email: 'some.user@automation.testing',

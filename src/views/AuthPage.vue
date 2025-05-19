@@ -26,9 +26,10 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import useUserStore from '@/stores/user'
+import type { IUserData } from '@/types'
 
 const userStore = useUserStore()
-const userForm = reactive({ email: '', password: '' })
+const userForm = reactive<IUserData>({ email: '', password: '' })
 
 const submit = () => {
   userStore.tryLoginProcess(userForm)
