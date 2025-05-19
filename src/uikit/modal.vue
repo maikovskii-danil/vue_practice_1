@@ -1,12 +1,10 @@
 <template>
-  <div class="modal-backdrop" @click="$emit('close')"></div>
+  <div class="modal-backdrop" @click="emit('close')"></div>
   <div class="modal"><slot /></div>
 </template>
 
-<script>
-export default {
-  emits: ['close'],
-}
+<script setup lang="ts">
+const emit = defineEmits(['close'])
 </script>
 
 <style scoped>

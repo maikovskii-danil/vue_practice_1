@@ -1,47 +1,24 @@
-<script>
-export default {
-  props: {
-    renderStrategy: {
-      type: String,
-      required: false,
-      default: 'primary',
-    },
-    disabled: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
-    small: {
-      type: Boolean,
-      default: false,
-    },
-    type: {
-      type: String,
-      required: false,
-      default: 'button',
-    },
-  },
-  data() {
-    return {
-      emits: ['click'],
-    }
-  },
-}
-</script>
-
 <template>
   <button
-    :type="type"
+    :="$attrs"
     :class="{
       btn: true,
       'btn-small': small,
       [renderStrategy]: true,
     }"
-    :disabled="disabled"
   >
     <slot />
   </button>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  renderStrategy: string
+  small: boolean
+}
+
+const { renderStrategy = 'primary', small = false } = defineProps<Props>()
+</script>
 
 <style scoped>
 .btn {

@@ -6,27 +6,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  emits: ['close'],
-  props: {
-    type: {
-      type: String,
-      required: false,
-      default: 'primary',
-    },
-    title: {
-      type: String,
-      required: false,
-      default: 'Alert Title',
-    },
-    text: {
-      type: String,
-      required: false,
-      default: 'Some text description',
-    },
-  },
+<script setup lang="ts">
+interface Props {
+  type: string
+  title: string
+  text: string
 }
+
+const {
+  type = 'primary',
+  title = 'Alert Title',
+  text = 'Some text description',
+} = defineProps<Props>()
 </script>
 
 <style scoped>

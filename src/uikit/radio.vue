@@ -1,37 +1,25 @@
-<script>
-export default {
-  props: {
-    name: {
-      type: String,
-      required: false,
-    },
-    renderStrategy: {
-      type: String,
-      required: false,
-      default: "radio",
-    },
-    checked: {
-      type: Boolean,
-      required: false,
-      default: null,
-    },
-  },
-};
-</script>
-
 <template>
   <label class="container">
     <input
-      v-if="typeof checked === 'boolean'"
       type="radio"
+      class="radio"
       :name="name"
-      :class="renderStrategy"
-      :checked="checked"
+      :checked="modelValue"
+      @change="emit('update:modelValue', !modelValue)"
     />
-    <input v-else type="radio" :name="name" :class="renderStrategy" />
     <div><slot /></div>
   </label>
 </template>
+
+<script setup lang="ts">
+interface Props {
+  name: string
+  modelValue: boolean
+}
+
+const { name = '', modelValue = false } = defineProps<Props>()
+const emit = defineEmits(['update:modelValue'])
+</script>
 
 <style scoped>
 .container {
@@ -59,7 +47,7 @@ export default {
     border: 1px solid #0363c9;
   }
   &::before {
-    content: "";
+    content: '';
     display: block;
     width: 6px;
     height: 6px;
