@@ -2,26 +2,29 @@
   <div class="status" :class="status">{{ statusDisplayName }}</div>
 </template>
 
-<script>
-export default {
-  props: ['status'],
-  computed: {
-    statusDisplayName() {
-      switch (this.status) {
-        case 'active':
-          return 'Активен'
-        case 'completed':
-          return 'Завершен'
-        case 'rejected':
-          return 'Отменен'
-        case 'in_progress':
-          return 'Выполняется'
-        default:
-          return '== Unknown =='
-      }
-    },
-  },
+<script setup lang="ts">
+import { computed } from 'vue'
+
+interface Props {
+  status: string
 }
+
+const { status } = defineProps<Props>()
+
+const statusDisplayName = computed(() => {
+  switch (status) {
+    case 'active':
+      return 'Активен'
+    case 'completed':
+      return 'Завершен'
+    case 'rejected':
+      return 'Отменен'
+    case 'in_progress':
+      return 'Выполняется'
+    default:
+      return '== Unknown =='
+  }
+})
 </script>
 
 <style scoped>
