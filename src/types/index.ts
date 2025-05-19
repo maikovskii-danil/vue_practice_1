@@ -1,12 +1,8 @@
 import { z } from 'zod'
-import { userSchema } from './validation'
+import { userSchema, applicationSchema } from './validation'
 
-export type TUserData = z.infer<typeof userSchema>
+export interface IUserData extends z.infer<typeof userSchema> {}
 
-export type TApplication = {
+export interface IApplication extends z.infer<typeof applicationSchema> {
   id: string
-  fullName: string
-  phone: string
-  amount: number
-  status: string
 }

@@ -28,9 +28,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 300px;
-  background: #fff;
   margin: auto;
 }
 </style>

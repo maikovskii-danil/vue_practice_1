@@ -8,7 +8,18 @@
   </div>
   <Teleport to="body">
     <app-modal v-if="isOpenedModal" @close="isOpenedModal = false">
-      <div class="modal-wrapper">Модалка</div>
+      <div class="modal-wrapper">
+        <h3 class="modal-header">Создать заявку</h3>
+        <ApplicationForm
+          :initialForm="{
+            fullName: '',
+            phone: '',
+            amount: 0,
+            status: 'active',
+          }"
+          @submit="submit"
+        />
+      </div>
     </app-modal>
   </Teleport>
 </template>
@@ -17,11 +28,18 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Applications from '@/components/Applications.vue'
+import ApplicationForm from '@/forms/ApplicationForm.vue'
 import useApplicationsStore from '@/stores/applications'
+import type { IApplication } from '@/types'
 
 const router = useRouter()
 const applicationsStore = useApplicationsStore()
 const isOpenedModal = ref(false)
+
+const submit = (evt: IApplication) => {
+  applicationsStore.create(evt)
+  isOpenedModal.value = false
+}
 
 const openApplication = (id: string) => {
   router.push({ name: 'application', params: { applicationId: id } })
@@ -33,6 +51,12 @@ const openApplication = (id: string) => {
   padding: 32px 12px 12px 12px;
 }
 .modal-wrapper {
+  width: 500px;
   padding: 12px;
+  border-radius: 8px;
+  background: #fff;
+}
+.modal-header {
+  margin-top: 16px;
 }
 </style>

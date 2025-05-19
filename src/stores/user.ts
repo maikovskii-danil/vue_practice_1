@@ -1,37 +1,24 @@
 import { defineStore } from 'pinia'
-import { ref, reactive, computed } from 'vue'
+import { reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import type { TUserData } from '@/types'
+import type { IUserData } from '@/types'
+import { REGISTERED_USERS_DATA, REGISTERED_USERS_DATA_MAP } from '@/consts'
 import localStorage from './localStorage'
 
 const useUserStore = defineStore('user', () => {
   const router = useRouter()
 
-  const usersData = reactive<TUserData[]>([
-    {
-      email: 'some.user@automation.testing',
-      password: '123456',
-    },
-  ])
+  const currentUser = reactive<IUserData>(localStorage.getUser())
 
-  const usersMap = computed(() => {
-    return usersData.reduce(
-      (acc, user) => {
-        return { ...acc, [user.email]: user }
-      },
-      {} as Record<string, TUserData>,
-    )
+  const isLoggedIn = computed(() => {
+    return !!(currentUser.email && currentUser.password)
   })
-
-  const currentUser = reactive<TUserData>(localStorage.getUser())
-
-  const isLoggedIn = ref(!!(currentUser.email && currentUser.password))
   const errors = reactive({
     form: { email: '', password: '' },
     api: '',
   })
 
-  const formValidation = (user: TUserData) => {
+  const formValidation = (user: IUserData) => {
     if (!user.email) {
       errors.form.email = 'Обязательное поле'
     } else {
@@ -49,8 +36,8 @@ const useUserStore = defineStore('user', () => {
     return !(errors.form.email || errors.form.password)
   }
 
-  const apiValidation = (user: TUserData) => {
-    const foundUser = usersMap.value[user.email]
+  const apiValidation = (user: IUserData) => {
+    const foundUser = REGISTERED_USERS_DATA_MAP[user.email]
 
     if (!foundUser) {
       errors.api = 'Нет пользователя с таким email'
@@ -63,7 +50,7 @@ const useUserStore = defineStore('user', () => {
     return !errors.api
   }
 
-  const tryLoginProcess = (user: TUserData) => {
+  const tryLoginProcess = (user: IUserData) => {
     const isValidForm = formValidation(user)
 
     if (!isValidForm) {
@@ -80,15 +67,13 @@ const useUserStore = defineStore('user', () => {
     router.push({ name: 'applications' })
   }
 
-  const login = (user: TUserData) => {
-    isLoggedIn.value = true
+  const login = (user: IUserData) => {
     currentUser.email = user.email
     currentUser.password = user.password
     localStorage.setUser(currentUser)
   }
 
   const logout = () => {
-    isLoggedIn.value = false
     currentUser.email = ''
     currentUser.password = ''
     localStorage.setUser(currentUser)
@@ -97,8 +82,8 @@ const useUserStore = defineStore('user', () => {
   }
 
   return {
-    usersData,
-    usersMap,
+    usersData: REGISTERED_USERS_DATA,
+    usersMap: REGISTERED_USERS_DATA_MAP,
     currentUser,
     isLoggedIn,
     errors,

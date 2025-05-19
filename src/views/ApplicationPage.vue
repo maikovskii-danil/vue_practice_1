@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import ApplicationCard from '@/components/ApplicationCard.vue'
 import useApplicationsStore from '@/stores/applications'
-import type { TApplication } from '@/types'
+import type { IApplication } from '@/types'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -43,7 +43,7 @@ const currentApplication = computed(() => {
   return applicationsStore.applications.find((application) => application.id === applicationId)
 })
 
-const changeApplication = (updated: TApplication) => {
+const changeApplication = (updated: IApplication) => {
   isOpenedAlertSuccess.value = true
   change(updated)
 }

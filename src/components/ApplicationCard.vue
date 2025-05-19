@@ -21,7 +21,7 @@
       <div>
         <div class="change-status-label">Изменить статус:</div>
         <app-select
-          :options="options"
+          :options="APPLICATION_STATUS_OPTIONS"
           :modelValue="application.status"
           @update:modelValue="emit('change-application', { ...application, status: $event })"
         />
@@ -36,18 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import type { TApplication } from '@/types'
+import type { IApplication } from '@/types'
+import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import Status from './Status.vue'
 
 const emit = defineEmits(['change-application', 'remove-application'])
-const { application } = defineProps<{ application: TApplication }>()
-
-const options = [
-  { id: 'active', displayName: 'Активен' },
-  { id: 'completed', displayName: 'Завершен' },
-  { id: 'in_progress', displayName: 'Выполняется' },
-  { id: 'rejected', displayName: 'Отменен' },
-]
+const { application } = defineProps<{ application: IApplication }>()
 </script>
 
 <style scoped>

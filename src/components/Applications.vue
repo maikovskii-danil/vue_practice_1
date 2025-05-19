@@ -6,13 +6,7 @@
       <app-input placeholder="Введите имя" v-model="filters.fullname" />
       <app-select
         v-model="filters.status"
-        :options="[
-          { id: 'empty', displayName: '' },
-          { id: 'active', displayName: 'Активен' },
-          { id: 'completed', displayName: 'Завершен' },
-          { id: 'in_progress', displayName: 'Выполняется' },
-          { id: 'rejected', displayName: 'Отменен' },
-        ]"
+        :options="[{ id: 'empty', displayName: '' }, ...APPLICATION_STATUS_OPTIONS]"
       />
       <div
         v-if="filters.fullname || filters.status !== 'empty'"
@@ -50,11 +44,12 @@
 
 <script setup lang="ts">
 import { computed, reactive } from 'vue'
-import type { TApplication } from '@/types'
+import type { IApplication } from '@/types'
+import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import Status from './Status.vue'
 
 const emit = defineEmits(['open-modal-create', 'open-application'])
-const { applications } = defineProps<{ applications: TApplication[] }>()
+const { applications } = defineProps<{ applications: IApplication[] }>()
 const filters = reactive({ fullname: '', status: 'empty' })
 
 const filteredApplications = computed(() => {
