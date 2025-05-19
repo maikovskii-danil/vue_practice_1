@@ -1,37 +1,18 @@
 <template>
   <div class="card">
     <h1 class="title">Войдите в систему</h1>
-    <form @submit.prevent="submit">
-      <div class="form-control">
-        <label for="email">Email</label>
-        <app-input v-model="userForm.email" type="email" id="email" placeholder="Введите email" />
-        <div class="error">{{ userStore.errors.form.email }}</div>
-      </div>
-      <div class="form-control">
-        <label for="password">Пароль</label>
-        <app-input
-          v-model="userForm.password"
-          type="password"
-          id="password"
-          placeholder="Введите пароль"
-          autocomplete="on"
-        />
-        <div class="error">{{ userStore.errors.form.password }}</div>
-      </div>
-      <app-button type="submit">Войти</app-button>
-    </form>
+    <AuthForm :initialForm="{ email: '', password: '' }" @submit="submit" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
 import useUserStore from '@/stores/user'
 import type { IUserData } from '@/types'
+import AuthForm from '@/forms/AuthForm.vue'
 
 const userStore = useUserStore()
-const userForm = reactive<IUserData>({ email: '', password: '' })
 
-const submit = () => {
+const submit = (userForm: IUserData) => {
   userStore.tryLoginProcess(userForm)
 }
 </script>

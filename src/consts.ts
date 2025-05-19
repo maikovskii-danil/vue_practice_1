@@ -59,7 +59,7 @@ export const INITIAL_APPLICATIONS: IApplication[] = [
   },
 ]
 
-export const INITIAL_LAST_ID = (INITIAL_APPLICATIONS.at(-1)?.id ?? 0).toString()
+export const INITIAL_LAST_ID = +(INITIAL_APPLICATIONS.at(-1)?.id ?? 0)
 
 export const REGISTERED_USERS_DATA: IUserData[] = [
   {

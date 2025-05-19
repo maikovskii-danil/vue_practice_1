@@ -13,8 +13,8 @@
 
 <script setup lang="ts">
 interface Props {
-  renderStrategy: string
-  small: boolean
+  renderStrategy?: string
+  small?: boolean
 }
 
 const { renderStrategy = 'primary', small = false } = defineProps<Props>()

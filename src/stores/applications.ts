@@ -32,7 +32,14 @@ const useApplicationsStore = defineStore('applications', () => {
     }
   }
 
-  return { applications, create, change, remove }
+  return {
+    initialApplications: INITIAL_APPLICATIONS,
+    initialLastId: INITIAL_LAST_ID,
+    applications,
+    create,
+    change,
+    remove,
+  }
 })
 
 export default useApplicationsStore

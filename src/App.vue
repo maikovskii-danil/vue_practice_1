@@ -3,12 +3,12 @@
     <TheNavbar :visible="userStore.isLoggedIn" />
     <Teleport to="body">
       <app-alert
-        v-if="userStore.errors.api"
+        v-if="userStore.error"
         type="danger"
         title="Ошибка!"
-        :text="userStore.errors.api"
+        :text="userStore.error"
         class="fixed width-350"
-        @click="userStore.errors.api = ''"
+        @click="userStore.error = ''"
       ></app-alert>
     </Teleport>
     <div class="container" :class="{ uncentered: userStore.isLoggedIn }">
