@@ -1,6 +1,11 @@
 <template>
   <div class="select-wrapper">
-    <select ref="selectRef" class="select" :="$attrs">
+    <select
+      class="select"
+      :="$attrs"
+      :value="modelValue"
+      @change="emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
+    >
       <option v-for="option in options" class="option" :key="option.id" :value="option.id">
         {{ option.displayName || 'Не выбрано' }}
       </option>
@@ -13,15 +18,14 @@
 
 <script setup lang="ts">
 import ArrowSvgLink from '@/assets/arrow.svg'
-import { useTemplateRef } from 'vue'
-
-const selectTemplateRef = useTemplateRef<HTMLSelectElement>('selectRef')
 
 interface Props {
+  modelValue: string
   options: Array<{ id: string; displayName: string }>
 }
 
-const { options } = defineProps<Props>()
+const { options, modelValue } = defineProps<Props>()
+const emit = defineEmits(['update:modelValue'])
 </script>
 
 <style scoped>

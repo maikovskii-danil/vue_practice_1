@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import type { UserData } from './types'
+import type { TUserData } from '@/types'
+import localStorage from './localStorage'
 
-const useUserStore = defineStore('counter', () => {
+const useUserStore = defineStore('user', () => {
   const router = useRouter()
 
-  const usersData = reactive<UserData[]>([
+  const usersData = reactive<TUserData[]>([
     {
       email: 'some.user@automation.testing',
       password: '123456',
@@ -18,25 +19,19 @@ const useUserStore = defineStore('counter', () => {
       (acc, user) => {
         return { ...acc, [user.email]: user }
       },
-      {} as Record<string, UserData>,
+      {} as Record<string, TUserData>,
     )
   })
 
-  const currentUser = reactive({
-    email: 'some.user@automation.testing',
-    password: '123456',
-  })
+  const currentUser = reactive<TUserData>(localStorage.getUser())
 
-  const isLoggedIn = ref(true)
+  const isLoggedIn = ref(!!(currentUser.email && currentUser.password))
   const errors = reactive({
-    form: {
-      email: '',
-      password: '',
-    },
+    form: { email: '', password: '' },
     api: '',
   })
 
-  const formValidation = (user: { email: string; password: string }) => {
+  const formValidation = (user: TUserData) => {
     if (!user.email) {
       errors.form.email = 'Обязательное поле'
     } else {
@@ -54,7 +49,7 @@ const useUserStore = defineStore('counter', () => {
     return !(errors.form.email || errors.form.password)
   }
 
-  const apiValidation = (user: { email: string; password: string }) => {
+  const apiValidation = (user: TUserData) => {
     const foundUser = usersMap.value[user.email]
 
     if (!foundUser) {
@@ -68,16 +63,8 @@ const useUserStore = defineStore('counter', () => {
     return !errors.api
   }
 
-  const login = (user: { email: string; password: string }) => {
-    isLoggedIn.value = true
-    currentUser.email = user.email
-    currentUser.password = user.password
-  }
-
-  const tryLoginProcess = (user: { email: string; password: string }) => {
+  const tryLoginProcess = (user: TUserData) => {
     const isValidForm = formValidation(user)
-
-    console.log('isValidForm', isValidForm)
 
     if (!isValidForm) {
       return
@@ -93,10 +80,18 @@ const useUserStore = defineStore('counter', () => {
     router.push({ name: 'applications' })
   }
 
+  const login = (user: TUserData) => {
+    isLoggedIn.value = true
+    currentUser.email = user.email
+    currentUser.password = user.password
+    localStorage.setUser(currentUser)
+  }
+
   const logout = () => {
     isLoggedIn.value = false
     currentUser.email = ''
     currentUser.password = ''
+    localStorage.setUser(currentUser)
 
     router.push({ name: 'auth' })
   }
@@ -108,6 +103,7 @@ const useUserStore = defineStore('counter', () => {
     isLoggedIn,
     errors,
     tryLoginProcess,
+    login,
     logout,
   }
 })

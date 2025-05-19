@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import TheNavbar from './TheNavbar.vue'
-import useUserStore from './store'
+import useUserStore from './stores/user'
 
 const userStore = useUserStore()
 </script>

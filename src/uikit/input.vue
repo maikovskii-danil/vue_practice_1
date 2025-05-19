@@ -1,104 +1,18 @@
-<script>
-export default {
-  emits: ['update:modelValue'],
-  props: {
-    id: {
-      type: String,
-      required: false,
-    },
-    type: {
-      type: String,
-      default: null,
-    },
-    autocomplete: {
-      type: String,
-      default: 'off',
-    },
-    name: {
-      type: String,
-      required: false,
-    },
-    modelValue: {
-      type: String,
-      required: false,
-    },
-    placeholder: {
-      type: String,
-      required: false,
-    },
-    renderStrategy: {
-      type: String,
-      required: false,
-      default: 'default', // 'default' | 'number'
-    },
-    changeStrategy: {
-      type: String,
-      required: false,
-      default: 'default', // 'default' | 'number'
-    },
-  },
-  data() {
-    return {
-      prevValue: this.value ?? '',
-    }
-  },
-  methods: {
-    handleInput(evt) {
-      if (this.changeStrategy === 'number') {
-        const trimmedTextValue = evt.target.value.trim()
-
-        if (trimmedTextValue) {
-          const numValue = parseInt(evt.target.value)
-
-          if (isNaN(numValue)) {
-            evt.target.value = this.prevValue
-          } else {
-            evt.target.value = numValue.toString()
-          }
-        }
-      }
-
-      this.prevValue = evt.target.value
-      this.$emit('update:modelValue', evt.target.value)
-    },
-  },
-  computed: {
-    calculatedType() {
-      if (this.renderStrategy === 'number') {
-        return 'number'
-      }
-
-      return 'text'
-    },
-  },
-}
-</script>
-
 <template>
   <label class="container">
     <input
-      v-if="typeof modelValue === 'string'"
       class="input"
-      :id="id"
-      :type="type ?? calculatedType"
-      :name="name"
+      :="$attrs"
       :value="modelValue"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
-      @input="handleInput($event)"
-    />
-    <input
-      v-else
-      class="input"
-      :id="id"
-      :type="type ?? calculatedType"
-      :name="name"
-      :placeholder="placeholder"
-      :autocomplete="autocomplete"
-      @input="handleInput($event)"
+      @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
   </label>
 </template>
+
+<script setup lang="ts">
+const { modelValue } = defineProps<{ modelValue: string }>()
+const emit = defineEmits(['update:modelValue'])
+</script>
 
 <style scoped>
 .container {

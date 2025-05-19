@@ -1,6 +1,10 @@
 <template>
   <div class="card wrapper">
-    <ApplicationsCard @open-modal-create="isOpenedModal = true" />
+    <Applications
+      :applications="applicationsStore.applications"
+      @open-modal-create="isOpenedModal = true"
+      @open-application="openApplication"
+    />
   </div>
   <Teleport to="body">
     <app-modal v-if="isOpenedModal" @close="isOpenedModal = false">
@@ -10,10 +14,18 @@
 </template>
 
 <script setup lang="ts">
-import ApplicationsCard from '@/components/ApplicationsCard.vue'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Applications from '@/components/Applications.vue'
+import useApplicationsStore from '@/stores/applications'
 
+const router = useRouter()
+const applicationsStore = useApplicationsStore()
 const isOpenedModal = ref(false)
+
+const openApplication = (id: string) => {
+  router.push({ name: 'application', params: { applicationId: id } })
+}
 </script>
 
 <style scoped>

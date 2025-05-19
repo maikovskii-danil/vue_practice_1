@@ -13,7 +13,7 @@ export default {
         case 'completed':
           return 'Завершен'
         case 'rejected':
-          return 'Отклонен'
+          return 'Отменен'
         case 'in_progress':
           return 'Выполняется'
         default:

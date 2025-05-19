@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
-import useUserStore from '@/store'
+import useUserStore from '@/stores/user'
 
 const userStore = useUserStore()
 const userForm = reactive({ email: '', password: '' })
