@@ -3,7 +3,7 @@
     <TheNavbar :visible="userStore.isLoggedIn" />
     <Teleport to="body">
       <app-alert
-        v-show="userStore.errors.api"
+        v-if="userStore.errors.api"
         type="danger"
         title="Ошибка!"
         :text="userStore.errors.api"

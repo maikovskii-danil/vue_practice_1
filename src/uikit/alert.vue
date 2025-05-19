@@ -32,6 +32,9 @@ export default {
 <style scoped>
 .alert {
   border-left: 4px solid transparent;
+  border-right: 1px dashed #151414;
+  border-top: 1px dashed #151414;
+  border-bottom: 1px dashed #151414;
   padding: 16px;
   background: #fff;
 }

@@ -1,5 +1,15 @@
 <template>
   <div class="application-page-wrapper">
+    <Teleport to="body">
+      <app-alert
+        v-if="isOpenedAlertSuccess"
+        type="primary"
+        title="Успешно!"
+        text="Заявка обновлена"
+        class="fixed width-350"
+        @close="isOpenedAlertSuccess = false"
+      ></app-alert>
+    </Teleport>
     <button class="link" @click="returnToMain">Назад на Главную</button>
     <ApplicationCard
       v-if="currentApplication"
@@ -13,7 +23,8 @@
 <script setup lang="ts">
 import ApplicationCard from '@/components/ApplicationCard.vue'
 import useApplicationsStore from '@/stores/applications'
-import { computed } from 'vue'
+import type { TApplication } from '@/types'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 interface Props {
@@ -24,12 +35,18 @@ const { applicationId } = defineProps<Props>()
 
 const router = useRouter()
 const applicationsStore = useApplicationsStore()
+const isOpenedAlertSuccess = ref(false)
 
-const { change: changeApplication, remove } = applicationsStore
+const { change, remove } = applicationsStore
 
 const currentApplication = computed(() => {
   return applicationsStore.applications.find((application) => application.id === applicationId)
 })
+
+const changeApplication = (updated: TApplication) => {
+  isOpenedAlertSuccess.value = true
+  change(updated)
+}
 
 const removeApplication = (id: string) => {
   remove(id)
