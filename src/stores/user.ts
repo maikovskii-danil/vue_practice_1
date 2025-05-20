@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
-import { reactive, computed, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { IUserData } from '@/types'
 import { REGISTERED_USERS_DATA, REGISTERED_USERS_DATA_MAP } from '@/consts'
-import localStorage from './localStorage'
+import { useStorage } from '@vueuse/core'
 
 const useUserStore = defineStore('user', () => {
   const router = useRouter()
 
-  const currentUser = reactive<IUserData>(localStorage.getUser())
+  const currentUser = useStorage('user-storage', { email: '', password: '' })
 
   const isLoggedIn = computed(() => {
-    return !!(currentUser.email && currentUser.password)
+    return !!(currentUser.value.email && currentUser.value.password)
   })
   const error = ref('')
 
@@ -41,15 +41,13 @@ const useUserStore = defineStore('user', () => {
   }
 
   const login = (user: IUserData) => {
-    currentUser.email = user.email
-    currentUser.password = user.password
-    localStorage.setUser(currentUser)
+    currentUser.value.email = user.email
+    currentUser.value.password = user.password
   }
 
   const logout = () => {
-    currentUser.email = ''
-    currentUser.password = ''
-    localStorage.setUser(currentUser)
+    currentUser.value.email = ''
+    currentUser.value.password = ''
 
     router.push({ name: 'auth' })
   }
