@@ -1,14 +1,11 @@
 <template>
   <label class="container">
-    <input type="checkbox" :name="name" v-model="model" />
+    <input type="checkbox" :="$attrs" v-model="model" />
     <div><slot /></div>
   </label>
 </template>
 
 <script setup lang="ts">
-const { name = '' } = defineProps<{
-  name?: string
-}>()
 const model = defineModel()
 </script>
 

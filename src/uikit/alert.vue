@@ -1,5 +1,5 @@
 <template>
-  <div class="alert" :="$attrs" :class="type">
+  <div class="alert" :class="type">
     <div class="title" :class="type">{{ title }}</div>
     <div class="text">{{ text }}</div>
     <app-button type="button" :render-strategy="type" @click="$emit('close')"> Закрыть </app-button>

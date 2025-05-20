@@ -1,16 +1,11 @@
 <template>
   <label class="container">
-    <input type="radio" class="radio" :name="name" v-model="model" />
+    <input type="radio" class="radio" :="$attrs" v-model="model" />
     <div><slot /></div>
   </label>
 </template>
 
 <script setup lang="ts">
-const { name = '', modelValue = false } = defineProps<{
-  name?: string
-  modelValue?: boolean
-}>()
-const emit = defineEmits(['update:modelValue'])
 const model = defineModel()
 </script>
 

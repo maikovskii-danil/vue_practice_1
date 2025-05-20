@@ -1,6 +1,5 @@
 <template>
   <button
-    :="$attrs"
     :class="{
       btn: true,
       'btn-small': small,

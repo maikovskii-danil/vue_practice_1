@@ -39,6 +39,7 @@ const model = defineModel()
   border: 1px solid #a6a6a6;
   width: 100%;
   height: 37px;
+  cursor: pointer;
 }
 .option {
   all: unset;
