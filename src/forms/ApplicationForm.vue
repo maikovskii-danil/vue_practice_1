@@ -11,7 +11,7 @@
     <app-input
       placeholder="Телефон"
       filter="phone"
-      v-model="formData.phone"
+      v-model.num="formData.phone"
       @focus="formErrors.phone = ''"
     />
     <div class="error">{{ formErrors.phone }}</div>
@@ -48,7 +48,11 @@ const submit = () => {
   const { success, error } = applicationSchema.safeParse(formData)
 
   if (success) {
-    emit('submit', formData)
+    const editedFormData = JSON.parse(JSON.stringify(formData))
+
+    editedFormData.phone = '+' + editedFormData.phone
+
+    emit('submit', editedFormData)
   } else {
     error.errors.forEach((zodErrorRecord) => {
       const key = zodErrorRecord.path[0] as keyof typeof formErrors

@@ -5,7 +5,20 @@
 </template>
 
 <script setup lang="ts">
-const model = defineModel()
+const [model, modifiers] = defineModel({
+  set(value: string) {
+    if (modifiers.num) {
+      const newValue =
+        Array.from(value)
+          .filter((letter) => !isNaN(+letter))
+          .join('') || '0'
+
+      return newValue
+    }
+
+    return value
+  },
+})
 </script>
 
 <style scoped>
