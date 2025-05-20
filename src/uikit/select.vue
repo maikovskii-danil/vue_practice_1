@@ -1,11 +1,6 @@
 <template>
   <div class="select-wrapper">
-    <select
-      class="select"
-      :="$attrs"
-      :value="modelValue"
-      @change="emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
-    >
+    <select class="select" :="$attrs" v-model="model">
       <option v-for="option in options" class="option" :key="option.id" :value="option.id">
         {{ option.displayName || 'Не выбрано' }}
       </option>
@@ -19,11 +14,10 @@
 <script setup lang="ts">
 import ArrowSvgLink from '@/assets/arrow.svg'
 
-const { options, modelValue } = defineProps<{
-  modelValue: string
+const { options } = defineProps<{
   options: Array<{ id: string; displayName: string }>
 }>()
-const emit = defineEmits(['update:modelValue'])
+const model = defineModel()
 </script>
 
 <style scoped>

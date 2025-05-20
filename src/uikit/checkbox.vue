@@ -1,21 +1,15 @@
 <template>
   <label class="container">
-    <input
-      type="checkbox"
-      :name="name"
-      :checked="modelValue"
-      @change="emit('update:modelValue', !modelValue)"
-    />
+    <input type="checkbox" :name="name" v-model="model" />
     <div><slot /></div>
   </label>
 </template>
 
 <script setup lang="ts">
-const { name = '', modelValue = false } = defineProps<{
+const { name = '' } = defineProps<{
   name?: string
-  modelValue?: boolean
 }>()
-const emit = defineEmits(['update:modelValue'])
+const model = defineModel()
 </script>
 
 <style scoped>

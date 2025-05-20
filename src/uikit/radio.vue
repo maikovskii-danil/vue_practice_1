@@ -1,12 +1,6 @@
 <template>
   <label class="container">
-    <input
-      type="radio"
-      class="radio"
-      :name="name"
-      :checked="modelValue"
-      @change="emit('update:modelValue', !modelValue)"
-    />
+    <input type="radio" class="radio" :name="name" v-model="model" />
     <div><slot /></div>
   </label>
 </template>
@@ -17,6 +11,7 @@ const { name = '', modelValue = false } = defineProps<{
   modelValue?: boolean
 }>()
 const emit = defineEmits(['update:modelValue'])
+const model = defineModel()
 </script>
 
 <style scoped>

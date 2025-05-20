@@ -1,20 +1,11 @@
 <template>
   <label class="container">
-    <input class="input" :="$attrs" :value="modelValue" @input="input" />
+    <input class="input" :="$attrs" v-model="model" />
   </label>
 </template>
 
 <script setup lang="ts">
-const { modelValue } = defineProps<{
-  modelValue?: string
-}>()
-const emit = defineEmits(['update:modelValue'])
-
-const input = (evt: Event) => {
-  const value = (evt.target as HTMLInputElement).value
-
-  emit('update:modelValue', value)
-}
+const model = defineModel()
 </script>
 
 <style scoped>
