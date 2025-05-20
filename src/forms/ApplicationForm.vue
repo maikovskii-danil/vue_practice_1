@@ -39,10 +39,10 @@ import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
 
 const emit = defineEmits(['submit'])
-const formErrors = reactive({ fullName: '', phone: '', amount: '' })
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
 
 const formData = reactive<Omit<IApplication, 'id'>>(initialForm)
+const formErrors = reactive({ fullName: '', phone: '', amount: '' })
 
 const submit = () => {
   const { success, error } = applicationSchema.safeParse(formData)
