@@ -16,16 +16,15 @@ import router from './router'
 const pinia = createPinia()
 const app = createApp(App)
 
-app.component('AppButton', Button)
-app.component('AppInput', Input)
-app.component('AppCheckbox', Checkbox)
-app.component('AppRadio', Radio)
-app.component('AppSelect', Select)
-app.component('AppAlert', Alert)
-app.component('AppLoader', Loader)
-app.component('AppModal', Modal)
-
-app.use(pinia)
-app.use(router)
-
-app.mount('#app')
+app
+  .component('AppButton', Button)
+  .component('AppInput', Input)
+  .component('AppCheckbox', Checkbox)
+  .component('AppRadio', Radio)
+  .component('AppSelect', Select)
+  .component('AppAlert', Alert)
+  .component('AppLoader', Loader)
+  .component('AppModal', Modal)
+  .use(pinia)
+  .use(router)
+  .mount('#app')
