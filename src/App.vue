@@ -1,6 +1,6 @@
 <template>
   <div class="full-min-height" :class="{ centered: !userStore.isLoggedIn }">
-    <TheNavbar :visible="userStore.isLoggedIn" />
+    <TheNavbar v-if="userStore.isLoggedIn" />
     <Teleport to="body">
       <app-alert
         v-if="userStore.error"

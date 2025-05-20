@@ -19,12 +19,10 @@
 <script setup lang="ts">
 import ArrowSvgLink from '@/assets/arrow.svg'
 
-interface Props {
+const { options, modelValue } = defineProps<{
   modelValue: string
   options: Array<{ id: string; displayName: string }>
-}
-
-const { options, modelValue } = defineProps<Props>()
+}>()
 const emit = defineEmits(['update:modelValue'])
 </script>
 

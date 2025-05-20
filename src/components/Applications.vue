@@ -1,7 +1,7 @@
 <template>
   <div class="applications-wrapper">
     <h2 class="header">Заявки</h2>
-    <app-button class="btn-create" @click="emit('open-modal-create')">Создать</app-button>
+    <app-button class="btn-create" @click="$emit('open-modal-create')">Создать</app-button>
     <div class="filters-wrapper">
       <app-input placeholder="Введите имя" v-model="filters.fullname" />
       <app-select
@@ -34,7 +34,7 @@
           <Status :status="application.status" />
         </div>
         <div class="action">
-          <app-button small @click="emit('open-application', application.id)">Открыть</app-button>
+          <app-button small @click="$emit('open-application', application.id)">Открыть</app-button>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@ import type { IApplication } from '@/types'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import Status from './Status.vue'
 
-const emit = defineEmits(['open-modal-create', 'open-application'])
+defineEmits(['open-modal-create', 'open-application'])
 const { applications } = defineProps<{ applications: IApplication[] }>()
 const filters = reactive({ fullname: '', status: 'empty' })
 

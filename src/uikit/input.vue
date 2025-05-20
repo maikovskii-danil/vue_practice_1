@@ -1,17 +1,20 @@
 <template>
   <label class="container">
-    <input
-      class="input"
-      :="$attrs"
-      :value="modelValue"
-      @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-    />
+    <input class="input" :="$attrs" :value="modelValue" @input="input" />
   </label>
 </template>
 
 <script setup lang="ts">
-const { modelValue } = defineProps<{ modelValue: string }>()
+const { modelValue } = defineProps<{
+  modelValue?: string
+}>()
 const emit = defineEmits(['update:modelValue'])
+
+const input = (evt: Event) => {
+  const value = (evt.target as HTMLInputElement).value
+
+  emit('update:modelValue', value)
+}
 </script>
 
 <style scoped>

@@ -4,26 +4,26 @@
     <app-input
       placeholder="Введите ФИО"
       v-model="formData.fullName"
-      @focus="errors.fullName = ''"
+      @focus="formErrors.fullName = ''"
     />
-    <div class="error">{{ errors.fullName }}</div>
+    <div class="error">{{ formErrors.fullName }}</div>
     <div>Телефон</div>
     <app-input
       placeholder="Телефон"
-      :modelValue="formData.phone"
-      @focus="errors.phone = ''"
-      @update:modelValue="formData.phone = $event"
+      filter="phone"
+      v-model="formData.phone"
+      @focus="formErrors.phone = ''"
     />
-    <div class="error">{{ errors.phone }}</div>
+    <div class="error">{{ formErrors.phone }}</div>
     <div>Сумма</div>
     <app-input
       type="number"
       placeholder="Сумма"
       :modelValue="(formData.amount || '').toString()"
-      @focus="errors.amount = ''"
       @update:modelValue="formData.amount = +$event"
+      @focus="formErrors.amount = ''"
     />
-    <div class="error">{{ errors.amount }}</div>
+    <div class="error">{{ formErrors.amount }}</div>
     <div>Статус</div>
     <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="formData.status" />
     <div class="btn-create-wrapper">
@@ -37,21 +37,22 @@ import { reactive } from 'vue'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
-import type { ZodError } from 'zod'
 
 const emit = defineEmits(['submit'])
-const errors = reactive({ fullName: '', phone: '', amount: '' })
+const formErrors = reactive({ fullName: '', phone: '', amount: '' })
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
 
 const formData = reactive<Omit<IApplication, 'id'>>(initialForm)
 
 const submit = () => {
-  try {
-    applicationSchema.parse(formData)
+  const { success, error } = applicationSchema.safeParse(formData)
+
+  if (success) {
     emit('submit', formData)
-  } catch (err) {
-    ;(err as ZodError).errors.forEach((zodErrorRecord) => {
-      errors[zodErrorRecord.path[0] as keyof typeof errors] = zodErrorRecord.message
+  } else {
+    error.errors.forEach((zodErrorRecord) => {
+      const key = zodErrorRecord.path[0] as keyof typeof formErrors
+      formErrors[key] = zodErrorRecord.message
     })
   }
 }

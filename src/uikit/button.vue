@@ -12,12 +12,10 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
+const { renderStrategy = 'primary', small = false } = defineProps<{
   renderStrategy?: string
   small?: boolean
-}
-
-const { renderStrategy = 'primary', small = false } = defineProps<Props>()
+}>()
 </script>
 
 <style scoped>

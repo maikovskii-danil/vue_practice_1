@@ -12,12 +12,10 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  name: string
-  modelValue: boolean
-}
-
-const { name = '', modelValue = false } = defineProps<Props>()
+const { name = '', modelValue = false } = defineProps<{
+  name?: string
+  modelValue?: boolean
+}>()
 const emit = defineEmits(['update:modelValue'])
 </script>
 

@@ -5,11 +5,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-interface Props {
-  status: string
-}
-
-const { status } = defineProps<Props>()
+const { status } = defineProps<{ status: string }>()
 
 const statusDisplayName = computed(() => {
   switch (status) {

@@ -27,11 +27,7 @@ import type { IApplication } from '@/types'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-interface Props {
-  applicationId: string
-}
-
-const { applicationId } = defineProps<Props>()
+const { applicationId } = defineProps<{ applicationId: string }>()
 
 const router = useRouter()
 const applicationsStore = useApplicationsStore()

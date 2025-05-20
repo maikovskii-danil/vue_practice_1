@@ -1,5 +1,5 @@
 <template>
-  <header class="header" v-if="visible">
+  <header class="header">
     <h1>Tinkoff</h1>
     <ul class="navbar-menu">
       <li>
@@ -18,13 +18,7 @@
 <script setup lang="ts">
 import useUserStore from './stores/user'
 
-interface Props {
-  visible: boolean
-}
-
 const userStore = useUserStore()
-
-const { visible = false } = defineProps<Props>()
 </script>
 
 <style scoped>

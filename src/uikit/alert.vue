@@ -7,17 +7,15 @@
 </template>
 
 <script setup lang="ts">
-interface Props {
-  type: string
-  title: string
-  text: string
-}
-
 const {
   type = 'primary',
   title = 'Alert Title',
   text = 'Some text description',
-} = defineProps<Props>()
+} = defineProps<{
+  type?: string
+  title?: string
+  text?: string
+}>()
 </script>
 
 <style scoped>

@@ -23,11 +23,11 @@
         <app-select
           :options="APPLICATION_STATUS_OPTIONS"
           :modelValue="application.status"
-          @update:modelValue="emit('change-application', { ...application, status: $event })"
+          @update:modelValue="$emit('change-application', { ...application, status: $event })"
         />
       </div>
       <div>
-        <app-button renderStrategy="danger" @click="emit('remove-application', application.id)">
+        <app-button renderStrategy="danger" @click="$emit('remove-application', application.id)">
           Удалить
         </app-button>
       </div>
@@ -40,8 +40,8 @@ import type { IApplication } from '@/types'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import Status from './Status.vue'
 
-const emit = defineEmits(['change-application', 'remove-application'])
-const { application } = defineProps<{ application: IApplication }>()
+defineEmits(['change-application', 'remove-application'])
+defineProps<{ application: IApplication }>()
 </script>
 
 <style scoped>

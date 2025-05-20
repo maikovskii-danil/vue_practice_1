@@ -1,8 +1,11 @@
 import { z } from 'zod'
 
 export const userSchema = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().min(1, 'Обязательное поле'),
+  password: z
+    .string()
+    .min(1, 'Обязательное поле')
+    .min(6, 'Пароль должен быть не меньше 6 символов'),
 })
 
 export const statusUnion = z.union([

@@ -23,40 +23,24 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import type { IUserData } from '@/types'
-
-interface Props {
-  initialForm: IUserData
-}
+import { userSchema } from '@/types/validation'
 
 const emit = defineEmits(['submit'])
-const { initialForm } = defineProps<Props>()
+const { initialForm } = defineProps<{ initialForm: IUserData }>()
 
 const userForm = reactive<IUserData>(initialForm)
 const formErrors = reactive({ email: '', password: '' })
 
-const formValidation = (user: IUserData) => {
-  if (!user.email) {
-    formErrors.email = 'Обязательное поле'
-  } else {
-    formErrors.email = ''
-  }
-
-  if (!user.password) {
-    formErrors.password = 'Обязательное поле'
-  } else if (user.password.length < 6) {
-    formErrors.password = 'Пароль должен быть не меньше 6 символов'
-  } else {
-    formErrors.password = ''
-  }
-
-  return !(formErrors.email || formErrors.password)
-}
-
 const submit = () => {
-  const isValid = formValidation(userForm)
+  const { success, error } = userSchema.safeParse(userForm)
 
-  if (isValid) {
+  if (success) {
     emit('submit', userForm)
+  } else {
+    error.errors.forEach((zodErrorRecord) => {
+      const key = zodErrorRecord.path[0] as keyof typeof formErrors
+      formErrors[key] = zodErrorRecord.message
+    })
   }
 }
 </script>
