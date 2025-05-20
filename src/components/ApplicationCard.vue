@@ -22,12 +22,12 @@
         <div class="change-status-label">Изменить статус:</div>
         <app-select
           :options="APPLICATION_STATUS_OPTIONS"
-          :modelValue="application.status"
-          @update:modelValue="$emit('change-application', { ...application, status: $event })"
+          :model-value="application.status"
+          @update:model-value="$emit('change-application', { ...application, status: $event })"
         />
       </div>
       <div>
-        <app-button renderStrategy="danger" @click="$emit('remove-application', application.id)">
+        <app-button render-strategy="danger" @click="$emit('remove-application', application.id)">
           Удалить
         </app-button>
       </div>

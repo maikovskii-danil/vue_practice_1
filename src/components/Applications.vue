@@ -12,7 +12,7 @@
         v-if="filters.fullname || filters.status !== 'empty'"
         style="display: flex; align-items: center"
       >
-        <app-button small renderStrategy="danger" @click="clear">Очистить</app-button>
+        <app-button small render-strategy="danger" @click="clear">Очистить</app-button>
       </div>
       <div v-else style="min-width: 79px; height: 37px"></div>
     </div>

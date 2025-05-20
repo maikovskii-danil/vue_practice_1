@@ -19,8 +19,8 @@
     <app-input
       type="number"
       placeholder="Сумма"
-      :modelValue="(formData.amount || '').toString()"
-      @update:modelValue="formData.amount = +$event"
+      :model-value="(formData.amount || '').toString()"
+      @update:model-value="formData.amount = +$event"
       @focus="formErrors.amount = ''"
     />
     <div class="error">{{ formErrors.amount }}</div>

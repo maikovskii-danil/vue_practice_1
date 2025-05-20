@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h1 class="title">Войдите в систему</h1>
-    <AuthForm :initialForm="{ email: '', password: '' }" @submit="submit" />
+    <AuthForm :initial-form="{ email: '', password: '' }" @submit="submit" />
   </div>
 </template>
 

@@ -11,7 +11,7 @@
       <div class="modal-wrapper">
         <h3 class="modal-header">Создать заявку</h3>
         <ApplicationForm
-          :initialForm="{
+          :initial-form="{
             fullName: '',
             phone: '',
             amount: 0,
