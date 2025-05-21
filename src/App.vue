@@ -1,6 +1,6 @@
 <template>
-  <div class="full-min-height" :class="{ centered: !userStore.isLoggedIn }">
-    <TheNavbar v-if="userStore.isLoggedIn" />
+  <div class="full-min-height">
+    <TheNavbar :visible="userStore.isLoggedIn" />
     <Teleport to="body">
       <app-alert
         v-if="userStore.error"
@@ -12,7 +12,11 @@
       ></app-alert>
     </Teleport>
     <div class="container" :class="{ uncentered: userStore.isLoggedIn }">
-      <router-view></router-view>
+      <router-view #="{ Component: Page }">
+        <Transition mode="out-in">
+          <Component :is="Page" />
+        </Transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -28,14 +32,6 @@ const userStore = useUserStore()
 .full-min-height {
   min-height: 100vh;
 }
-.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.uncentered {
-  padding-top: 8px;
-}
 .fixed {
   position: fixed;
   top: 16px;
@@ -43,5 +39,14 @@ const userStore = useUserStore()
 }
 .width-350 {
   width: 350px;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>

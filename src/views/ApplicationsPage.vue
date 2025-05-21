@@ -1,37 +1,39 @@
 <template>
-  <div class="card wrapper">
-    <Applications
-      :applications="applicationsStore.applications"
-      @open-modal-create="isOpenedModal = true"
-      @open-application="openApplication"
-    />
+  <div>
+    <div class="card wrapper">
+      <Applications
+        :applications="applicationsStore.applications"
+        @open-modal-create="isOpenedModal = true"
+        @open-application="openApplication"
+      />
+    </div>
+    <Teleport to="body">
+      <app-modal v-if="isOpenedModal" @close="isOpenedModal = false">
+        <div class="modal-wrapper">
+          <h3 class="modal-header">Создать заявку</h3>
+          <ApplicationForm
+            :initial-form="{
+              fullName: '',
+              phone: '',
+              amount: 0,
+              status: 'active',
+            }"
+            @submit="submit"
+          />
+        </div>
+      </app-modal>
+    </Teleport>
+    <Teleport to="body">
+      <app-alert
+        v-if="isSuccessfullyCreated"
+        type="primary"
+        title="Успешно!"
+        text="Заявка обновлена"
+        class="fixed width-350"
+        @close="isSuccessfullyCreated = false"
+      ></app-alert>
+    </Teleport>
   </div>
-  <Teleport to="body">
-    <app-modal v-if="isOpenedModal" @close="isOpenedModal = false">
-      <div class="modal-wrapper">
-        <h3 class="modal-header">Создать заявку</h3>
-        <ApplicationForm
-          :initial-form="{
-            fullName: '',
-            phone: '',
-            amount: 0,
-            status: 'active',
-          }"
-          @submit="submit"
-        />
-      </div>
-    </app-modal>
-  </Teleport>
-  <Teleport to="body">
-    <app-alert
-      v-if="isSuccessfullyCreated"
-      type="primary"
-      title="Успешно!"
-      text="Заявка обновлена"
-      class="fixed width-350"
-      @close="isSuccessfullyCreated = false"
-    ></app-alert>
-  </Teleport>
 </template>
 
 <script setup lang="ts">

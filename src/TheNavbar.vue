@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ visible }">
     <h1>Tinkoff</h1>
     <ul class="navbar-menu">
       <li>
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import useUserStore from './stores/user'
 
+defineProps<{ visible: boolean }>()
 const userStore = useUserStore()
 </script>
 
@@ -33,9 +34,15 @@ h1 {
   justify-content: space-between;
   height: 46px;
   padding: 0 8px;
+  margin-bottom: 16px;
+  transition: opacity 0.3s ease;
+  opacity: 0;
   h3 {
     margin: 0;
   }
+}
+.visible {
+  opacity: 1;
 }
 .navbar-menu {
   all: unset;

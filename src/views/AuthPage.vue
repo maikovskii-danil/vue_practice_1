@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card margin-top-64">
     <h1 class="title">Войдите в систему</h1>
     <AuthForm :initial-form="{ email: '', password: '' }" @submit="submit" />
   </div>
@@ -18,6 +18,9 @@ const submit = (userForm: IUserData) => {
 </script>
 
 <style scoped>
+.margin-top-64 {
+  margin-top: 64px;
+}
 .title {
   margin: 32px 0;
 }
