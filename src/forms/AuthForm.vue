@@ -2,7 +2,13 @@
   <form @submit.prevent="submit">
     <div class="form-control">
       <label for="email">Email</label>
-      <app-input v-model="userForm.email" type="email" id="email" placeholder="Введите email" />
+      <app-input
+        v-model="userForm.email"
+        type="email"
+        id="email"
+        placeholder="Введите email"
+        @focus="clearErrorByKey('email')"
+      />
       <div class="error">{{ formErrors.email }}</div>
     </div>
     <div class="form-control">
@@ -13,6 +19,7 @@
         id="password"
         placeholder="Введите пароль"
         autocomplete="on"
+        @focus="clearErrorByKey('password')"
       />
       <div class="error">{{ formErrors.password }}</div>
     </div>
@@ -21,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import type { IUserData } from '@/types'
 import { userSchema } from '@/types/validation'
 
@@ -29,7 +36,11 @@ const emit = defineEmits(['submit'])
 const { initialForm } = defineProps<{ initialForm: IUserData }>()
 
 const userForm = reactive<IUserData>(initialForm)
-const formErrors = reactive({ email: '', password: '' })
+const formErrors = shallowRef({ email: '', password: '' })
+
+const clearErrorByKey = (key: keyof typeof formErrors.value) => {
+  formErrors.value = { ...formErrors.value, [key]: '' }
+}
 
 const submit = () => {
   const { success, error } = userSchema.safeParse(userForm)
@@ -37,10 +48,13 @@ const submit = () => {
   if (success) {
     emit('submit', userForm)
   } else {
+    const foundErrors = { email: '', password: '' }
+
     error.errors.forEach((zodErrorRecord) => {
-      const key = zodErrorRecord.path[0] as keyof typeof formErrors
-      formErrors[key] = zodErrorRecord.message
+      const key = zodErrorRecord.path[0] as keyof typeof foundErrors
+      foundErrors[key] = zodErrorRecord.message
     })
+    formErrors.value = foundErrors
   }
 }
 </script>

@@ -4,8 +4,8 @@ export const userSchema = z.object({
   email: z.string().min(1, 'Обязательное поле'),
   password: z
     .string()
-    .min(1, 'Обязательное поле')
-    .min(6, 'Пароль должен быть не меньше 6 символов'),
+    .min(6, 'Пароль должен быть не меньше 6 символов')
+    .min(1, 'Обязательное поле'),
 })
 
 export const statusUnion = z.union([
