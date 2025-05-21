@@ -18,7 +18,7 @@
             <div class="id">{{ application.id }}</div>
             <div class="fullname">{{ application.fullName }}</div>
             <div class="phone">{{ application.phone }}</div>
-            <div>{{ application.amount.toFixed(2) }} ₽</div>
+            <div>{{ displayAmount(application.amount) }}</div>
             <div class="status">
               <Status :status="application.status" />
             </div>
@@ -37,6 +37,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import currency from 'currency.js'
 import { refDebounced } from '@vueuse/core'
 import { DEBOUNCE_DELAY } from '@/consts'
 import type { IApplication } from '@/types'
@@ -44,6 +45,15 @@ import Status from './Status.vue'
 
 defineEmits(['open-application'])
 const { applications } = defineProps<{ applications: IApplication[] }>()
+
+const displayAmount = (amount: number) => {
+  return currency(amount, {
+    symbol: '₽',
+    pattern: '# !',
+    separator: ' ',
+    decimal: ',',
+  }).format()
+}
 
 const currentHeight = computed(() => {
   const row = 30
