@@ -74,3 +74,5 @@ export const REGISTERED_USERS_DATA_MAP = REGISTERED_USERS_DATA.reduce(
   },
   {} as Record<string, IUserData>,
 )
+
+export const DEBOUNCE_DELAY = 300
