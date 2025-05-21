@@ -17,7 +17,7 @@ export const statusUnion = z.union([
 
 export const applicationSchema = z.object({
   fullName: z.string().min(1, 'Обязательное поле'),
-  phone: z.string().min(1, 'Обязательное поле'),
+  phone: z.string().min(11, 'Неправильный номер телефона').min(1, 'Обязательное поле'),
   amount: z.number().min(1, 'Минимальная сумма равна 1'),
   status: statusUnion,
 })

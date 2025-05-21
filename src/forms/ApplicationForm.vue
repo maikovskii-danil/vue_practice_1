@@ -9,7 +9,7 @@
     <div class="error">{{ formErrors.fullName }}</div>
     <div>Телефон</div>
     <app-input
-      placeholder="Телефон"
+      placeholder="79876543210"
       filter="phone"
       v-model.num="formData.phone"
       @focus="formErrors.phone = ''"
@@ -46,6 +46,8 @@ const formData = reactive<Omit<IApplication, 'id'>>(initialForm)
 const formErrors = reactive({ fullName: '', phone: '', amount: '' })
 
 const submit = () => {
+  formData.phone = formData.phone === '0' ? '' : formData.phone
+
   const { success, error } = applicationSchema.safeParse(formData)
 
   if (success) {
