@@ -17,7 +17,7 @@
           <div class="row">
             <div class="id">{{ application.id }}</div>
             <div class="fullname">{{ application.fullName }}</div>
-            <div class="phone">{{ application.phone }}</div>
+            <div class="phone">{{ '+' + application.phone }}</div>
             <div>{{ displayAmount(application.amount) }}</div>
             <div class="status">
               <Status :status="application.status" />

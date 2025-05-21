@@ -4,7 +4,7 @@
     <app-input
       placeholder="Введите ФИО"
       v-model="formData.fullName"
-      @focus="formErrors.fullName = ''"
+      @focus="clearErrorByKey('fullName')"
     />
     <div class="error">{{ formErrors.fullName }}</div>
     <div>Телефон</div>
@@ -12,7 +12,7 @@
       placeholder="79876543210"
       filter="phone"
       v-model.num="formData.phone"
-      @focus="formErrors.phone = ''"
+      @focus="clearErrorByKey('phone')"
     />
     <div class="error">{{ formErrors.phone }}</div>
     <div>Сумма</div>
@@ -21,7 +21,7 @@
       placeholder="Сумма"
       :model-value="(formData.amount || '').toString()"
       @update:model-value="formData.amount = +$event"
-      @focus="formErrors.amount = ''"
+      @focus="clearErrorByKey('amount')"
     />
     <div class="error">{{ formErrors.amount }}</div>
     <div>Статус</div>
@@ -33,17 +33,20 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
-import { cloneFnJSON } from '@vueuse/core'
 
 const emit = defineEmits(['submit'])
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
 
 const formData = reactive<Omit<IApplication, 'id'>>(initialForm)
-const formErrors = reactive({ fullName: '', phone: '', amount: '' })
+const formErrors = shallowRef({ fullName: '', phone: '', amount: '' })
+
+const clearErrorByKey = (key: keyof typeof formErrors.value) => {
+  formErrors.value = { ...formErrors.value, [key]: '' }
+}
 
 const submit = () => {
   formData.phone = formData.phone === '0' ? '' : formData.phone
@@ -51,16 +54,15 @@ const submit = () => {
   const { success, error } = applicationSchema.safeParse(formData)
 
   if (success) {
-    const editedFormData = cloneFnJSON(formData)
-
-    editedFormData.phone = '+' + editedFormData.phone
-
-    emit('submit', editedFormData)
+    emit('submit', formData)
   } else {
+    const foundErrors = { fullName: '', phone: '', amount: '' }
+
     error.errors.forEach((zodErrorRecord) => {
-      const key = zodErrorRecord.path[0] as keyof typeof formErrors
-      formErrors[key] = zodErrorRecord.message
+      const key = zodErrorRecord.path[0] as keyof typeof foundErrors
+      foundErrors[key] = zodErrorRecord.message
     })
+    formErrors.value = foundErrors
   }
 }
 </script>
