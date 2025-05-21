@@ -37,6 +37,7 @@ import { reactive } from 'vue'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
+import { cloneFnJSON } from '@vueuse/core'
 
 const emit = defineEmits(['submit'])
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
@@ -48,7 +49,7 @@ const submit = () => {
   const { success, error } = applicationSchema.safeParse(formData)
 
   if (success) {
-    const editedFormData = JSON.parse(JSON.stringify(formData))
+    const editedFormData = cloneFnJSON(formData)
 
     editedFormData.phone = '+' + editedFormData.phone
 
