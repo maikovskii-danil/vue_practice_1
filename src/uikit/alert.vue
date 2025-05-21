@@ -1,21 +1,31 @@
 <template>
-  <div class="alert" :class="type">
-    <div class="title" :class="type">{{ title }}</div>
-    <div class="text">{{ text }}</div>
-    <app-button type="button" :render-strategy="type" @click="$emit('close')"> Закрыть </app-button>
-  </div>
+  <Transition>
+    <div v-if="visible" class="alert" :class="{ [type]: true }">
+      <div class="title" :class="type">{{ title }}</div>
+      <div class="text">{{ textCache }}</div>
+      <app-button type="button" :render-strategy="type" @click="$emit('close')">
+        Закрыть
+      </app-button>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const {
   type = 'primary',
   title = 'Alert Title',
   text = 'Some text description',
+  visible = false,
 } = defineProps<{
   type?: string
   title?: string
   text?: string
+  visible?: boolean
 }>()
+
+const textCache = computed((previous) => (text ? text : previous))
 </script>
 
 <style scoped>

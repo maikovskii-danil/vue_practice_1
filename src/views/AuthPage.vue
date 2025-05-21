@@ -2,13 +2,23 @@
   <div class="card margin-top-64">
     <h1 class="title">Войдите в систему</h1>
     <AuthForm :initial-form="{ email: '', password: '' }" @submit="submit" />
+    <Teleport to="body">
+      <app-alert
+        :visible="!!userStore.error"
+        type="danger"
+        title="Ошибка!"
+        :text="userStore.error"
+        class="fixed width-350"
+        @click="userStore.error = ''"
+      ></app-alert>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
 import useUserStore from '@/stores/user'
-import type { IUserData } from '@/types'
 import AuthForm from '@/forms/AuthForm.vue'
+import type { IUserData } from '@/types'
 
 const userStore = useUserStore()
 

@@ -1,5 +1,7 @@
 <template>
-  <div class="status" :class="status">{{ statusDisplayName }}</div>
+  <Transition mode="out-in">
+    <div :key="status" class="status" :class="status" :="$attrs">{{ statusDisplayName }}</div>
+  </Transition>
 </template>
 
 <script setup lang="ts">

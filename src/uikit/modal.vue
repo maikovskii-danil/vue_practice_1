@@ -1,13 +1,22 @@
 <template>
-  <div class="modal-backdrop" @click="emit('close')"></div>
-  <div class="modal"><slot /></div>
+  <Transition>
+    <div v-if="visible" class="modal-wrapper">
+      <div class="modal-backdrop" @click="emit('close')"></div>
+      <div class="modal"><slot /></div>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
 const emit = defineEmits(['close'])
+const { visible } = defineProps<{ visible: boolean }>()
 </script>
 
 <style scoped>
+.modal-wrapper {
+  position: fixed;
+  z-index: 1;
+}
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -18,11 +27,10 @@ const emit = defineEmits(['close'])
   opacity: 0.4;
 }
 .modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;

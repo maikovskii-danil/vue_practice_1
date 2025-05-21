@@ -8,10 +8,12 @@
         v-model="status"
         :options="[{ id: 'empty', displayName: '' }, ...APPLICATION_STATUS_OPTIONS]"
       />
-      <div v-if="fullname || status !== 'empty'" style="display: flex; align-items: center">
-        <app-button small render-strategy="danger" @click="clear">Очистить</app-button>
-      </div>
-      <div v-else style="min-width: 79px; height: 37px"></div>
+      <Transition mode="out-in">
+        <div v-if="fullname || status !== 'empty'" style="display: flex; align-items: center">
+          <app-button small render-strategy="danger" @click="clear">Очистить</app-button>
+        </div>
+        <div v-else style="min-width: 79px; height: 37px"></div>
+      </Transition>
     </div>
     <ApplicationsTable
       :applications="filteredApplications"

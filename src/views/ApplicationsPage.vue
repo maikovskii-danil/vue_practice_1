@@ -8,7 +8,7 @@
       />
     </div>
     <Teleport to="body">
-      <app-modal v-if="isOpenedModal" @close="isOpenedModal = false">
+      <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
         <div class="modal-wrapper">
           <h3 class="modal-header">Создать заявку</h3>
           <ApplicationForm
@@ -25,10 +25,10 @@
     </Teleport>
     <Teleport to="body">
       <app-alert
-        v-if="isSuccessfullyCreated"
+        :visible="isSuccessfullyCreated"
         type="primary"
         title="Успешно!"
-        text="Заявка обновлена"
+        text="Заявка создана"
         class="fixed width-350"
         @close="isSuccessfullyCreated = false"
       ></app-alert>

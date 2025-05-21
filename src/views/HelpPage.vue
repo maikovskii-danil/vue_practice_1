@@ -4,13 +4,17 @@
     <button class="question" @click="isOpenedQuestion1 = !isOpenedQuestion1">
       Что есть в данной системе?
     </button>
-    <div class="answer" v-if="isOpenedQuestion1">
-      Тут есть все, для того, чтобы смотреть, какие заявки человек добавлял
-    </div>
+    <Transition>
+      <div class="answer" v-if="isOpenedQuestion1">
+        Тут есть все, для того, чтобы смотреть, какие заявки человек добавлял
+      </div>
+    </Transition>
     <button class="question" @click="isOpenedQuestion2 = !isOpenedQuestion2">
       Как тут работает авторизация?
     </button>
-    <div class="answer" v-if="isOpenedQuestion2">Через localStorage с использованием Zod</div>
+    <Transition>
+      <div class="answer" v-if="isOpenedQuestion2">Через localStorage с использованием Zod</div>
+    </Transition>
   </div>
 </template>
 

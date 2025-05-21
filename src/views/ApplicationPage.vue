@@ -24,7 +24,7 @@
 import ApplicationCard from '@/components/ApplicationCard.vue'
 import useApplicationsStore from '@/stores/applications'
 import type { IApplication } from '@/types'
-import { computed, ref } from 'vue'
+import { computed, ref, type ComputedRef } from 'vue'
 import { useRouter } from 'vue-router'
 
 const { applicationId } = defineProps<{ applicationId: string }>()
@@ -35,8 +35,12 @@ const isOpenedAlertSuccess = ref(false)
 
 const { change, remove } = applicationsStore
 
-const currentApplication = computed(() => {
-  return applicationsStore.applications.find((application) => application.id === applicationId)
+const currentApplication: ComputedRef<IApplication | undefined> = computed((previous) => {
+  const foundApplicaton = applicationsStore.applications.find(
+    (application) => application.id === applicationId,
+  )
+
+  return foundApplicaton ?? previous
 })
 
 const changeApplication = (updated: IApplication) => {
