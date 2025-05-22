@@ -29,7 +29,10 @@ import { APPLICATION_STATUS_OPTIONS, DEBOUNCE_DELAY } from '@/consts'
 import { refDebounced } from '@vueuse/core'
 import ApplicationsTable from './ApplicationsTable.vue'
 
-defineEmits(['open-modal-create', 'open-application'])
+defineEmits<{
+  (e: 'open-modal-create'): void
+  (e: 'open-application', id: string): void
+}>()
 const { applications } = defineProps<{ applications: IApplication[] }>()
 const fullname = ref('')
 const status = ref('empty')

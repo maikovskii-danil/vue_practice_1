@@ -16,7 +16,7 @@
       </div>
       <div class="row">
         <div>Сумма:</div>
-        <div>{{ application.amount.toFixed(2) }} ₽</div>
+        <div>{{ displayAmount(application.amount) }}</div>
       </div>
       <div>
         <div class="change-status-label">Изменить статус:</div>
@@ -38,9 +38,13 @@
 <script setup lang="ts">
 import type { IApplication } from '@/types'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
+import displayAmount from '@/utils/displayAmount'
 import Status from './Status.vue'
 
-defineEmits(['change-application', 'remove-application'])
+defineEmits<{
+  (e: 'change-application', application: IApplication): void
+  (e: 'remove-application', id: string): void
+}>()
 defineProps<{ application: IApplication }>()
 </script>
 

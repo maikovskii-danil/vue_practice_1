@@ -32,7 +32,9 @@ import { reactive, shallowRef } from 'vue'
 import type { IUserData } from '@/types'
 import { userSchema } from '@/types/validation'
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits<{
+  (e: 'submit', form: IUserData): void
+}>()
 const { initialForm } = defineProps<{ initialForm: IUserData }>()
 
 const userForm = reactive<IUserData>(initialForm)

@@ -38,7 +38,9 @@ import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits<{
+  (e: 'submit', formData: Omit<IApplication, 'id'>): void
+}>()
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
 
 const formData = reactive<Omit<IApplication, 'id'>>(initialForm)

@@ -49,7 +49,7 @@ const applicationsStore = useApplicationsStore()
 const isOpenedModal = ref(false)
 const isSuccessfullyCreated = ref(false)
 
-const submit = (evt: IApplication) => {
+const submit = (evt: Omit<IApplication, 'id'>) => {
   applicationsStore.create(evt)
   isOpenedModal.value = false
   isSuccessfullyCreated.value = true

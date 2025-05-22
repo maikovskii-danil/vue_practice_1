@@ -37,23 +37,16 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import currency from 'currency.js'
 import { refDebounced } from '@vueuse/core'
 import { DEBOUNCE_DELAY } from '@/consts'
 import type { IApplication } from '@/types'
+import displayAmount from '@/utils/displayAmount'
 import Status from './Status.vue'
 
-defineEmits(['open-application'])
+defineEmits<{
+  (e: 'open-application', id: string): void
+}>()
 const { applications } = defineProps<{ applications: IApplication[] }>()
-
-const displayAmount = (amount: number) => {
-  return currency(amount, {
-    symbol: '₽',
-    pattern: '# !',
-    separator: ' ',
-    decimal: ',',
-  }).format()
-}
 
 const currentHeight = computed(() => {
   const row = 30
