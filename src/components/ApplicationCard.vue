@@ -8,7 +8,7 @@
       </div>
       <div class="row">
         <div>Телефон:</div>
-        <div>{{ application.phone }}</div>
+        <div>+{{ application.phone }}</div>
       </div>
       <div class="row">
         <div>Статус:</div>
