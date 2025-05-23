@@ -1,25 +1,25 @@
 <template>
-  <div class="card">
-    <h2 class="header">Заявка</h2>
-    <div class="table">
-      <div class="row">
+  <div class="bg-white rounded p-4 w-[700px]">
+    <h2 class="my-12 text-3xl">Заявка</h2>
+    <div class="flex flex-col gap-10">
+      <div class="flex gap-4">
         <div>Имя владельца:</div>
         <div>{{ application.fullName }}</div>
       </div>
-      <div class="row">
+      <div class="flex gap-4">
         <div>Телефон:</div>
         <div>+{{ application.phone }}</div>
       </div>
-      <div class="row">
+      <div class="flex gap-4">
         <div>Статус:</div>
         <div><Status :status="application.status" /></div>
       </div>
-      <div class="row">
+      <div class="flex gap-4">
         <div>Сумма:</div>
         <div>{{ displayAmount(application.amount) }}</div>
       </div>
       <div>
-        <div class="change-status-label">Изменить статус:</div>
+        <div class="mb-4">Изменить статус:</div>
         <app-select
           :options="APPLICATION_STATUS_OPTIONS"
           :model-value="application.status"
@@ -47,23 +47,3 @@ defineEmits<{
 }>()
 defineProps<{ application: IApplication }>()
 </script>
-
-<style scoped>
-.header {
-  margin-top: 24px;
-  margin-bottom: 24px;
-  font-size: 32px;
-}
-.row {
-  display: flex;
-  gap: 8px;
-}
-.table {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.change-status-label {
-  margin-bottom: 8px;
-}
-</style>

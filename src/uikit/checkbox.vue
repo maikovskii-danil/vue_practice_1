@@ -1,6 +1,6 @@
 <template>
-  <label class="container">
-    <input type="checkbox" :="$attrs" v-model="model" />
+  <label class="flex items-center gap-4 cursor-pointer">
+    <input type="checkbox" class="checkbox" :="$attrs" v-model="model" />
     <div><slot /></div>
   </label>
 </template>
@@ -10,12 +10,6 @@ const model = defineModel()
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
 .checkbox {
   all: unset;
   box-sizing: border-box;

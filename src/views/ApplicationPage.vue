@@ -1,5 +1,5 @@
 <template>
-  <div class="application-page-wrapper">
+  <div class="flex flex-col gap-2 mb-4">
     <Teleport to="body">
       <app-alert
         v-if="isOpenedAlertSuccess"
@@ -10,7 +10,9 @@
         @close="isOpenedAlertSuccess = false"
       ></app-alert>
     </Teleport>
-    <button class="link" @click="returnToMain">Назад на Главную</button>
+    <button class="hover:underline cursor-pointer text-left text-white" @click="returnToMain">
+      Назад на Главную
+    </button>
     <ApplicationCard
       v-if="currentApplication"
       :application="currentApplication"
@@ -21,11 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref, type ComputedRef } from 'vue'
+import { useRouter } from 'vue-router'
 import ApplicationCard from '@/components/ApplicationCard.vue'
 import useApplicationsStore from '@/stores/applications'
 import type { IApplication } from '@/types'
-import { computed, ref, type ComputedRef } from 'vue'
-import { useRouter } from 'vue-router'
 
 const { applicationId } = defineProps<{ applicationId: string }>()
 
@@ -57,19 +59,3 @@ const returnToMain = () => {
   router.push({ name: 'applications' })
 }
 </script>
-
-<style scoped>
-.application-page-wrapper {
-  margin: 8px auto;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.link {
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-</style>

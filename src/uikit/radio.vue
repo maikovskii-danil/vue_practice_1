@@ -1,5 +1,5 @@
 <template>
-  <label class="container">
+  <label class="flex items-center gap-4 cursor-pointer">
     <input type="radio" class="radio" :="$attrs" v-model="model" />
     <div><slot /></div>
   </label>
@@ -10,12 +10,6 @@ const model = defineModel()
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
 .radio {
   all: unset;
   box-sizing: border-box;

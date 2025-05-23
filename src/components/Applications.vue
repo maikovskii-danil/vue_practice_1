@@ -1,5 +1,5 @@
 <template>
-  <div class="applications-wrapper">
+  <div class="relative">
     <h2 class="header">Заявки</h2>
     <app-button class="btn-create" @click="$emit('open-modal-create')">Создать</app-button>
     <div class="filters-wrapper">

@@ -1,8 +1,12 @@
 <template>
   <Transition>
-    <div v-if="visible" class="alert" :class="{ [type]: true }">
-      <div class="title" :class="type">{{ title }}</div>
-      <div class="text">{{ textCache }}</div>
+    <div
+      v-if="visible"
+      class="border border-solid border-gray-950 border-l-4 border-l-transparent bg-white p-8"
+      :class="{ [type]: true }"
+    >
+      <div class="text-3xl" :class="type">{{ title }}</div>
+      <div class="my-7 text-black pl-3">{{ textCache }}</div>
       <app-button type="button" :render-strategy="type" @click="$emit('close')">
         Закрыть
       </app-button>
@@ -29,23 +33,6 @@ const textCache = computed((previous) => (text ? text : previous))
 </script>
 
 <style scoped>
-.alert {
-  border-left: 4px solid transparent;
-  border-right: 1px dashed #151414;
-  border-top: 1px dashed #151414;
-  border-bottom: 1px dashed #151414;
-  padding: 16px;
-  background: #fff;
-}
-.title {
-  margin: 0;
-  font-size: 30px;
-}
-.text {
-  color: #000;
-  padding-left: 5px;
-  margin: 14px 0;
-}
 .primary {
   color: #138b4d;
   border-color: #138b4d;

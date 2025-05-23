@@ -1,52 +1,28 @@
+@import 'tailwindcss';
+
+@theme {
+  --spacing: 2px;
+}
+
 #app {
   margin: 0 auto;
-  font-weight: normal;
+}
+
+html {
+  font-size: 16px;
 }
 
 body {
-  all: unset;
   background: #191921;
   font-family: 'Roboto';
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
+
+#app ul {
+  list-style: none;
 }
-ul {
-  all: unset;
-}
-li {
-  all: unset;
-}
-a {
-  all: unset;
-  cursor: pointer;
-}
-button {
-  all: unset;
-}
+
 .active-link {
   text-decoration: underline;
-}
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  justify-content: center;
-}
-.card {
-  background: #fff;
-  width: 700px;
-  margin: auto;
-  padding: 8px;
-  border-radius: 4px;
-}
-* {
-  box-sizing: border-box;
 }
 
 .v-enter-active,

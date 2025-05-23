@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card wrapper">
+    <div class="w-350 rounded-xl p-6 pt-16 bg-white">
       <Applications
         :applications="applicationsStore.applications"
         @open-modal-create="isOpenedModal = true"
@@ -9,8 +9,8 @@
     </div>
     <Teleport to="body">
       <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
-        <div class="modal-wrapper">
-          <h3 class="modal-header">Создать заявку</h3>
+        <div class="w-250 p-6 rounded-xl bg-white">
+          <h3 class="text-2xl pt-8">Создать заявку</h3>
           <ApplicationForm
             :initial-form="{
               fullName: '',
@@ -29,7 +29,7 @@
         type="primary"
         title="Успешно!"
         text="Заявка создана"
-        class="fixed width-350"
+        class="fixed w-175 top-6 right-6"
         @close="isSuccessfullyCreated = false"
       ></app-alert>
     </Teleport>
@@ -59,18 +59,3 @@ const openApplication = (id: string) => {
   router.push({ name: 'application', params: { applicationId: id } })
 }
 </script>
-
-<style scoped>
-.wrapper {
-  padding: 32px 12px 12px 12px;
-}
-.modal-wrapper {
-  width: 500px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #fff;
-}
-.modal-header {
-  margin-top: 16px;
-}
-</style>

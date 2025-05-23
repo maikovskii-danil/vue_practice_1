@@ -1,16 +1,10 @@
 <template>
-  <div class="wrapper">
+  <div class="h-[100px] flex items-center justify-center">
     <div class="loader"></div>
   </div>
 </template>
 
 <style scoped>
-.wrapper {
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .loader {
   width: 48px;
   height: 48px;

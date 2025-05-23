@@ -1,6 +1,6 @@
 <template>
-  <label class="container">
-    <input class="input" :="$attrs" v-model="model" />
+  <label class="block bg-white p-4 cursor-text w-full border border-solid border-gray-400">
+    <input class="w-full outline-0" :="$attrs" v-model="model" />
   </label>
 </template>
 
@@ -20,20 +20,3 @@ const [model, modifiers] = defineModel({
   },
 })
 </script>
-
-<style scoped>
-.container {
-  display: block;
-  background: #fff;
-  padding: 8px 0;
-  border: 1px solid #a6a6a6;
-  cursor: text;
-  width: 100%;
-}
-.input {
-  all: unset;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 12px;
-}
-</style>

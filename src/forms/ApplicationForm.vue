@@ -1,12 +1,12 @@
 <template>
-  <form class="application-form" @submit.prevent="submit">
+  <form class="flex flex-col gap-2 mt-8" @submit.prevent="submit">
     <div>ФИО</div>
     <app-input
       placeholder="Введите ФИО"
       v-model="formData.fullName"
       @focus="clearErrorByKey('fullName')"
     />
-    <div class="error">{{ formErrors.fullName }}</div>
+    <div class="text-red-600 text-xs min-h-7">{{ formErrors.fullName || '&nbsp;' }}</div>
     <div>Телефон</div>
     <app-input
       placeholder="79876543210"
@@ -14,7 +14,7 @@
       v-model.num="formData.phone"
       @focus="clearErrorByKey('phone')"
     />
-    <div class="error">{{ formErrors.phone }}</div>
+    <div class="text-red-600 text-xs min-h-7">{{ formErrors.phone || '&nbsp;' }}</div>
     <div>Сумма</div>
     <app-input
       type="number"
@@ -23,10 +23,10 @@
       @update:model-value="formData.amount = +$event"
       @focus="clearErrorByKey('amount')"
     />
-    <div class="error">{{ formErrors.amount }}</div>
+    <div class="text-red-600 text-xs min-h-7">{{ formErrors.amount || '&nbsp;' }}</div>
     <div>Статус</div>
     <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="formData.status" />
-    <div class="btn-create-wrapper">
+    <div class="mt-8">
       <app-button type="submit">Создать</app-button>
     </div>
   </form>
@@ -68,20 +68,3 @@ const submit = () => {
   }
 }
 </script>
-
-<style scoped>
-.application-form {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 16px;
-}
-.error {
-  font-size: 12px;
-  height: 14px;
-  color: #e60c0c;
-}
-.btn-create-wrapper {
-  margin-top: 16px;
-}
-</style>
