@@ -1,5 +1,5 @@
 <template>
-  <Transition mode="out-in">
+  <Transition name="opacity" mode="out-in">
     <div v-if="applications.length" class="w-full flex flex-col gap-8">
       <div class="flex items-center h-16 cursor-default px-4">
         <div class="w-48 cursor-default">ID</div>
@@ -20,7 +20,7 @@
             <div class="w-64">{{ '+' + application.phone }}</div>
             <div>{{ displayAmount(application.amount) }}</div>
             <div class="w-36 text-center ml-auto">
-              <Status :status="application.status" />
+              <Status class="w-full" :status="application.status" />
             </div>
             <div class="ml-8">
               <app-button small @click="$emit('open-application', application.id)">

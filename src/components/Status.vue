@@ -1,5 +1,5 @@
 <template>
-  <Transition mode="out-in">
+  <Transition name="opacity" mode="out-in">
     <div :key="status" class="status" :class="status" :="$attrs">{{ statusDisplayName }}</div>
   </Transition>
 </template>

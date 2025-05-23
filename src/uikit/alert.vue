@@ -1,5 +1,5 @@
 <template>
-  <Transition>
+  <Transition name="opacity">
     <div
       v-if="visible"
       class="border border-solid border-gray-950 border-l-4 border-l-transparent bg-white p-8"

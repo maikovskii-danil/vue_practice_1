@@ -6,6 +6,9 @@
 
 #app {
   margin: 0 auto;
+  ul {
+    list-style: none;
+  }
 }
 
 html {
@@ -17,20 +20,16 @@ body {
   font-family: 'Roboto';
 }
 
-#app ul {
-  list-style: none;
-}
-
 .active-link {
   text-decoration: underline;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: all 0.3s ease;
+.opacity-enter-active,
+.opacity-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.v-enter-from,
-.v-leave-to {
+.opacity-enter-from,
+.opacity-leave-to {
   opacity: 0;
 }

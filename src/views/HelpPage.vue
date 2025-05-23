@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-24 p-4 pb-12 w-350 bg-white rounded-xl">
+  <div class="p-4 pb-12 w-350 bg-white rounded-xl">
     <h2 class="cursor-default my-16 text-2xl">Помощь</h2>
     <button
       class="block mt-16 cursor-pointer hover:underline"
@@ -7,7 +7,7 @@
     >
       Что есть в данной системе?
     </button>
-    <Transition>
+    <Transition name="opacity">
       <div class="mt-4" v-if="isOpenedQuestion1">
         Тут есть все, для того, чтобы смотреть, какие заявки человек добавлял
       </div>
@@ -18,7 +18,7 @@
     >
       Как тут работает авторизация?
     </button>
-    <Transition>
+    <Transition name="opacity">
       <div class="mt-4" v-if="isOpenedQuestion2">Через localStorage с использованием Zod</div>
     </Transition>
   </div>

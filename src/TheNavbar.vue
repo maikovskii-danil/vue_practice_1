@@ -1,18 +1,27 @@
 <template>
-  <header class="header" :class="{ visible }">
-    <h1>Tinkoff</h1>
-    <ul class="navbar-menu">
-      <li>
-        <router-link :to="{ name: 'applications' }">Заявки</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'help' }">Помощь</router-link>
-      </li>
-      <li>
-        <a href="#" @click.prevent="userStore.logout">Выйти</a>
-      </li>
-    </ul>
-  </header>
+  <Transition name="opacity" mode="out-in">
+    <header v-if="visible" class="header flex items-center justify-between bg-white h-24 px-4 mb-8">
+      <h1 class="cursor-default text-2xl">Tinkoff</h1>
+      <ul class="flex gap-12 mr-16">
+        <li>
+          <router-link class="cursor-pointer hover:underline" :to="{ name: 'applications' }">
+            Заявки
+          </router-link>
+        </li>
+        <li>
+          <router-link class="cursor-pointer hover:underline" :to="{ name: 'help' }">
+            Помощь
+          </router-link>
+        </li>
+        <li>
+          <a href="#" class="cursor-pointer hover:underline" @click.prevent="userStore.logout">
+            Выйти
+          </a>
+        </li>
+      </ul>
+    </header>
+    <div v-else class="h-24"></div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -21,39 +30,3 @@ import useUserStore from './stores/user'
 defineProps<{ visible: boolean }>()
 const userStore = useUserStore()
 </script>
-
-<style scoped>
-h1 {
-  cursor: default;
-  font-size: 24px;
-}
-.header {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 46px;
-  padding: 0 8px;
-  margin-bottom: 16px;
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  h3 {
-    margin: 0;
-  }
-}
-.visible {
-  opacity: 1;
-}
-.navbar-menu {
-  all: unset;
-  display: flex;
-  gap: 24px;
-  margin-right: 32px;
-  a {
-    cursor: pointer;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-</style>

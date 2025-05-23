@@ -10,7 +10,7 @@
         v-model="status"
         :options="[{ id: 'empty', displayName: '' }, ...APPLICATION_STATUS_OPTIONS]"
       />
-      <Transition mode="out-in">
+      <Transition name="opacity" mode="out-in">
         <div v-if="fullname || status !== 'empty'" style="display: flex; align-items: center">
           <app-button small render-strategy="danger" @click="clear">Очистить</app-button>
         </div>
