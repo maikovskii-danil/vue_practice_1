@@ -1,28 +1,28 @@
 <template>
   <Transition mode="out-in">
-    <div v-if="applications.length" class="applications-table">
-      <div class="headers">
-        <div class="id">ID</div>
-        <div class="fullname">ФИО</div>
-        <div class="phone">Телефон</div>
+    <div v-if="applications.length" class="w-full flex flex-col gap-8">
+      <div class="flex items-center h-16 cursor-default px-4">
+        <div class="w-48 cursor-default">ID</div>
+        <div class="w-48">ФИО</div>
+        <div class="w-64">Телефон</div>
         <div>Сумма</div>
-        <div class="status">Статус</div>
-        <div class="action">Действие</div>
+        <div class="w-36 text-center ml-auto">Статус</div>
+        <div class="ml-8">Действие</div>
       </div>
       <div
-        class="applications-table height-animation"
+        class="w-full flex flex-col gap-8 transition-[height] duration-1000 overflow-hidden"
         :style="`height: ${currentHeightDebounced}px`"
       >
         <template v-for="application in applications" :key="application.id">
-          <div class="row">
-            <div class="id">{{ application.id }}</div>
-            <div class="fullname">{{ application.fullName }}</div>
-            <div class="phone">{{ '+' + application.phone }}</div>
+          <div class="flex items-center px-4">
+            <div class="w-48 cursor-default">{{ application.id }}</div>
+            <div class="w-48">{{ application.fullName }}</div>
+            <div class="w-64">{{ '+' + application.phone }}</div>
             <div>{{ displayAmount(application.amount) }}</div>
-            <div class="status">
+            <div class="w-36 text-center ml-auto">
               <Status :status="application.status" />
             </div>
-            <div class="action">
+            <div class="ml-8">
               <app-button small @click="$emit('open-application', application.id)">
                 Открыть
               </app-button>
@@ -31,7 +31,7 @@
         </template>
       </div>
     </div>
-    <div v-else class="centered-block height-300">Заявок нет</div>
+    <div v-else class="flex items-center justify-center w-full h-[300px]">Заявок нет</div>
   </Transition>
 </template>
 
@@ -58,55 +58,3 @@ const currentHeight = computed(() => {
 
 const currentHeightDebounced = refDebounced<number>(currentHeight, DEBOUNCE_DELAY)
 </script>
-
-<style scoped>
-.height-animation {
-  transition: height 1s ease;
-  overflow: hidden;
-}
-.applications-table {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.centered-block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-.id {
-  width: 90px;
-  cursor: default;
-}
-.fullname {
-  width: 100px;
-}
-.phone {
-  width: 140px;
-}
-.status {
-  margin-left: auto;
-  text-align: center;
-  width: 70px;
-}
-.action {
-  margin-left: 16px;
-}
-.height-300 {
-  height: 300px;
-}
-.headers {
-  display: flex;
-  align-items: center;
-  height: 30px;
-  cursor: default;
-  padding: 0 8px;
-}
-.row {
-  display: flex;
-  align-items: center;
-  padding: 0 8px;
-}
-</style>

@@ -19,7 +19,6 @@ const { renderStrategy = 'primary', small = false } = defineProps<{
 
 <style scoped>
 .btn {
-  all: unset;
   cursor: pointer;
   min-width: 60px;
   min-height: 30px;

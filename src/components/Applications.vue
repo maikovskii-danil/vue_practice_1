@@ -1,8 +1,10 @@
 <template>
   <div class="relative">
-    <h2 class="header">Заявки</h2>
-    <app-button class="btn-create" @click="$emit('open-modal-create')">Создать</app-button>
-    <div class="filters-wrapper">
+    <h2 class="text-3xl cursor-default">Заявки</h2>
+    <app-button class="absolute top-0 right-0" @click="$emit('open-modal-create')">
+      Создать
+    </app-button>
+    <div class="flex gap-8 w-225 my-6">
       <app-input placeholder="Введите имя" v-model="fullname" />
       <app-select
         v-model="status"
@@ -49,24 +51,3 @@ const clear = () => {
   status.value = 'empty'
 }
 </script>
-
-<style scoped>
-.applications-wrapper {
-  position: relative;
-}
-.header {
-  font-size: 32px;
-  cursor: default;
-}
-.btn-create {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.filters-wrapper {
-  display: flex;
-  gap: 16px;
-  width: 450px;
-  margin: 12px 0;
-}
-</style>
