@@ -1,6 +1,6 @@
 <template>
   <Transition name="opacity" mode="out-in">
-    <header v-if="visible" class="header flex items-center justify-between bg-white h-24 px-4 mb-8">
+    <header v-if="visible" class="flex items-center justify-between bg-white h-24 px-4 mb-8">
       <h1 class="cursor-default text-2xl">Tinkoff</h1>
       <ul class="flex gap-12 mr-16">
         <li>
