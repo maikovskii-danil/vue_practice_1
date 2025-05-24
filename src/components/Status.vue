@@ -2,8 +2,8 @@
   <Transition name="opacity" mode="out-in">
     <div
       :key="disabledTransition ? 'default' : status"
-      class="inline-block border border-solid border-black rounded-xl p-2 px-3 text-[9px] cursor-default"
-      :class="status"
+      class="inline-block border-2 rounded-xl p-2 px-3 text-[9px] font-bold cursor-default"
+      :class="twStyle"
       :="$attrs"
     >
       {{ statusDisplayName }}
@@ -21,38 +21,41 @@ const { status, disabledTransition = false } = defineProps<{
 
 const statusDisplayName = computed(() => {
   switch (status) {
-    case 'active':
+    case 'active': {
       return 'Активен'
-    case 'completed':
+    }
+    case 'completed': {
       return 'Завершен'
-    case 'rejected':
+    }
+    case 'rejected': {
       return 'Отменен'
-    case 'in_progress':
+    }
+    case 'in_progress': {
       return 'Выполняется'
-    default:
+    }
+    default: {
       return '== Unknown =='
+    }
+  }
+})
+
+const twStyle = computed(() => {
+  switch (status) {
+    case 'active': {
+      return 'border-green-700 text-green-700'
+    }
+    case 'completed': {
+      return 'border-green-700 text-green-700'
+    }
+    case 'rejected': {
+      return 'border-red-500 text-red-500'
+    }
+    case 'in_progress': {
+      return 'border-blue-700 text-blue-700'
+    }
+    default: {
+      return 'border-green-700 text-green-700'
+    }
   }
 })
 </script>
-
-<style scoped>
-.active {
-  border-color: #02a85d;
-  color: #02a85d;
-}
-
-.completed {
-  border-color: #02a85d;
-  color: #02a85d;
-}
-
-.rejected {
-  border-color: #d11a1a;
-  color: #d11a1a;
-}
-
-.in_progress {
-  border-color: #1a29d1;
-  color: #1a29d1;
-}
-</style>

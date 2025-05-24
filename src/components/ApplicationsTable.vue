@@ -8,7 +8,7 @@
     </template>
     <template #status="{ cell }">
       <div :class="cell.twStyle">
-        <Status class="w-full" :status="cell.value" disabledTransition />
+        <Status class="w-38" :status="cell.value" disabledTransition />
       </div>
     </template>
     <template #action="{ cell }">
@@ -39,7 +39,7 @@ const table = computed(() => {
       { id: 'fullName', displayName: 'ФИО', twStyle: 'w-48' },
       { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
       { id: 'amount', displayName: 'Сумма', twStyle: '' },
-      { id: 'status', displayName: 'Статус', twStyle: 'w-36 text-center ml-auto mr-4' },
+      { id: 'status', displayName: 'Статус', twStyle: 'w-36 text-center ml-auto mr-6' },
       { id: 'action', displayName: 'Действие', twStyle: 'ml-8' },
     ],
     rows: applications.map((application) => ({
