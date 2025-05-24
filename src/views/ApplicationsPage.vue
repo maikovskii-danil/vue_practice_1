@@ -1,21 +1,21 @@
 <template>
-  <Teleport to="body">
-    <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
-      <div class="w-250 p-6 rounded-xl bg-white">
-        <h3 class="text-2xl pt-8">Создать заявку</h3>
-        <ApplicationForm
-          :initial-form="{
-            fullName: '',
-            phone: '',
-            amount: 0,
-            status: 'active',
-          }"
-          @submit="submit"
-        />
-      </div>
-    </app-modal>
-  </Teleport>
   <div>
+    <Teleport to="body">
+      <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
+        <div class="w-250 p-6 rounded-xl bg-white">
+          <h3 class="text-2xl pt-8">Создать заявку</h3>
+          <ApplicationForm
+            :initial-form="{
+              fullName: '',
+              phone: '',
+              amount: 0,
+              status: 'active',
+            }"
+            @submit="submit"
+          />
+        </div>
+      </app-modal>
+    </Teleport>
     <div class="w-350 rounded-xl p-6 pt-16 bg-white">
       <Applications
         :applications="applicationsStore.applications"
