@@ -1,6 +1,13 @@
 <template>
   <Transition name="opacity" mode="out-in">
-    <div :key="status" class="status" :class="status" :="$attrs">{{ statusDisplayName }}</div>
+    <div
+      :key="status"
+      class="inline-block border border-solid border-black rounded-xl p-2 px-3 text-[9px] cursor-default"
+      :class="status"
+      :="$attrs"
+    >
+      {{ statusDisplayName }}
+    </div>
   </Transition>
 </template>
 
@@ -26,26 +33,21 @@ const statusDisplayName = computed(() => {
 </script>
 
 <style scoped>
-.status {
-  display: inline-block;
-  border: 1px solid #000;
-  border-radius: 12px;
-  padding: 3px 6px;
-  font-size: 9px;
-  cursor: default;
-}
 .active {
   border-color: #02a85d;
   color: #02a85d;
 }
+
 .completed {
   border-color: #02a85d;
   color: #02a85d;
 }
+
 .rejected {
   border-color: #d11a1a;
   color: #d11a1a;
 }
+
 .in_progress {
   border-color: #1a29d1;
   color: #1a29d1;

@@ -5,10 +5,10 @@
     <Teleport to="body">
       <app-alert
         :visible="!!userStore.error"
-        type="danger"
+        style-strategy="danger"
         title="Ошибка!"
         :text="userStore.error"
-        class="fixed w-175"
+        class="fixed top-8 right-8 w-175"
         @click="userStore.error = ''"
       ></app-alert>
     </Teleport>

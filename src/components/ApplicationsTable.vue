@@ -10,11 +10,11 @@
         <div class="ml-8">Действие</div>
       </div>
       <div
-        class="w-full flex flex-col gap-8 transition-[height] duration-1000 overflow-hidden"
+        class="w-full flex flex-col gap-6 transition-[height] duration-1000 overflow-hidden"
         :style="`height: ${currentHeightDebounced}px`"
       >
         <template v-for="application in applications" :key="application.id">
-          <div class="flex items-center px-4">
+          <div class="flex items-center py-2 px-4">
             <div class="w-48 cursor-default text-sm">{{ application.id }}</div>
             <div class="w-48 text-sm">{{ application.fullName }}</div>
             <div class="w-64 text-sm">{{ '+' + application.phone }}</div>
@@ -23,7 +23,7 @@
               <Status class="w-full" :status="application.status" />
             </div>
             <div class="ml-8">
-              <app-button small @click="$emit('open-application', application.id)">
+              <app-button class="p-2! px-4!" @click="$emit('open-application', application.id)">
                 Открыть
               </app-button>
             </div>
@@ -49,8 +49,8 @@ defineEmits<{
 const { applications } = defineProps<{ applications: IApplication[] }>()
 
 const currentHeight = computed(() => {
-  const row = 30
-  const gap = 16
+  const row = 36
+  const gap = 12
   const result = applications.length * (row + gap) - gap
 
   return result > 0 ? result : 0

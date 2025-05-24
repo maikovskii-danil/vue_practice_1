@@ -11,10 +11,10 @@
         :options="[{ id: 'empty', displayName: '' }, ...APPLICATION_STATUS_OPTIONS]"
       />
       <Transition name="opacity" mode="out-in">
-        <div v-if="fullname || status !== 'empty'" style="display: flex; align-items: center">
-          <app-button small render-strategy="danger" @click="clear">Очистить</app-button>
+        <div v-if="fullname || status !== 'empty'" class="flex items-center">
+          <app-button @click="clear">Очистить</app-button>
         </div>
-        <div v-else style="min-width: 79px; height: 37px"></div>
+        <div v-else class="min-w-[96.5px] h-[37px]"></div>
       </Transition>
     </div>
     <ApplicationsTable

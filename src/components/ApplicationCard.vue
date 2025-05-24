@@ -10,7 +10,7 @@
         <div>Телефон:</div>
         <div>+{{ application.phone }}</div>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-4 items-center">
         <div>Статус:</div>
         <div><Status :status="application.status" /></div>
       </div>
@@ -27,7 +27,7 @@
         />
       </div>
       <div>
-        <app-button render-strategy="danger" @click="$emit('remove-application', application.id)">
+        <app-button style-strategy="danger" @click="$emit('remove-application', application.id)">
           Удалить
         </app-button>
       </div>

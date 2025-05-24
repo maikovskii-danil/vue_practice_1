@@ -1,91 +1,48 @@
 <template>
   <button
-    :class="{
-      btn: true,
-      'btn-small': small,
-      [renderStrategy]: true,
-    }"
+    :class="`
+    ${twCSS}
+    p-4 px-8 rounded-2xl
+    text-sm
+    focus:outline-2 focus:outline-offset-2
+    cursor-pointer
+    `"
   >
     <slot />
   </button>
 </template>
 
 <script setup lang="ts">
-const { renderStrategy = 'primary', small = false } = defineProps<{
-  renderStrategy?: string
-  small?: boolean
+import { computed } from 'vue'
+
+const { styleStrategy = 'primary' } = defineProps<{
+  styleStrategy?: 'primary' | 'confirm' | 'danger'
 }>()
+
+const twCSS = computed(() => {
+  switch (styleStrategy) {
+    case 'danger': {
+      return `
+        bg-red-500 hover:bg-red-600 active:bg-red-700
+        text-white
+        focus:outline-red-500
+      `
+    }
+    case 'confirm': {
+      return `
+        bg-green-500 hover:bg-green-600 active:bg-green-700
+        text-white
+        focus:outline-green-500
+      `
+    }
+    case 'primary':
+    default: {
+      return `
+        bg-violet-500 hover:bg-violet-600 active:bg-violet-700
+        text-white
+        focus:outline-violet-500
+      `
+    }
+  }
+})
 </script>
-
-<style scoped>
-.btn {
-  cursor: pointer;
-  min-width: 60px;
-  min-height: 30px;
-
-  border-radius: 12px;
-  padding: 4px 12px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-weight: bold;
-
-  background: #fff;
-
-  transition: all 0.7s ease;
-  &:disabled {
-    background: #fff;
-    border-color: #aaa;
-    color: #aaa;
-    cursor: not-allowed;
-  }
-}
-.btn-small {
-  font-size: 12px;
-  padding: 3px 6px;
-  min-width: 40px;
-  min-height: 20px;
-}
-.primary {
-  border: 2px solid #138b4d;
-  color: #138b4d;
-  text-transform: uppercase;
-  &:hover:not(:disabled) {
-    color: #fff;
-    border-color: #fff;
-    background: #138b4d;
-  }
-}
-.secondary {
-  border: 2px solid transparent;
-  color: #b49900;
-  &:hover:not(:disabled) {
-    text-decoration: underline;
-  }
-}
-.danger {
-  border: 2px solid #ca0f05;
-  color: #ca0f05;
-  text-transform: uppercase;
-  &:hover:not(:disabled) {
-    color: #fff;
-    border-color: #fff;
-    background: #ca0f05;
-  }
-}
-.confirm {
-  border: 2px solid #2207f0;
-  color: #2207f0;
-  text-transform: uppercase;
-  &:hover:not(:disabled) {
-    color: #fff;
-    border-color: #fff;
-    background: #2207f0;
-  }
-}
-.inline {
-  display: inline-flex;
-}
-</style>
