@@ -12,7 +12,7 @@
       </div>
       <div class="flex gap-4 items-center">
         <div>Статус:</div>
-        <div><Status :status="application.status" /></div>
+        <div><Status class="w-36 text-center" :status="application.status" /></div>
       </div>
       <div class="flex gap-4">
         <div>Сумма:</div>
