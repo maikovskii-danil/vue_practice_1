@@ -1,22 +1,20 @@
 <template>
   <form @submit.prevent="submit">
     <div class="flex flex-col gap-4 mb-4">
-      <label for="email">Email</label>
+      <div>Email</div>
       <app-input
         v-model="userForm.email"
         type="email"
-        id="email"
         placeholder="Введите email"
         @focus="clearErrorByKey('email')"
       />
       <div class="text-red-600 text-xs min-h-7">{{ formErrors.email || '&nbsp;' }}</div>
     </div>
     <div class="flex flex-col gap-4 mb-4">
-      <label for="password">Пароль</label>
+      <label>Пароль</label>
       <app-input
         v-model="userForm.password"
         type="password"
-        id="password"
         placeholder="Введите пароль"
         autocomplete="on"
         @focus="clearErrorByKey('password')"

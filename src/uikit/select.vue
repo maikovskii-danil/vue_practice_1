@@ -1,11 +1,20 @@
 <template>
-  <div class="border-solid border border-gray-400 relative flex items-center pr-2 w-full">
-    <select class="p-4 cursor-pointer w-full outline-0" :="$attrs" v-model="model">
+  <label
+    :class="`
+    border rounded border-gray-400 
+    focus-within:outline-violet-500 focus-within:outline-1 focus-within:border-violet-500 
+    relative
+    flex items-center
+    pr-2 w-full
+    cursor-pointer
+    `"
+  >
+    <select class="p-4 w-full outline-0" :="$attrs" v-model="model">
       <option v-for="option in options" :key="option.id" :value="option.id">
         {{ option.displayName || 'Не выбрано' }}
       </option>
     </select>
-  </div>
+  </label>
 </template>
 
 <script setup lang="ts">
