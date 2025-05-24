@@ -12,7 +12,11 @@
       >
         <template v-for="row in computedTable.rows" :key="row.id">
           <div class="flex items-center py-2 px-4">
-            <div v-for="(cell, index) in row.cells" :key="cell.value" :class="cell.twStyle">
+            <div
+              v-for="(cell, index) in row.cells"
+              :key="computedTable.headers[index]?.id ?? 'unknown'"
+              :class="cell.twStyle"
+            >
               <slot :row :cell :name="computedTable.headers[index]?.id ?? 'unknown'">
                 {{ cell.value }}
               </slot>
