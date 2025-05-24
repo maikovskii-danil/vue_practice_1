@@ -1,44 +1,28 @@
 <template>
-  <Transition name="opacity" mode="out-in">
-    <div v-if="applications.length" class="w-full flex flex-col gap-4">
-      <div class="flex items-center h-16 cursor-default px-4">
-        <div class="w-48 cursor-default">ID</div>
-        <div class="w-48">ФИО</div>
-        <div class="w-64">Телефон</div>
-        <div>Сумма</div>
-        <div class="w-36 text-center ml-auto">Статус</div>
-        <div class="ml-8">Действие</div>
+  <app-table :table="table" empty-text="Заявок нет">
+    <template #phone="{ cell }">
+      <div :class="cell.twStyle">{{ '+' + cell.value }}</div>
+    </template>
+    <template #amount="{ cell }">
+      <div :class="cell.twStyle">{{ displayAmount(+cell.value) }}</div>
+    </template>
+    <template #status="{ cell }">
+      <div :class="cell.twStyle">
+        <Status class="w-full" :status="cell.value" />
       </div>
-      <div
-        class="w-full flex flex-col gap-6 transition-[height] duration-1000 overflow-hidden"
-        :style="`height: ${currentHeightDebounced}px`"
-      >
-        <template v-for="application in applications" :key="application.id">
-          <div class="flex items-center py-2 px-4">
-            <div class="w-48 cursor-default text-sm">{{ application.id }}</div>
-            <div class="w-48 text-sm">{{ application.fullName }}</div>
-            <div class="w-64 text-sm">{{ '+' + application.phone }}</div>
-            <div class="text-sm">{{ displayAmount(application.amount) }}</div>
-            <div class="w-36 text-center ml-auto text-sm">
-              <Status class="w-full" :status="application.status" />
-            </div>
-            <div class="ml-8">
-              <app-button class="p-2! px-4!" @click="$emit('open-application', application.id)">
-                Открыть
-              </app-button>
-            </div>
-          </div>
-        </template>
+    </template>
+    <template #action="{ cell }">
+      <div :class="cell.twStyle">
+        <app-button class="p-2! px-4!" @click="$emit('open-application', cell.value)">
+          Открыть
+        </app-button>
       </div>
-    </div>
-    <div v-else class="flex items-center justify-center w-full h-[300px]">Заявок нет</div>
-  </Transition>
+    </template>
+  </app-table>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { refDebounced } from '@vueuse/core'
-import { DEBOUNCE_DELAY } from '@/consts'
 import type { IApplication } from '@/types'
 import displayAmount from '@/utils/displayAmount'
 import Status from './Status.vue'
@@ -48,13 +32,26 @@ defineEmits<{
 }>()
 const { applications } = defineProps<{ applications: IApplication[] }>()
 
-const currentHeight = computed(() => {
-  const row = 36
-  const gap = 12
-  const result = applications.length * (row + gap) - gap
-
-  return result > 0 ? result : 0
+const table = computed(() => {
+  return {
+    headers: [
+      { id: 'id', displayName: 'ID', twStyle: 'w-48 cursor-default' },
+      { id: 'fullName', displayName: 'ФИО', twStyle: 'w-48' },
+      { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
+      { id: 'amount', displayName: 'Сумма', twStyle: '' },
+      { id: 'status', displayName: 'Статус', twStyle: 'w-36 text-center ml-auto mr-4' },
+      { id: 'action', displayName: 'Действие', twStyle: 'ml-8' },
+    ],
+    rows: applications.map((application) => ({
+      cells: [
+        { value: application.id, twStyle: 'w-48 cursor-default text-sm' },
+        { value: application.fullName, twStyle: 'w-48 text-sm' },
+        { value: application.phone, twStyle: 'w-64 text-sm' },
+        { value: application.amount + '', twStyle: 'text-sm' },
+        { value: application.status, twStyle: 'w-36 text-center ml-auto text-sm' },
+        { value: application.id, twStyle: 'ml-8' },
+      ],
+    })),
+  }
 })
-
-const currentHeightDebounced = refDebounced<number>(currentHeight, DEBOUNCE_DELAY)
 </script>

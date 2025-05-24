@@ -11,10 +11,25 @@ import Select from './uikit/select.vue'
 import Alert from './uikit/alert.vue'
 import Loader from './uikit/loader.vue'
 import Modal from './uikit/modal.vue'
+import Table from './uikit/table.vue'
 import router from './router'
 
 const pinia = createPinia()
 const app = createApp(App)
+
+declare module 'vue' {
+  interface GlobalComponents {
+    AppButton: typeof Button
+    AppInput: typeof Input
+    AppCheckbox: typeof Checkbox
+    AppRadio: typeof Radio
+    AppSelect: typeof Select
+    AppAlert: typeof Alert
+    AppLoader: typeof Loader
+    AppModal: typeof Modal
+    AppTable: typeof Table
+  }
+}
 
 app
   .component('AppButton', Button)
@@ -25,6 +40,7 @@ app
   .component('AppAlert', Alert)
   .component('AppLoader', Loader)
   .component('AppModal', Modal)
+  .component('AppTable', Table)
   .use(pinia)
   .use(router)
   .mount('#app')
