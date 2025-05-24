@@ -2,7 +2,7 @@
   <div class="mt-24 p-4 w-350 bg-white rounded-xl">
     <h1 class="cursor-default my-16 text-2xl">Войдите в систему</h1>
     <AuthForm :initial-form="{ email: '', password: '' }" @submit="submit" />
-    <Teleport to="body">
+    <Teleport to="#alerts">
       <app-alert
         :visible="!!userStore.error"
         style-strategy="danger"

@@ -2,7 +2,7 @@
   <Transition name="opacity">
     <div v-if="visible" class="border border-solid border-l-4 bg-white p-8" :class="twCSS">
       <div class="text-3xl" :class="styleStrategy">{{ title }}</div>
-      <div class="my-7 text-black pl-3">{{ textCache }}</div>
+      <div ref="before-close-button" class="my-7 text-black pl-3">{{ textCache }}</div>
       <app-button type="button" :style-strategy="styleStrategy" @click="$emit('close')">
         Закрыть
       </app-button>
@@ -11,7 +11,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
+import { useFocus } from '@vueuse/core'
+
+useFocus(useTemplateRef<HTMLDivElement>('before-close-button'), { initialValue: true })
 
 const {
   styleStrategy = 'primary',

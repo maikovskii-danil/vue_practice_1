@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-2 mb-4">
-    <Teleport to="body">
+    <Teleport to="#alerts">
       <app-alert
         v-if="isOpenedAlertSuccess"
         type="primary"

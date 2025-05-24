@@ -4,6 +4,7 @@
       <div>Email</div>
       <app-input
         v-model="userForm.email"
+        ref="email-input"
         type="email"
         placeholder="Введите email"
         @focus="clearErrorByKey('email')"
@@ -26,9 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, shallowRef } from 'vue'
+import { reactive, shallowRef, useTemplateRef } from 'vue'
+import { useFocus } from '@vueuse/core'
 import type { IUserData } from '@/types'
 import { userSchema } from '@/types/validation'
+
+useFocus(useTemplateRef<HTMLInputElement>('email-input'), { initialValue: true })
 
 const emit = defineEmits<{
   (e: 'submit', form: IUserData): void

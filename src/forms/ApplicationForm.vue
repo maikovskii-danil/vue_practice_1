@@ -2,8 +2,9 @@
   <form class="flex flex-col gap-2 mt-8" @submit.prevent="submit">
     <div>ФИО</div>
     <app-input
-      placeholder="Введите ФИО"
       v-model="formData.fullName"
+      ref="fullName-input"
+      placeholder="Введите ФИО"
       @focus="clearErrorByKey('fullName')"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.fullName || '&nbsp;' }}</div>
@@ -33,10 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, shallowRef } from 'vue'
+import { reactive, shallowRef, useTemplateRef } from 'vue'
+import { useFocus } from '@vueuse/core'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
+
+useFocus(useTemplateRef<HTMLInputElement>('fullName-input'), { initialValue: true })
 
 const emit = defineEmits<{
   (e: 'submit', formData: Omit<IApplication, 'id'>): void
