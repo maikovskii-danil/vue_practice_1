@@ -1,6 +1,6 @@
 <template>
   <Transition name="opacity" mode="out-in">
-    <div v-if="applications.length" class="w-full flex flex-col gap-8">
+    <div v-if="applications.length" class="w-full flex flex-col gap-4">
       <div class="flex items-center h-16 cursor-default px-4">
         <div class="w-48 cursor-default">ID</div>
         <div class="w-48">ФИО</div>
