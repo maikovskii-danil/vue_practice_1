@@ -1,7 +1,7 @@
 <template>
   <Transition name="opacity" mode="out-in">
     <div
-      :key="status"
+      :key="disabledTransition ? 'default' : status"
       class="inline-block border border-solid border-black rounded-xl p-2 px-3 text-[9px] cursor-default"
       :class="status"
       :="$attrs"
@@ -14,7 +14,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const { status } = defineProps<{ status: string }>()
+const { status, disabledTransition = false } = defineProps<{
+  status: string
+  disabledTransition?: boolean
+}>()
 
 const statusDisplayName = computed(() => {
   switch (status) {
