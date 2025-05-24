@@ -1,17 +1,17 @@
 <template>
   <Transition name="opacity" mode="out-in">
-    <div v-if="computedTable.headers.length" class="w-full flex flex-col gap-4">
-      <div class="flex items-center h-16 cursor-default px-4">
+    <div v-if="computedTable.headers.length" class="w-full flex flex-col">
+      <div class="flex items-center cursor-default px-4 py-6 bg-violet-100">
         <div v-for="header in computedTable.headers" :key="header.id" :class="header.twStyle">
           {{ header.displayName }}
         </div>
       </div>
       <div
-        class="w-full flex flex-col gap-6 transition-[height] duration-1000 overflow-hidden"
+        class="w-full flex flex-col transition-[height] duration-1000 overflow-hidden"
         :style="`height: ${currentHeightDebounced}px`"
       >
         <template v-for="row in computedTable.rows" :key="row.id">
-          <div class="flex items-center py-2 px-4">
+          <div class="flex items-center py-5 px-4 odd:bg-white even:bg-violet-100">
             <div
               v-for="(cell, index) in row.cells"
               :key="computedTable.headers[index]?.id ?? 'unknown'"
@@ -77,20 +77,14 @@ const computedTable = computed<ITable>(() => {
   }
 
   return {
-    headers: [{ id: '1', displayName: 'header', twStyle: 'w-full' }],
-    rows: [
-      {
-        id: '1',
-        cells: [{ value: 'cell', twStyle: 'w-full' }],
-      },
-    ],
+    headers: [],
+    rows: [],
   }
 })
 
 const currentHeight = computed(() => {
-  const row = 36
-  const gap = 12
-  const result = computedTable.value.rows.length * (row + gap) - gap
+  const row = 48
+  const result = computedTable.value.rows.length * row
 
   return result > 0 ? result : 0
 })
