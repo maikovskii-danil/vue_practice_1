@@ -15,11 +15,11 @@
       >
         <template v-for="application in applications" :key="application.id">
           <div class="flex items-center px-4">
-            <div class="w-48 cursor-default">{{ application.id }}</div>
-            <div class="w-48">{{ application.fullName }}</div>
-            <div class="w-64">{{ '+' + application.phone }}</div>
-            <div>{{ displayAmount(application.amount) }}</div>
-            <div class="w-36 text-center ml-auto">
+            <div class="w-48 cursor-default text-sm">{{ application.id }}</div>
+            <div class="w-48 text-sm">{{ application.fullName }}</div>
+            <div class="w-64 text-sm">{{ '+' + application.phone }}</div>
+            <div class="text-sm">{{ displayAmount(application.amount) }}</div>
+            <div class="w-36 text-center ml-auto text-sm">
               <Status class="w-full" :status="application.status" />
             </div>
             <div class="ml-8">
