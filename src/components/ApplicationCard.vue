@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-white rounded p-4 w-[700px]">
-    <h2 class="my-12 text-3xl">Заявка</h2>
+  <div class="bg-white rounded p-6 w-[700px]">
+    <h2 class="my-10 text-3xl">Заявка</h2>
     <div class="flex flex-col gap-10">
       <div class="flex gap-4">
         <div>Имя владельца:</div>
