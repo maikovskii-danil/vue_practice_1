@@ -45,10 +45,10 @@ const statusDisplayName = computed(() => {
 const twStyle = computed(() => {
   switch (status) {
     case 'active': {
-      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
+      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
     }
     case 'completed': {
-      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
+      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
     }
     case 'rejected': {
       return 'border-red-500 text-red-500'
@@ -57,7 +57,7 @@ const twStyle = computed(() => {
       return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500'
     }
     default: {
-      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
+      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
     }
   }
 })
