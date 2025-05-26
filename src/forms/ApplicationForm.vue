@@ -1,6 +1,6 @@
 <template>
-  <form class="flex flex-col gap-2 mt-8" @submit.prevent="submit">
-    <div>ФИО</div>
+  <form class="flex flex-col gap-2 mt-8" @submit.prevent>
+    <div class="dark:text-gray-100">ФИО:</div>
     <app-input
       v-model="formData.fullName"
       ref="fullName-input"
@@ -8,7 +8,7 @@
       @focus="clearErrorByKey('fullName')"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.fullName || '&nbsp;' }}</div>
-    <div>Телефон</div>
+    <div class="dark:text-gray-100">Телефон:</div>
     <app-input
       placeholder="79876543210"
       filter="phone"
@@ -16,7 +16,7 @@
       @focus="clearErrorByKey('phone')"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.phone || '&nbsp;' }}</div>
-    <div>Сумма</div>
+    <div class="dark:text-gray-100">Сумма:</div>
     <app-input
       type="number"
       placeholder="Сумма"
@@ -25,10 +25,10 @@
       @focus="clearErrorByKey('amount')"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.amount || '&nbsp;' }}</div>
-    <div>Статус</div>
+    <div class="dark:text-gray-100">Статус:</div>
     <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="formData.status" />
-    <div class="mt-8">
-      <app-button type="submit">Создать</app-button>
+    <div class="mt-16">
+      <app-button type="button" @click="submit">Создать</app-button>
     </div>
   </form>
 </template>
