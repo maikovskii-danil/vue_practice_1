@@ -2,37 +2,37 @@
   <div class="w-full relative">
     <button
       ref="select-btn"
-      :class="`
-      group
-      w-full
-      flex items-center
-      p-4 border
-      cursor-pointer rounded
-      bg-white dark:bg-gray-900
-      border-gray-400 dark:border-gray-900
-      focus:outline-violet-500 focus:outline-2 focus:border-violet-500
-      `"
+      :class="[
+        'group',
+        'w-full',
+        'flex items-center',
+        'p-4 border',
+        'cursor-pointer rounded',
+        'bg-white dark:bg-gray-900',
+        'border-gray-400 dark:border-gray-900',
+        'focus:outline-violet-500 focus:outline-2 focus:border-violet-500',
+      ]"
     >
       <div v-if="currentDisplayName" class="text-gray-950 dark:text-white">
         {{ currentDisplayName }}
       </div>
       <div v-else class="text-gray-400">Не выбрано</div>
       <div
-        :class="{
-          'absolute top-2/4 -translate-1/2 right-3': true,
-          'w-4 h-4': true,
-          'before:block before:w-1 before:h-3.5': true,
-          'before:absolute before:top-1/4 before:-translate-1/2 before:right-1': true,
-          'before:-rotate-45': true,
-          'before:bg-gray-500': true,
-          'before:rounded': true,
-          'after:block after:w-1 after:h-3.5': true,
-          'after:absolute after:top-3/4 after:-translate-1/2 after:right-1': true,
-          'after:rotate-45': true,
-          'after:bg-gray-500': true,
-          'after:rounded': true,
-          'rotate-90': hasDropdown,
-        }"
+        :class="[
+          'absolute top-2/4 -translate-1/2 right-3',
+          'w-4 h-4',
+          'before:block before:w-1 before:h-3.5',
+          'before:absolute before:top-1/4 before:-translate-1/2 before:right-1',
+          'before:-rotate-45',
+          'before:bg-gray-500',
+          'before:rounded',
+          'after:block after:w-1 after:h-3.5',
+          'after:absolute after:top-3/4 after:-translate-1/2 after:right-1',
+          'after:rotate-45',
+          'after:bg-gray-500',
+          'after:rounded',
+          hasDropdown && 'rotate-90',
+        ]"
       ></div>
     </button>
     <div
@@ -46,15 +46,15 @@
         <button
           v-if="option.displayName"
           ref="select-options"
-          :class="`
-          w-full
-          cursor-pointer rounded
-          outline-0
-          px-4 py-2 my-1
-          text-white text-left
-          hover:bg-violet-700 
-          focus:outline-violet-700 focus:outline-2
-          `"
+          :class="[
+            'w-full',
+            'cursor-pointer rounded',
+            'outline-0',
+            'px-4 py-2 my-1',
+            'text-white text-left',
+            'hover:bg-violet-700',
+            'focus:outline-violet-700 focus:outline-2',
+          ]"
           @click="selectOption(option.id)"
         >
           {{ option.displayName }}
