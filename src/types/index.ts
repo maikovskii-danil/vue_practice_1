@@ -1,5 +1,7 @@
 import { z } from 'zod'
-import { userSchema, applicationSchema } from './validation'
+import { userSchema, applicationSchema, statusUnion } from './validation'
+
+export type TApplicationStatus = z.infer<typeof statusUnion>
 
 export interface IUserData extends z.infer<typeof userSchema> {}
 

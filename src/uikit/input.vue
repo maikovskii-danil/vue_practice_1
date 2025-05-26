@@ -1,14 +1,19 @@
 <template>
   <label
     :class="`
-    bg-white
-    border rounded border-gray-400
-    focus-within:outline-violet-500 focus-within:outline-1 focus-within:border-violet-500
     w-full
-    cursor-text
+    cursor-text rounded
+    border
+    bg-white dark:bg-gray-900
+    border-gray-400 dark:border-gray-900
+    focus-within:outline-violet-500 focus-within:outline-2 focus-within:border-violet-500
     `"
   >
-    <input class="w-full p-4 outline-0" :="$attrs" v-model="model" />
+    <input
+      class="w-full p-4 outline-0 dark:text-gray-100 placeholder:text-gray-400"
+      :="$attrs"
+      v-model="model"
+    />
   </label>
 </template>
 

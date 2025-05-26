@@ -1,15 +1,12 @@
 <template>
   <div class="relative">
-    <h2 class="text-3xl cursor-default">Заявки</h2>
+    <h2 class="text-3xl dark:text-gray-100 cursor-default">Заявки</h2>
     <app-button class="absolute top-0 right-0" @click="$emit('open-modal-create')">
       Создать
     </app-button>
     <div class="flex gap-8 w-225 my-6">
       <app-input placeholder="Введите имя" v-model="fullname" />
-      <app-select
-        v-model="status"
-        :options="[{ id: 'empty', displayName: '' }, ...APPLICATION_STATUS_OPTIONS]"
-      />
+      <app-select v-model="status" :options="statusOptions" />
       <Transition name="opacity" mode="out-in">
         <div v-if="fullname || status !== 'empty'" class="flex items-center">
           <app-button @click="clear">Очистить</app-button>
@@ -36,18 +33,25 @@ defineEmits<{
   (e: 'open-application', id: string): void
 }>()
 const { applications } = defineProps<{ applications: IApplication[] }>()
+
+const defaultOptionId = 'empty'
+const statusOptions = [{ id: defaultOptionId, displayName: '' }, ...APPLICATION_STATUS_OPTIONS]
+
+const status = ref(defaultOptionId)
+
 const fullname = ref('')
-const status = ref('empty')
 const fullnameDebounced = refDebounced<string>(fullname, DEBOUNCE_DELAY)
 
 const filteredApplications = computed(() => {
   return applications
     .filter((application) => application.fullName.includes(fullnameDebounced.value))
-    .filter((application) => status.value === 'empty' || application.status === status.value)
+    .filter(
+      (application) => status.value === defaultOptionId || application.status === status.value,
+    )
 })
 
 const clear = () => {
   fullname.value = ''
-  status.value = 'empty'
+  status.value = defaultOptionId
 }
 </script>

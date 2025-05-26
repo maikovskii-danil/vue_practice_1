@@ -4,6 +4,8 @@
   --spacing: 2px;
 }
 
+@custom-variant dark (&:where([color-scheme=dark], [color-scheme=dark] *));
+
 #app {
   margin: 0 auto;
   ul {
@@ -16,7 +18,6 @@ html {
 }
 
 body {
-  background: #191921;
   font-family: 'Inter';
 }
 

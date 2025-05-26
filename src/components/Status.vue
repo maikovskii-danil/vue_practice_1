@@ -2,11 +2,14 @@
   <Transition name="opacity" mode="out-in">
     <div
       :key="disabledTransition ? 'default' : status"
-      class="inline-block border-2 rounded-xl p-2 px-3 text-[9px] font-bold cursor-default"
+      class="inline-block relative border-2 rounded-xl p-2 px-3 text-[10px] font-bold cursor-default z-0 shadow-xl/10"
       :class="twStyle"
       :="$attrs"
     >
-      {{ statusDisplayName }}
+      <div
+        class="bg-white dark:bg-gray-700 inline-block absolute top-0 left-0 right-0 bottom-0 rounded-xl opacity-50"
+      ></div>
+      <div class="relative z-1">{{ statusDisplayName }}</div>
     </div>
   </Transition>
 </template>
@@ -42,19 +45,19 @@ const statusDisplayName = computed(() => {
 const twStyle = computed(() => {
   switch (status) {
     case 'active': {
-      return 'border-green-700 text-green-700'
+      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
     }
     case 'completed': {
-      return 'border-green-700 text-green-700'
+      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
     }
     case 'rejected': {
       return 'border-red-500 text-red-500'
     }
     case 'in_progress': {
-      return 'border-blue-700 text-blue-700'
+      return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500'
     }
     default: {
-      return 'border-green-700 text-green-700'
+      return 'border-green-700 text-green-700 dark:border-green-600 dark:text-green-600'
     }
   }
 })

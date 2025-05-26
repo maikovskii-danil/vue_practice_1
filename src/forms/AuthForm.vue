@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit">
     <div class="flex flex-col gap-4 mb-4">
-      <div>Email</div>
+      <div class="dark:text-gray-100 cursor-default">Email:</div>
       <app-input
         v-model="userForm.email"
         ref="email-input"
@@ -9,10 +9,12 @@
         placeholder="Введите email"
         @focus="clearErrorByKey('email')"
       />
-      <div class="text-red-600 text-xs min-h-7">{{ formErrors.email || '&nbsp;' }}</div>
+      <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
+        {{ formErrors.email || '&nbsp;' }}
+      </div>
     </div>
     <div class="flex flex-col gap-4 mb-4">
-      <label>Пароль</label>
+      <div class="dark:text-gray-100 cursor-default">Пароль:</div>
       <app-input
         v-model="userForm.password"
         type="password"
@@ -20,7 +22,9 @@
         autocomplete="on"
         @focus="clearErrorByKey('password')"
       />
-      <div class="text-red-600 text-xs min-h-7">{{ formErrors.password || '&nbsp;' }}</div>
+      <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
+        {{ formErrors.password || '&nbsp;' }}
+      </div>
     </div>
     <app-button type="submit">Войти</app-button>
   </form>

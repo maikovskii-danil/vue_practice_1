@@ -1,29 +1,29 @@
 <template>
-  <div class="bg-white rounded p-6 w-[700px]">
-    <h2 class="my-10 text-3xl">Заявка</h2>
+  <div class="bg-white dark:bg-gray-700 rounded p-6 w-[700px]">
+    <h2 class="my-10 text-3xl dark:text-gray-100">Заявка</h2>
     <div class="flex flex-col gap-10">
       <div class="flex gap-4">
-        <div>Имя владельца:</div>
-        <div>{{ application.fullName }}</div>
+        <div class="dark:text-gray-100">Имя владельца:</div>
+        <div class="dark:text-gray-100">{{ application.fullName }}</div>
       </div>
       <div class="flex gap-4">
-        <div>Телефон:</div>
-        <div>+{{ application.phone }}</div>
+        <div class="dark:text-gray-100">Телефон:</div>
+        <div class="dark:text-gray-100">+{{ application.phone }}</div>
       </div>
       <div class="flex gap-4 items-center">
-        <div>Статус:</div>
-        <div><Status class="w-38 text-center" :status="application.status" /></div>
+        <div class="dark:text-gray-100">Статус:</div>
+        <div><Status class="w-40 text-center" :status="application.status" /></div>
       </div>
       <div class="flex gap-4">
-        <div>Сумма:</div>
-        <div>{{ displayAmount(application.amount) }}</div>
+        <div class="dark:text-gray-100">Сумма:</div>
+        <div class="dark:text-gray-100">{{ displayAmount(application.amount) }}</div>
       </div>
       <div>
-        <div class="mb-4">Изменить статус:</div>
+        <div class="mb-4 dark:text-gray-100">Изменить статус:</div>
         <app-select
           :options="APPLICATION_STATUS_OPTIONS"
           :model-value="application.status"
-          @update:model-value="$emit('change-application', { ...application, status: $event })"
+          @update:model-value="changeApplication($event, application)"
         />
       </div>
       <div>
@@ -40,10 +40,22 @@ import type { IApplication } from '@/types'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import displayAmount from '@/utils/displayAmount'
 import Status from './Status.vue'
+import { statusUnion } from '@/types/validation'
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'change-application', application: IApplication): void
   (e: 'remove-application', id: string): void
 }>()
 defineProps<{ application: IApplication }>()
+
+const changeApplication = (evt = '', application: IApplication) => {
+  const statusParseData = statusUnion.safeParse(evt)
+
+  if (statusParseData.success) {
+    emit('change-application', {
+      ...application,
+      status: statusParseData.data,
+    })
+  }
+}
 </script>

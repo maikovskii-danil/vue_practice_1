@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="w-350 rounded-xl p-6 pt-16 bg-white dark:bg-gray-700 shadow-xl/20">
     <Teleport to="#modals">
       <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
-        <div class="w-250 p-6 rounded-xl bg-white">
+        <div class="w-250 p-6 rounded-xl bg-white dark:bg-gray-700">
           <h3 class="text-2xl pt-8">Создать заявку</h3>
           <ApplicationForm
             :initial-form="{
@@ -26,13 +26,11 @@
         @close="isSuccessfullyCreated = false"
       ></app-alert>
     </Teleport>
-    <div class="w-350 rounded-xl p-6 pt-16 bg-white">
-      <Applications
-        :applications="applicationsStore.applications"
-        @open-modal-create="isOpenedModal = true"
-        @open-application="openApplication"
-      />
-    </div>
+    <Applications
+      :applications="applicationsStore.applications"
+      @open-modal-create="isOpenedModal = true"
+      @open-application="openApplication"
+    />
   </div>
 </template>
 

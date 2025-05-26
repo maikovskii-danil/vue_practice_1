@@ -1,11 +1,18 @@
-import type { IApplication, IUserData } from './types'
+import type { IApplication, IUserData, TApplicationStatus } from './types'
 
-export const APPLICATION_STATUS_OPTIONS = [
+export const APPLICATION_STATUS_OPTIONS: Array<{
+  id: TApplicationStatus
+  displayName: string
+}> = [
   { id: 'active', displayName: 'Активен' },
   { id: 'completed', displayName: 'Завершен' },
   { id: 'in_progress', displayName: 'Выполняется' },
   { id: 'rejected', displayName: 'Отменен' },
 ]
+
+export const APPLICATION_STATUSES_SET = new Set<TApplicationStatus>(
+  APPLICATION_STATUS_OPTIONS.map((option) => option.id),
+)
 
 export const INITIAL_APPLICATIONS: IApplication[] = [
   {

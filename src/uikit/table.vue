@@ -1,7 +1,9 @@
 <template>
   <Transition name="opacity" mode="out-in">
     <div v-if="computedTable.headers.length" class="w-full flex flex-col">
-      <div class="flex items-center cursor-default px-4 py-6 bg-violet-100">
+      <div
+        class="flex items-center cursor-default px-4 py-6 bg-violet-200 dark:text-gray-100 dark:bg-gray-900"
+      >
         <div v-for="header in computedTable.headers" :key="header.id" :class="header.twStyle">
           {{ header.displayName }}
         </div>
@@ -11,7 +13,9 @@
         :style="`height: ${currentHeightDebounced}px`"
       >
         <template v-for="row in computedTable.rows" :key="row.id">
-          <div class="flex items-center py-5 px-4 odd:bg-white even:bg-violet-100">
+          <div
+            class="flex items-center py-5 px-4 odd:bg-white dark:odd:bg-gray-800 even:bg-violet-200 dark:even:bg-gray-900 dark:text-gray-100"
+          >
             <div
               v-for="(cell, index) in row.cells"
               :key="computedTable.headers[index]?.id ?? 'unknown'"

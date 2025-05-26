@@ -1,21 +1,28 @@
 <template>
   <Transition appear name="opacity" mode="out-in">
-    <header v-if="visible" class="flex items-center justify-between bg-white h-24 px-4 mb-8">
-      <h1 class="cursor-default text-2xl">Tinkoff</h1>
-      <ul class="flex gap-12 mr-16">
+    <header
+      v-if="visible"
+      class="flex items-center justify-between shadow-xl/20 bg-gray-100 dark:bg-gray-700 h-28 px-8 mb-20"
+    >
+      <h1 class="cursor-default text-3xl dark:text-blue-100 font-bold">
+        <router-link :to="{ name: 'applications' }" custom #="{ navigate }">
+          <button class="cursor-pointer" @click="navigate">Vue.js App</button>
+        </router-link>
+      </h1>
+      <ul class="flex gap-6">
         <li v-for="link in routerLinks" :key="link.displayName">
-          <router-link class="cursor-pointer hover:underline" :to="link.to">
-            {{ link.displayName }}
+          <router-link :to="link.to" custom #="{ navigate }">
+            <app-button style-strategy="neutral" @click="navigate">
+              {{ link.displayName }}
+            </app-button>
           </router-link>
         </li>
         <li>
-          <a href="#" class="cursor-pointer hover:underline" @click.prevent="userStore.logout">
-            Выйти
-          </a>
+          <app-button style-strategy="neutral" @click="userStore.logout">Выйти</app-button>
         </li>
       </ul>
     </header>
-    <div v-else class="h-24"></div>
+    <div v-else class="h-28 mb-20"></div>
   </Transition>
 </template>
 

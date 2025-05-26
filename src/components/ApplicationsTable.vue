@@ -8,7 +8,7 @@
     </template>
     <template #status="{ cell }">
       <div :class="cell.twStyle">
-        <Status class="w-38" :status="cell.value" disabledTransition />
+        <Status class="w-40" :status="cell.value" disabledTransition />
       </div>
     </template>
     <template #action="{ cell }">

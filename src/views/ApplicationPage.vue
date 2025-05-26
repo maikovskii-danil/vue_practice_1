@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-2 mb-4">
+  <div class="flex flex-col gap-2 shadow-xl/20">
     <Teleport to="#alerts">
       <app-alert
         v-if="isOpenedAlertSuccess"
@@ -10,7 +10,10 @@
         @close="isOpenedAlertSuccess = false"
       ></app-alert>
     </Teleport>
-    <button class="hover:underline cursor-pointer text-left text-white" @click="returnToMain">
+    <button
+      class="hover:underline cursor-pointer text-left font-bold dark:text-white"
+      @click="returnToMain"
+    >
       Назад на Главную
     </button>
     <ApplicationCard
