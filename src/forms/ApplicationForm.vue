@@ -18,10 +18,8 @@
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.phone || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Сумма:</div>
     <app-input
-      type="number"
       placeholder="Сумма"
-      :model-value="(formData.amount || '').toString()"
-      @update:model-value="formData.amount = +$event"
+      v-model.num="formData.amount"
       @focus="clearErrorByKey('amount')"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.amount || '&nbsp;' }}</div>
@@ -39,6 +37,7 @@ import { useFocus } from '@vueuse/core'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
+import type { ToString } from '@/utility-types'
 
 useFocus(useTemplateRef<HTMLInputElement>('fullName-input'), { initialValue: true })
 
@@ -47,7 +46,10 @@ const emit = defineEmits<{
 }>()
 const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
 
-const formData = reactive<Omit<IApplication, 'id'>>(initialForm)
+const formData = reactive<ToString<typeof initialForm>>({
+  ...initialForm,
+  amount: (initialForm.amount || '').toString(),
+})
 const formErrors = shallowRef({ fullName: '', phone: '', amount: '' })
 
 const clearErrorByKey = (key: keyof typeof formErrors.value) => {
@@ -56,11 +58,17 @@ const clearErrorByKey = (key: keyof typeof formErrors.value) => {
 
 const submit = () => {
   formData.phone = formData.phone === '0' ? '' : formData.phone
+  formData.amount = formData.amount === '0' ? '' : formData.amount
 
-  const { success, error } = applicationSchema.safeParse(formData)
+  const preparedToSubmitFormData = {
+    ...formData,
+    amount: +formData.amount,
+  }
+
+  const { success, error, data } = applicationSchema.safeParse(preparedToSubmitFormData)
 
   if (success) {
-    emit('submit', formData)
+    emit('submit', data)
   } else {
     const foundErrors = { fullName: '', phone: '', amount: '' }
 
