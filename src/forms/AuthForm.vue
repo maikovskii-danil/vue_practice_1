@@ -7,7 +7,7 @@
         ref="email-input"
         type="email"
         placeholder="Введите email"
-        @focus="clearErrorByKey('email')"
+        @focus="formErrors.email = ''"
       />
       <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
         {{ formErrors.email || '&nbsp;' }}
@@ -20,7 +20,7 @@
         type="password"
         placeholder="Введите пароль"
         autocomplete="on"
-        @focus="clearErrorByKey('password')"
+        @focus="formErrors.password = ''"
       />
       <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
         {{ formErrors.password || '&nbsp;' }}
@@ -31,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, shallowRef, useTemplateRef } from 'vue'
+import { reactive, ref, useTemplateRef } from 'vue'
 import { useFocus } from '@vueuse/core'
 import type { IUserData } from '@/types'
 import { userSchema } from '@/types/validation'
@@ -44,11 +44,7 @@ const emit = defineEmits<{
 const { initialForm } = defineProps<{ initialForm: IUserData }>()
 
 const userForm = reactive<IUserData>(initialForm)
-const formErrors = shallowRef({ email: '', password: '' })
-
-const clearErrorByKey = (key: keyof typeof formErrors.value) => {
-  formErrors.value = { ...formErrors.value, [key]: '' }
-}
+const formErrors = ref({ email: '', password: '' })
 
 const submit = () => {
   const { success, error } = userSchema.safeParse(userForm)

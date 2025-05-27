@@ -21,12 +21,16 @@
 const [model, modifiers] = defineModel({
   set(value: string) {
     if (modifiers.num) {
+      if (value === '') {
+        return value
+      }
+
       const newValue =
         Array.from(value)
           .filter((letter) => !isNaN(+letter))
           .join('') || '0'
 
-      return newValue
+      return modifiers.positive ? Math.abs(+newValue).toString() : newValue
     }
 
     return value

@@ -5,22 +5,22 @@
       v-model="formData.fullName"
       ref="fullName-input"
       placeholder="Введите ФИО"
-      @focus="clearErrorByKey('fullName')"
+      @focus="formErrors.fullName = ''"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.fullName || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Телефон:</div>
     <app-input
       placeholder="79876543210"
       filter="phone"
-      v-model.num="formData.phone"
-      @focus="clearErrorByKey('phone')"
+      v-model.num.positive="formData.phone"
+      @focus="formErrors.phone = ''"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.phone || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Сумма:</div>
     <app-input
       placeholder="Сумма"
-      v-model.num="formData.amount"
-      @focus="clearErrorByKey('amount')"
+      v-model.num.positive="formData.amount"
+      @focus="formErrors.amount = ''"
     />
     <div class="text-red-600 text-xs min-h-7">{{ formErrors.amount || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Статус:</div>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, shallowRef, useTemplateRef } from 'vue'
+import { reactive, ref, useTemplateRef } from 'vue'
 import { useFocus } from '@vueuse/core'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import type { IApplication } from '@/types'
@@ -50,16 +50,9 @@ const formData = reactive<ToString<typeof initialForm>>({
   ...initialForm,
   amount: (initialForm.amount || '').toString(),
 })
-const formErrors = shallowRef({ fullName: '', phone: '', amount: '' })
-
-const clearErrorByKey = (key: keyof typeof formErrors.value) => {
-  formErrors.value = { ...formErrors.value, [key]: '' }
-}
+const formErrors = ref({ fullName: '', phone: '', amount: '' })
 
 const submit = () => {
-  formData.phone = formData.phone === '0' ? '' : formData.phone
-  formData.amount = formData.amount === '0' ? '' : formData.amount
-
   const preparedToSubmitFormData = {
     ...formData,
     amount: +formData.amount,
