@@ -3,7 +3,6 @@
     <button
       ref="select-btn"
       :class="[
-        'group',
         'w-full',
         'flex items-center',
         'p-4 border',
