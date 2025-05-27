@@ -2,9 +2,14 @@
   <Transition appear name="opacity" mode="out-in">
     <header
       v-if="visible"
-      class="flex items-center justify-between shadow-xl/20 bg-gray-100 dark:bg-gray-700 h-28 px-8 mb-20"
+      :class="[
+        'flex items-center justify-between',
+        'h-28 px-8 mb-20',
+        'shadow-xl/20',
+        'bg-gray-100 dark:bg-gray-700',
+      ]"
     >
-      <h1 class="cursor-default text-3xl dark:text-blue-100 font-bold">
+      <h1 class="cursor-default text-3xl font-bold dark:text-blue-100">
         <router-link :to="{ name: 'applications' }" custom #="{ navigate }">
           <button class="cursor-pointer" @click="navigate">Vue.js App</button>
         </router-link>
@@ -18,6 +23,11 @@
           </router-link>
         </li>
         <li>
+          <app-button style-strategy="neutral" @click="toggleIsDark()">
+            {{ isDark ? 'Светлая тема' : 'Темная тема' }}
+          </app-button>
+        </li>
+        <li>
           <app-button style-strategy="neutral" @click="userStore.logout">Выйти</app-button>
         </li>
       </ul>
@@ -27,10 +37,12 @@
 </template>
 
 <script setup lang="ts">
-import useUserStore from './stores/user'
+import useDarkCustom from '@/utils/useDarkCustom'
+import useUserStore from '@/stores/user'
 
 defineProps<{ visible: boolean }>()
 const userStore = useUserStore()
+const { value: isDark, toggle: toggleIsDark } = useDarkCustom()
 
 const routerLinks = [
   { to: { name: 'applications' }, displayName: 'Заявки' },

@@ -130,7 +130,7 @@ useEventListener(document, 'click', (evt) => {
   const target = evt.target as Node
 
   if (!button.value.contains(target) && !dropdown.value.contains(target)) {
-    hasDropdown.value = false
+    toggleHasDropdown(false)
   }
 })
 </script>
