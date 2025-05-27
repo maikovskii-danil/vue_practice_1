@@ -29,7 +29,9 @@
         </template>
       </div>
     </div>
-    <div v-else class="flex items-center justify-center w-full h-[300px]">{{ emptyText }}</div>
+    <div v-else class="flex items-center justify-center w-full h-[300px] dark:text-gray-100">
+      {{ emptyText }}
+    </div>
   </Transition>
 </template>
 
