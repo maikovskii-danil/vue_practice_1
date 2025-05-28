@@ -12,7 +12,11 @@
       ]"
     >
       <input
-        class="w-full p-4 outline-0 dark:text-gray-100 placeholder:text-gray-400"
+        :class="[
+          'w-full p-4 outline-0 dark:text-gray-100',
+          'placeholder:text-gray-400',
+          error && 'placeholder:text-red-500',
+        ]"
         :="$attrs"
         v-model="model"
       />
