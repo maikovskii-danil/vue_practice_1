@@ -21,10 +21,6 @@ body {
   font-family: 'Inter';
 }
 
-.active-link {
-  text-decoration: underline;
-}
-
 .opacity-enter-active,
 .opacity-leave-active {
   transition: opacity 0.3s ease;

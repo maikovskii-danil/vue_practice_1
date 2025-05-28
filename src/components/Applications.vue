@@ -5,10 +5,10 @@
       Создать
     </app-button>
     <div class="flex gap-8 w-225 my-6">
-      <app-input placeholder="Введите имя" v-model="fullname" />
+      <app-input placeholder="Введите имя" v-model="name" />
       <app-select v-model="status" :options="statusOptions" />
       <Transition name="opacity" mode="out-in">
-        <div v-if="fullname || status !== 'empty'" class="flex items-center">
+        <div v-if="name || status !== 'empty'" class="flex items-center">
           <app-button @click="clear">Очистить</app-button>
         </div>
         <div v-else class="min-w-[96.5px] h-[37px]"></div>
@@ -39,19 +39,19 @@ const statusOptions = [{ id: defaultOptionId, displayName: '' }, ...APPLICATION_
 
 const status = ref(defaultOptionId)
 
-const fullname = ref('')
-const fullnameDebounced = refDebounced<string>(fullname, DEBOUNCE_DELAY)
+const name = ref('')
+const nameDebounced = refDebounced<string>(name, DEBOUNCE_DELAY)
 
 const filteredApplications = computed(() => {
   return applications
-    .filter((application) => application.fullName.includes(fullnameDebounced.value))
+    .filter((application) => application.name.includes(nameDebounced.value))
     .filter(
       (application) => status.value === defaultOptionId || application.status === status.value,
     )
 })
 
 const clear = () => {
-  fullname.value = ''
+  name.value = ''
   status.value = defaultOptionId
 }
 </script>

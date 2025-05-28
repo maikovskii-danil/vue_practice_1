@@ -4,7 +4,7 @@
     <div class="flex flex-col gap-10">
       <div class="flex gap-4">
         <div class="dark:text-gray-100">Имя владельца:</div>
-        <div class="dark:text-gray-100">{{ application.fullName }}</div>
+        <div class="dark:text-gray-100">{{ application.name }}</div>
       </div>
       <div class="flex gap-4">
         <div class="dark:text-gray-100">Телефон:</div>
@@ -20,15 +20,18 @@
       </div>
       <div>
         <div class="mb-4 dark:text-gray-100">Изменить статус:</div>
-        <app-select
-          :options="APPLICATION_STATUS_OPTIONS"
-          :model-value="application.status"
-          @update:model-value="changeApplication($event, application)"
-        />
+        <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="applicationStatus" />
       </div>
-      <div>
+      <div class="flex gap-4">
         <app-button style-strategy="danger" @click="$emit('remove-application', application.id)">
           Удалить
+        </app-button>
+        <app-button
+          style-strategy="primary"
+          :disabled="applicationStatus === application.status"
+          @click="changeApplication"
+        >
+          Обновить
         </app-button>
       </div>
     </div>
@@ -36,20 +39,23 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { IApplication } from '@/types'
 import { APPLICATION_STATUS_OPTIONS } from '@/consts'
 import displayAmount from '@/utils/displayAmount'
-import Status from './Status.vue'
 import { statusUnion } from '@/types/validation'
+import Status from './Status.vue'
 
 const emit = defineEmits<{
   (e: 'change-application', application: IApplication): void
   (e: 'remove-application', id: string): void
 }>()
-defineProps<{ application: IApplication }>()
+const { application } = defineProps<{ application: IApplication }>()
 
-const changeApplication = (evt = '', application: IApplication) => {
-  const statusParseData = statusUnion.safeParse(evt)
+const applicationStatus = ref(application.status)
+
+const changeApplication = () => {
+  const statusParseData = statusUnion.safeParse(applicationStatus.value)
 
   if (statusParseData.success) {
     emit('change-application', {

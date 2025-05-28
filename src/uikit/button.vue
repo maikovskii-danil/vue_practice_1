@@ -27,6 +27,9 @@ const twCSS = computed(() => {
         'text-white',
         'focus:outline-red-600',
         'shadow-xl/20',
+        'disabled:opacity-60',
+        'disabled:cursor-not-allowed',
+        'disabled:outline-0',
       ]
     }
     case 'confirm': {
@@ -35,6 +38,9 @@ const twCSS = computed(() => {
         'text-white',
         'focus:outline-green-500',
         'shadow-xl/20',
+        'disabled:opacity-60',
+        'disabled:cursor-not-allowed',
+        'disabled:outline-0',
       ]
     }
     case 'neutral': {
@@ -60,11 +66,14 @@ const twCSS = computed(() => {
     case 'primary':
     default: {
       return [
-        'bg-violet-500 hover:bg-violet-600 active:bg-violet-700',
-        'dark:bg-violet-700 dark:hover:bg-violet-600 dark:active:bg-violet-500',
+        'bg-violet-500 not-disabled:hover:bg-violet-600 not-disabled:active:bg-violet-700',
+        'dark:bg-violet-700 dark:not-disabled:hover:bg-violet-600 dark:not-disabled:active:bg-violet-500',
         'text-white',
         'focus:outline-violet-500',
         'shadow-xl/20',
+        'disabled:opacity-60',
+        'disabled:cursor-not-allowed',
+        'disabled:outline-0',
       ]
     }
   }

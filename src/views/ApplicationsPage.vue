@@ -6,7 +6,7 @@
           <h3 class="text-2xl pt-8 dark:text-gray-100">Создать заявку</h3>
           <ApplicationForm
             :initial-form="{
-              fullName: '',
+              name: '',
               phone: '',
               amount: 0,
               status: 'active',

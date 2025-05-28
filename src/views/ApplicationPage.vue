@@ -2,20 +2,22 @@
   <div class="flex flex-col gap-2 shadow-xl/20">
     <Teleport to="#alerts">
       <app-alert
-        v-if="isOpenedAlertSuccess"
         type="primary"
         title="Успешно!"
         text="Заявка обновлена"
-        class="fixed width-350"
-        @close="isOpenedAlertSuccess = false"
+        class="fixed w-175 top-6 right-6"
+        :visible="isOpenedAlertUpdated"
+        @close="isOpenedAlertUpdated = false"
       ></app-alert>
     </Teleport>
-    <button
-      class="hover:underline cursor-pointer text-left font-bold dark:text-white"
-      @click="returnToMain"
-    >
-      Назад на Главную
-    </button>
+    <div>
+      <button
+        class="hover:underline cursor-pointer text-left font-bold dark:text-white"
+        @click="returnToMain"
+      >
+        Вернуться на список заявок
+      </button>
+    </div>
     <ApplicationCard
       v-if="currentApplication"
       :application="currentApplication"
@@ -36,7 +38,7 @@ const { applicationId } = defineProps<{ applicationId: string }>()
 
 const router = useRouter()
 const applicationsStore = useApplicationsStore()
-const isOpenedAlertSuccess = ref(false)
+const isOpenedAlertUpdated = ref(false)
 
 const { change, remove } = applicationsStore
 
@@ -49,8 +51,8 @@ const currentApplication: ComputedRef<IApplication | undefined> = computed((prev
 })
 
 const changeApplication = (updated: IApplication) => {
-  isOpenedAlertSuccess.value = true
   change(updated)
+  isOpenedAlertUpdated.value = true
 }
 
 const removeApplication = (id: string) => {

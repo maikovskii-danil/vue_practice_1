@@ -1,18 +1,17 @@
 <template>
   <form class="flex flex-col gap-2 mt-8" @submit.prevent>
-    <div class="dark:text-gray-100">ФИО:</div>
+    <div class="dark:text-gray-100">Имя:</div>
     <app-input
-      ref="fullName-input"
-      placeholder="Введите ФИО"
+      ref="name-input"
+      placeholder="Введите имя"
       with-error
-      :error="formErrors.fullName"
-      v-model="formData.fullName"
-      @focus="formErrors.fullName = ''"
+      :error="formErrors.name"
+      v-model="formData.name"
+      @focus="formErrors.name = ''"
     />
     <div class="dark:text-gray-100">Телефон:</div>
     <app-input
       placeholder="79876543210"
-      filter="phone"
       with-error
       :error="formErrors.phone"
       v-model.num.positive="formData.phone"
@@ -42,7 +41,7 @@ import type { IApplication } from '@/types'
 import { applicationSchema } from '@/types/validation'
 import type { ToString } from '@/utility-types'
 
-useFocus(useTemplateRef<HTMLInputElement>('fullName-input'), { initialValue: true })
+useFocus(useTemplateRef<HTMLInputElement>('name-input'), { initialValue: true })
 
 const emit = defineEmits<{
   (e: 'submit', formData: Omit<IApplication, 'id'>): void
@@ -53,7 +52,7 @@ const formData = reactive<ToString<typeof initialForm>>({
   ...initialForm,
   amount: (initialForm.amount || '').toString(),
 })
-const formErrors = ref({ fullName: '', phone: '', amount: '' })
+const formErrors = ref({ name: '', phone: '', amount: '' })
 
 const submit = () => {
   const preparedToSubmitFormData = {
@@ -66,7 +65,7 @@ const submit = () => {
   if (success) {
     emit('submit', data)
   } else {
-    const foundErrors = { fullName: '', phone: '', amount: '' }
+    const foundErrors = { name: '', phone: '', amount: '' }
 
     error.errors.forEach((zodErrorRecord) => {
       const key = zodErrorRecord.path[0] as keyof typeof foundErrors

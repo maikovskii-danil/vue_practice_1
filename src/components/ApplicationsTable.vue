@@ -36,7 +36,7 @@ const table = computed(() => {
   return {
     headers: [
       { id: 'id', displayName: 'ID', twStyle: 'w-48 cursor-default' },
-      { id: 'fullName', displayName: 'ФИО', twStyle: 'w-48' },
+      { id: 'name', displayName: 'Имя', twStyle: 'w-48' },
       { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
       { id: 'amount', displayName: 'Сумма', twStyle: '' },
       { id: 'status', displayName: 'Статус', twStyle: 'w-36 text-center ml-auto mr-6' },
@@ -45,7 +45,7 @@ const table = computed(() => {
     rows: applications.map((application) => ({
       cells: [
         { value: application.id, twStyle: 'w-48 cursor-default text-sm' },
-        { value: application.fullName, twStyle: 'w-48 text-sm' },
+        { value: application.name, twStyle: 'w-48 text-sm' },
         { value: application.phone, twStyle: 'w-64 text-sm' },
         { value: application.amount + '', twStyle: 'text-sm' },
         { value: application.status, twStyle: 'w-36 text-center ml-auto text-sm' },

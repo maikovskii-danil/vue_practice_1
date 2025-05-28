@@ -35,8 +35,6 @@ const options: RouterOptions = {
       redirect: '/',
     },
   ],
-  linkActiveClass: 'active-link',
-  linkExactActiveClass: 'active-link',
 }
 
 const router = createRouter(options)

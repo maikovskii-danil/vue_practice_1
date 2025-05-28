@@ -5,11 +5,11 @@
       :class="[
         'w-full',
         'flex items-center',
-        'p-4 border',
+        'p-4 border focus:outline-2',
         'cursor-pointer rounded',
         'bg-white dark:bg-gray-900',
         'border-gray-400 dark:border-gray-900',
-        'focus:outline-violet-500 focus:outline-2 focus:border-violet-500',
+        'focus:outline-violet-500 focus:border-violet-500',
       ]"
     >
       <div v-if="currentDisplayName" class="text-gray-950 dark:text-white">
@@ -36,10 +36,14 @@
     </button>
     <div
       ref="select-dropdown"
-      :class="{
-        'absolute w-full px-2 py-1 cursor-default rounded bg-gray-900': true,
-        hidden: !hasDropdown,
-      }"
+      :class="[
+        'w-full',
+        'px-2 py-1 dark:border',
+        'absolute z-1',
+        'cursor-default rounded',
+        'bg-gray-900 dark:bg-gray-800 dark:border-gray-700',
+        !hasDropdown && 'hidden',
+      ]"
     >
       <template v-for="option in options" :key="option.id">
         <button
@@ -48,11 +52,10 @@
           :class="[
             'w-full',
             'cursor-pointer rounded',
-            'outline-0',
-            'px-4 py-2 my-1',
+            'px-4 py-2 my-1 outline-0 focus:outline-2',
             'text-white text-left',
             'hover:bg-violet-700',
-            'focus:outline-violet-700 focus:outline-2',
+            'focus:outline-violet-700',
           ]"
           @click="selectOption(option.id)"
         >
