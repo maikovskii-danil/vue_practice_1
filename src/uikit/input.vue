@@ -1,5 +1,5 @@
 <template>
-  <label class="w-full flex flex-col gap-4">
+  <label class="w-full flex flex-col gap-4 has-disabled:cursor-not-allowed">
     <div
       :class="[
         'w-full',
@@ -7,14 +7,19 @@
         'border',
         'bg-white dark:bg-gray-900',
         'border-gray-400 dark:border-gray-900',
-        'focus-within:outline-violet-500 focus-within:outline-2 focus-within:border-violet-500',
-        error && 'outline-2 outline-red-500 dark:outline-red-600',
+        'focus-within:outline-2',
+        'focus-within:outline-violet-500 focus-within:border-violet-500',
+        'has-disabled:cursor-not-allowed',
+        'has-disabled:bg-gray-200 dark:has-disabled:bg-gray-800',
+        error && 'outline-2 has-disabled:outline-0 outline-red-500 dark:outline-red-600',
       ]"
     >
       <input
         :class="[
           'w-full p-4 outline-0 dark:text-gray-100',
           'placeholder:text-gray-400',
+          'disabled:cursor-not-allowed',
+          'disabled:placeholder:text-gray-400 dark:disabled:placeholder:text-gray-600',
           error && 'placeholder:text-red-500',
         ]"
         :="$attrs"
