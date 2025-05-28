@@ -48,13 +48,13 @@ const twStyle = computed(() => {
       return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
     }
     case 'completed': {
-      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
+      return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500'
     }
     case 'rejected': {
       return 'border-red-500 text-red-500'
     }
     case 'in_progress': {
-      return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500'
+      return 'border-yellow-700 text-yellow-700 dark:border-yellow-500 dark:text-yellow-500'
     }
     default: {
       return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
