@@ -3,28 +3,26 @@
     <div class="flex flex-col gap-4 mb-4">
       <div class="dark:text-gray-100 cursor-default">Email:</div>
       <app-input
-        v-model="userForm.email"
         ref="email-input"
         type="email"
         placeholder="Введите email"
+        with-error
+        :error="formErrors.email"
+        v-model="userForm.email"
         @focus="formErrors.email = ''"
       />
-      <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
-        {{ formErrors.email || '&nbsp;' }}
-      </div>
     </div>
     <div class="flex flex-col gap-4 mb-4">
       <div class="dark:text-gray-100 cursor-default">Пароль:</div>
       <app-input
-        v-model="userForm.password"
         type="password"
         placeholder="Введите пароль"
         autocomplete="on"
+        with-error
+        :error="formErrors.password"
+        v-model="userForm.password"
         @focus="formErrors.password = ''"
       />
-      <div class="text-red-600 dark:text-red-500 cursor-default text-xs min-h-7">
-        {{ formErrors.password || '&nbsp;' }}
-      </div>
     </div>
     <app-button type="submit">Войти</app-button>
   </form>

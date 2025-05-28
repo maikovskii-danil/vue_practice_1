@@ -2,27 +2,30 @@
   <form class="flex flex-col gap-2 mt-8" @submit.prevent>
     <div class="dark:text-gray-100">ФИО:</div>
     <app-input
-      v-model="formData.fullName"
       ref="fullName-input"
       placeholder="Введите ФИО"
+      with-error
+      :error="formErrors.fullName"
+      v-model="formData.fullName"
       @focus="formErrors.fullName = ''"
     />
-    <div class="text-red-600 text-xs min-h-7">{{ formErrors.fullName || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Телефон:</div>
     <app-input
       placeholder="79876543210"
       filter="phone"
+      with-error
+      :error="formErrors.phone"
       v-model.num.positive="formData.phone"
       @focus="formErrors.phone = ''"
     />
-    <div class="text-red-600 text-xs min-h-7">{{ formErrors.phone || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Сумма:</div>
     <app-input
       placeholder="Сумма"
+      with-error
+      :error="formErrors.amount"
       v-model.num.positive="formData.amount"
       @focus="formErrors.amount = ''"
     />
-    <div class="text-red-600 text-xs min-h-7">{{ formErrors.amount || '&nbsp;' }}</div>
     <div class="dark:text-gray-100">Статус:</div>
     <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="formData.status" />
     <div class="mt-16">
