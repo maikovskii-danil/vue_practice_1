@@ -14,4 +14,10 @@ import TheNavbar from './TheNavbar.vue';
 import useUserStore from './stores/user';
 
 const userStore = useUserStore();
+
+const newTest = {
+  name: 'fdsv',
+
+  jfsd: 324,
+};
 </script>
