@@ -7,5 +7,6 @@ jobs:
     steps:
       - uses: actions/setup-node@v4
       - run: |
+          npm
           npm i
           npm run prettier-check
