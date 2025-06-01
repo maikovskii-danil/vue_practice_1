@@ -5,6 +5,7 @@ jobs:
   prettier:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           npm ci
           npm run prettier-check
