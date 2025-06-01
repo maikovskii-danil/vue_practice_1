@@ -38,6 +38,6 @@
     "vue-tsc": "^2.2.8"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown src/"
+    "**/*": "npm run format"
   }
 }

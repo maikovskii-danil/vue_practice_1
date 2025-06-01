@@ -15,9 +15,5 @@ import useUserStore from './stores/user';
 
 const userStore = useUserStore();
 
-const newTest = {
-  name: 'fdsv',
-
-  jfsd: 324,
-};
+const test2 = { afvsd: 'dsvf', kk: 32 };
 </script>
