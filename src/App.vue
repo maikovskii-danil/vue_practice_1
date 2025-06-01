@@ -14,7 +14,4 @@ import TheNavbar from './TheNavbar.vue';
 import useUserStore from './stores/user';
 
 const userStore = useUserStore();
-const unprettierLikeCode = {  name: '',
-  second: '',
-}
 </script>
