@@ -38,6 +38,6 @@
     "vue-tsc": "^2.2.8"
   },
   "lint-staged": {
-    "**/*": "npm run format"
+    "**/*": "npm run prettier-check"
   }
 }
