@@ -10,8 +10,8 @@
 </template>
 
 <script setup lang="ts">
-import TheNavbar from './TheNavbar.vue'
-import useUserStore from './stores/user'
+import TheNavbar from './TheNavbar.vue';
+import useUserStore from './stores/user';
 
-const userStore = useUserStore()
+const userStore = useUserStore();
 </script>

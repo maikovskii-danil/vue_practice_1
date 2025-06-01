@@ -1,18 +1,18 @@
-import type { IApplication, IUserData, TApplicationStatus } from './types'
+import type { IApplication, IUserData, TApplicationStatus } from './types';
 
 export const APPLICATION_STATUS_OPTIONS: Array<{
-  id: TApplicationStatus
-  displayName: string
+  id: TApplicationStatus;
+  displayName: string;
 }> = [
   { id: 'active', displayName: 'Активен' },
   { id: 'completed', displayName: 'Завершен' },
   { id: 'in_progress', displayName: 'Выполняется' },
   { id: 'rejected', displayName: 'Отменен' },
-]
+];
 
 export const APPLICATION_STATUSES_SET = new Set<TApplicationStatus>(
   APPLICATION_STATUS_OPTIONS.map((option) => option.id),
-)
+);
 
 export const INITIAL_APPLICATIONS: IApplication[] = [
   {
@@ -64,22 +64,22 @@ export const INITIAL_APPLICATIONS: IApplication[] = [
     amount: 1234,
     status: 'completed',
   },
-]
+];
 
-export const INITIAL_LAST_ID = +(INITIAL_APPLICATIONS.at(-1)?.id ?? 0)
+export const INITIAL_LAST_ID = +(INITIAL_APPLICATIONS.at(-1)?.id ?? 0);
 
 export const REGISTERED_USERS_DATA: IUserData[] = [
   {
     email: 'some.user@automation.testing',
     password: '123456',
   },
-]
+];
 
 export const REGISTERED_USERS_DATA_MAP = REGISTERED_USERS_DATA.reduce(
   (acc, user) => {
-    return { ...acc, [user.email]: user }
+    return { ...acc, [user.email]: user };
   },
   {} as Record<string, IUserData>,
-)
+);
 
-export const DEBOUNCE_DELAY = 300
+export const DEBOUNCE_DELAY = 300;

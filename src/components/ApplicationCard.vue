@@ -12,18 +12,28 @@
       </div>
       <div class="flex gap-4 items-center">
         <div class="dark:text-gray-100">Статус:</div>
-        <div><Status class="w-40 text-center" :status="application.status" /></div>
+        <div>
+          <Status class="w-40 text-center" :status="application.status" />
+        </div>
       </div>
       <div class="flex gap-4">
         <div class="dark:text-gray-100">Сумма:</div>
-        <div class="dark:text-gray-100">{{ displayAmount(application.amount) }}</div>
+        <div class="dark:text-gray-100">
+          {{ displayAmount(application.amount) }}
+        </div>
       </div>
       <div>
         <div class="mb-4 dark:text-gray-100">Изменить статус:</div>
-        <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="applicationStatus" />
+        <app-select
+          :options="APPLICATION_STATUS_OPTIONS"
+          v-model="applicationStatus"
+        />
       </div>
       <div class="flex gap-4">
-        <app-button style-strategy="danger" @click="$emit('remove-application', application.id)">
+        <app-button
+          style-strategy="danger"
+          @click="$emit('remove-application', application.id)"
+        >
           Удалить
         </app-button>
         <app-button
@@ -39,29 +49,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { IApplication } from '@/types'
-import { APPLICATION_STATUS_OPTIONS } from '@/consts'
-import displayAmount from '@/utils/displayAmount'
-import { statusUnion } from '@/types/validation'
-import Status from './Status.vue'
+import { ref } from 'vue';
+import type { IApplication } from '@/types';
+import { APPLICATION_STATUS_OPTIONS } from '@/consts';
+import displayAmount from '@/utils/displayAmount';
+import { statusUnion } from '@/types/validation';
+import Status from './Status.vue';
 
 const emit = defineEmits<{
-  (e: 'change-application', application: IApplication): void
-  (e: 'remove-application', id: string): void
-}>()
-const { application } = defineProps<{ application: IApplication }>()
+  (e: 'change-application', application: IApplication): void;
+  (e: 'remove-application', id: string): void;
+}>();
+const { application } = defineProps<{ application: IApplication }>();
 
-const applicationStatus = ref(application.status)
+const applicationStatus = ref(application.status);
 
 const changeApplication = () => {
-  const statusParseData = statusUnion.safeParse(applicationStatus.value)
+  const statusParseData = statusUnion.safeParse(applicationStatus.value);
 
   if (statusParseData.success) {
     emit('change-application', {
       ...application,
       status: statusParseData.data,
-    })
+    });
   }
-}
+};
 </script>

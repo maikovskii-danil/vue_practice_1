@@ -11,7 +11,8 @@
         'focus-within:outline-violet-500 focus-within:border-violet-500',
         'has-disabled:cursor-not-allowed',
         'has-disabled:bg-gray-200 dark:has-disabled:bg-gray-800',
-        error && 'not-has-disabled:outline-2 outline-red-500 dark:outline-red-600',
+        error &&
+          'not-has-disabled:outline-2 outline-red-500 dark:outline-red-600',
       ]"
     >
       <input
@@ -40,19 +41,22 @@ const [model, modifiers] = defineModel({
   set(value: string) {
     if (modifiers.num) {
       if (value === '') {
-        return value
+        return value;
       }
 
       const newValue =
         Array.from(value)
           .filter((letter) => !isNaN(+letter))
-          .join('') || '0'
+          .join('') || '0';
 
-      return modifiers.positive ? Math.abs(+newValue).toString() : newValue
+      return modifiers.positive ? Math.abs(+newValue).toString() : newValue;
     }
 
-    return value
+    return value;
   },
-})
-const { error = '', withError = false } = defineProps<{ error?: string; withError?: boolean }>()
+});
+const { error = '', withError = false } = defineProps<{
+  error?: string;
+  withError?: boolean;
+}>();
 </script>

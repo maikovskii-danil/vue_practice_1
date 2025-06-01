@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const { styleStrategy = 'primary' } = defineProps<{
-  styleStrategy?: 'primary' | 'confirm' | 'danger' | 'neutral'
-}>()
+  styleStrategy?: 'primary' | 'confirm' | 'danger' | 'neutral';
+}>();
 
 const twCSS = computed(() => {
   switch (styleStrategy) {
@@ -30,7 +30,7 @@ const twCSS = computed(() => {
         'disabled:opacity-60',
         'disabled:cursor-not-allowed',
         'disabled:outline-0',
-      ]
+      ];
     }
     case 'confirm': {
       return [
@@ -41,7 +41,7 @@ const twCSS = computed(() => {
         'disabled:opacity-60',
         'disabled:cursor-not-allowed',
         'disabled:outline-0',
-      ]
+      ];
     }
     case 'neutral': {
       return [
@@ -61,7 +61,7 @@ const twCSS = computed(() => {
         'disabled:outline-0',
         'disabled:bg-white',
         'disabled:dark:bg-gray-800',
-      ]
+      ];
     }
     case 'primary':
     default: {
@@ -74,8 +74,8 @@ const twCSS = computed(() => {
         'disabled:opacity-60',
         'disabled:cursor-not-allowed',
         'disabled:outline-0',
-      ]
+      ];
     }
   }
-})
+});
 </script>

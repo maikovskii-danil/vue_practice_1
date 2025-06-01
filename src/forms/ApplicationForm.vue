@@ -26,7 +26,10 @@
       @focus="formErrors.amount = ''"
     />
     <div class="dark:text-gray-100">Статус:</div>
-    <app-select :options="APPLICATION_STATUS_OPTIONS" v-model="formData.status" />
+    <app-select
+      :options="APPLICATION_STATUS_OPTIONS"
+      v-model="formData.status"
+    />
     <div class="mt-16">
       <app-button type="button" @click="submit">Создать</app-button>
     </div>
@@ -34,44 +37,50 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, useTemplateRef } from 'vue'
-import { useFocus } from '@vueuse/core'
-import { APPLICATION_STATUS_OPTIONS } from '@/consts'
-import type { IApplication } from '@/types'
-import { applicationSchema } from '@/types/validation'
-import type { ToString } from '@/utility-types'
+import { reactive, ref, useTemplateRef } from 'vue';
+import { useFocus } from '@vueuse/core';
+import { APPLICATION_STATUS_OPTIONS } from '@/consts';
+import type { IApplication } from '@/types';
+import { applicationSchema } from '@/types/validation';
+import type { ToString } from '@/utility-types';
 
-useFocus(useTemplateRef<HTMLInputElement>('name-input'), { initialValue: true })
+useFocus(useTemplateRef<HTMLInputElement>('name-input'), {
+  initialValue: true,
+});
 
 const emit = defineEmits<{
-  (e: 'submit', formData: Omit<IApplication, 'id'>): void
-}>()
-const { initialForm } = defineProps<{ initialForm: Omit<IApplication, 'id'> }>()
+  (e: 'submit', formData: Omit<IApplication, 'id'>): void;
+}>();
+const { initialForm } = defineProps<{
+  initialForm: Omit<IApplication, 'id'>;
+}>();
 
 const formData = reactive<ToString<typeof initialForm>>({
   ...initialForm,
   amount: (initialForm.amount || '').toString(),
-})
-const formErrors = ref({ name: '', phone: '', amount: '' })
+});
+const formErrors = ref({ name: '', phone: '', amount: '' });
 
 const submit = () => {
   const preparedToSubmitFormData = {
     ...formData,
     amount: +formData.amount,
-  }
+  };
 
-  const { success, error, data } = applicationSchema.safeParse(preparedToSubmitFormData)
+  const { success, error, data } = applicationSchema.safeParse(
+    preparedToSubmitFormData,
+  );
 
   if (success) {
-    emit('submit', data)
+    emit('submit', data);
   } else {
-    const foundErrors = { name: '', phone: '', amount: '' }
+    const foundErrors = { name: '', phone: '', amount: '' };
 
     error.errors.forEach((zodErrorRecord) => {
-      const key = zodErrorRecord.path[0] as keyof typeof foundErrors
-      foundErrors[key] = zodErrorRecord.message
-    })
-    formErrors.value = foundErrors
+      const key = zodErrorRecord.path[0] as keyof typeof foundErrors;
+      foundErrors[key] = zodErrorRecord.message;
+    });
+    formErrors.value = foundErrors;
   }
-}
+};
 </script>

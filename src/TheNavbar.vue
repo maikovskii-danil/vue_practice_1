@@ -28,7 +28,9 @@
           </app-button>
         </li>
         <li>
-          <app-button style-strategy="neutral" @click="userStore.logout">Выйти</app-button>
+          <app-button style-strategy="neutral" @click="userStore.logout">
+            Выйти
+          </app-button>
         </li>
       </ul>
     </header>
@@ -37,15 +39,15 @@
 </template>
 
 <script setup lang="ts">
-import useDarkCustom from '@/utils/useDarkCustom'
-import useUserStore from '@/stores/user'
+import useDarkCustom from '@/utils/useDarkCustom';
+import useUserStore from '@/stores/user';
 
-defineProps<{ visible: boolean }>()
-const userStore = useUserStore()
-const { value: isDark, toggle: toggleIsDark } = useDarkCustom()
+defineProps<{ visible: boolean }>();
+const userStore = useUserStore();
+const { value: isDark, toggle: toggleIsDark } = useDarkCustom();
 
 const routerLinks = [
   { to: { name: 'applications' }, displayName: 'Заявки' },
   { to: { name: 'help' }, displayName: 'Помощь' },
-]
+];
 </script>

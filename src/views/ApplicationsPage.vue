@@ -1,5 +1,7 @@
 <template>
-  <div class="w-350 rounded-xl p-6 pt-16 bg-white dark:bg-gray-700 shadow-xl/20">
+  <div
+    class="w-350 rounded-xl p-6 pt-16 bg-white dark:bg-gray-700 shadow-xl/20"
+  >
     <Teleport to="#modals">
       <app-modal :visible="isOpenedModal" @close="isOpenedModal = false">
         <div class="w-250 p-6 rounded-xl bg-white dark:bg-gray-700">
@@ -35,25 +37,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import Applications from '@/components/Applications.vue'
-import ApplicationForm from '@/forms/ApplicationForm.vue'
-import useApplicationsStore from '@/stores/applications'
-import type { IApplication } from '@/types'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import Applications from '@/components/Applications.vue';
+import ApplicationForm from '@/forms/ApplicationForm.vue';
+import useApplicationsStore from '@/stores/applications';
+import type { IApplication } from '@/types';
 
-const router = useRouter()
-const applicationsStore = useApplicationsStore()
-const isOpenedModal = ref(false)
-const isSuccessfullyCreated = ref(false)
+const router = useRouter();
+const applicationsStore = useApplicationsStore();
+const isOpenedModal = ref(false);
+const isSuccessfullyCreated = ref(false);
 
 const submit = (evt: Omit<IApplication, 'id'>) => {
-  applicationsStore.create(evt)
-  isOpenedModal.value = false
-  isSuccessfullyCreated.value = true
-}
+  applicationsStore.create(evt);
+  isOpenedModal.value = false;
+  isSuccessfullyCreated.value = true;
+};
 
 const openApplication = (id: string) => {
-  router.push({ name: 'application', params: { applicationId: id } })
-}
+  router.push({ name: 'application', params: { applicationId: id } });
+};
 </script>

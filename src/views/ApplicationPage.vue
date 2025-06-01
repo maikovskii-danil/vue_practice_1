@@ -28,39 +28,41 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type ComputedRef } from 'vue'
-import { useRouter } from 'vue-router'
-import ApplicationCard from '@/components/ApplicationCard.vue'
-import useApplicationsStore from '@/stores/applications'
-import type { IApplication } from '@/types'
+import { computed, ref, type ComputedRef } from 'vue';
+import { useRouter } from 'vue-router';
+import ApplicationCard from '@/components/ApplicationCard.vue';
+import useApplicationsStore from '@/stores/applications';
+import type { IApplication } from '@/types';
 
-const { applicationId } = defineProps<{ applicationId: string }>()
+const { applicationId } = defineProps<{ applicationId: string }>();
 
-const router = useRouter()
-const applicationsStore = useApplicationsStore()
-const isOpenedAlertUpdated = ref(false)
+const router = useRouter();
+const applicationsStore = useApplicationsStore();
+const isOpenedAlertUpdated = ref(false);
 
-const { change, remove } = applicationsStore
+const { change, remove } = applicationsStore;
 
-const currentApplication: ComputedRef<IApplication | undefined> = computed((previous) => {
-  const foundApplicaton = applicationsStore.applications.find(
-    (application) => application.id === applicationId,
-  )
+const currentApplication: ComputedRef<IApplication | undefined> = computed(
+  (previous) => {
+    const foundApplicaton = applicationsStore.applications.find(
+      (application) => application.id === applicationId,
+    );
 
-  return foundApplicaton ?? previous
-})
+    return foundApplicaton ?? previous;
+  },
+);
 
 const changeApplication = (updated: IApplication) => {
-  change(updated)
-  isOpenedAlertUpdated.value = true
-}
+  change(updated);
+  isOpenedAlertUpdated.value = true;
+};
 
 const removeApplication = (id: string) => {
-  remove(id)
-  router.push({ name: 'applications' })
-}
+  remove(id);
+  router.push({ name: 'applications' });
+};
 
 const returnToMain = () => {
-  router.push({ name: 'applications' })
-}
+  router.push({ name: 'applications' });
+};
 </script>

@@ -14,7 +14,11 @@
           ]"
           :style="`height: ${initialRowHeight}px`"
         >
-          <div v-for="header in computedTable.headers" :key="header.id" :class="header.twStyle">
+          <div
+            v-for="header in computedTable.headers"
+            :key="header.id"
+            :class="header.twStyle"
+          >
             {{ header.displayName }}
           </div>
         </div>
@@ -34,7 +38,11 @@
                 :key="computedTable.headers[index]?.id ?? 'unknown'"
                 :class="cell.twStyle"
               >
-                <slot :row :cell :name="computedTable.headers[index]?.id ?? 'unknown'">
+                <slot
+                  :row
+                  :cell
+                  :name="computedTable.headers[index]?.id ?? 'unknown'"
+                >
                   {{ cell.value }}
                 </slot>
               </div>
@@ -54,10 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { refDebounced, refThrottled } from '@vueuse/core'
-import { DEBOUNCE_DELAY } from '@/consts'
-import type { ITable, ITableProps } from '@/types/table'
+import { computed } from 'vue';
+import { refDebounced, refThrottled } from '@vueuse/core';
+import { DEBOUNCE_DELAY } from '@/consts';
+import type { ITable, ITableProps } from '@/types/table';
 
 const {
   table,
@@ -65,11 +73,11 @@ const {
   emptyHeightInRows = 6,
   initialRowHeight = 52,
 } = defineProps<{
-  table?: ITableProps | ITable
-  emptyText?: string
-  emptyHeightInRows?: number
-  initialRowHeight?: number
-}>()
+  table?: ITableProps | ITable;
+  emptyText?: string;
+  emptyHeightInRows?: number;
+  initialRowHeight?: number;
+}>();
 
 const computedTable = computed<ITable>(() => {
   if (table && table.headers?.length && table.rows?.length) {
@@ -79,20 +87,25 @@ const computedTable = computed<ITable>(() => {
         ...item,
         id: table.headers[index]?.id ?? '== UNKNOWN HEADER ==',
       })),
-    } as ITable
+    } as ITable;
   }
 
-  return { headers: [], rows: [] }
-})
+  return { headers: [], rows: [] };
+});
 
-const isEmpty = computed(() => !computedTable.value.rows.length)
-const isEmptyThrottled = refThrottled<boolean>(isEmpty, DEBOUNCE_DELAY)
+const isEmpty = computed(() => !computedTable.value.rows.length);
+const isEmptyThrottled = refThrottled<boolean>(isEmpty, DEBOUNCE_DELAY);
 
 const currentHeight = computed(() => {
-  const rowsLength = isEmpty.value ? emptyHeightInRows : computedTable.value.rows.length + 1
+  const rowsLength = isEmpty.value
+    ? emptyHeightInRows
+    : computedTable.value.rows.length + 1;
 
-  return rowsLength * initialRowHeight
-})
+  return rowsLength * initialRowHeight;
+});
 
-const currentHeightDebounced = refDebounced<number>(currentHeight, DEBOUNCE_DELAY)
+const currentHeightDebounced = refDebounced<number>(
+  currentHeight,
+  DEBOUNCE_DELAY,
+);
 </script>

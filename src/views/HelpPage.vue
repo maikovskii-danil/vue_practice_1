@@ -1,5 +1,7 @@
 <template>
-  <div class="p-6 pb-12 w-350 bg-white dark:bg-gray-700 rounded-xl shadow-xl/20">
+  <div
+    class="p-6 pb-12 w-350 bg-white dark:bg-gray-700 rounded-xl shadow-xl/20"
+  >
     <h2 class="cursor-default my-12 text-3xl dark:text-gray-100">Помощь</h2>
     <button
       class="block mt-16 cursor-pointer hover:underline dark:text-gray-100"
@@ -27,8 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const isOpenedQuestion1 = ref(false)
-const isOpenedQuestion2 = ref(false)
+const isOpenedQuestion1 = ref(false);
+const isOpenedQuestion2 = ref(false);
 </script>

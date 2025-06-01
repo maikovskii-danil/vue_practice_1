@@ -13,7 +13,10 @@
     </template>
     <template #action="{ cell }">
       <div :class="cell.twStyle">
-        <app-button class="p-2! px-4!" @click="$emit('open-application', cell.value)">
+        <app-button
+          class="p-2! px-4!"
+          @click="$emit('open-application', cell.value)"
+        >
           Открыть
         </app-button>
       </div>
@@ -22,15 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { IApplication } from '@/types'
-import displayAmount from '@/utils/displayAmount'
-import Status from './Status.vue'
+import { computed } from 'vue';
+import type { IApplication } from '@/types';
+import displayAmount from '@/utils/displayAmount';
+import Status from './Status.vue';
 
 defineEmits<{
-  (e: 'open-application', id: string): void
-}>()
-const { applications } = defineProps<{ applications: IApplication[] }>()
+  (e: 'open-application', id: string): void;
+}>();
+const { applications } = defineProps<{ applications: IApplication[] }>();
 
 const table = computed(() => {
   return {
@@ -39,7 +42,11 @@ const table = computed(() => {
       { id: 'name', displayName: 'Имя', twStyle: 'w-48' },
       { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
       { id: 'amount', displayName: 'Сумма', twStyle: '' },
-      { id: 'status', displayName: 'Статус', twStyle: 'w-36 text-center ml-auto mr-6' },
+      {
+        id: 'status',
+        displayName: 'Статус',
+        twStyle: 'w-36 text-center ml-auto mr-6',
+      },
       { id: 'action', displayName: 'Действие', twStyle: 'ml-8' },
     ],
     rows: applications.map((application) => ({
@@ -48,10 +55,13 @@ const table = computed(() => {
         { value: application.name, twStyle: 'w-48 text-sm' },
         { value: application.phone, twStyle: 'w-64 text-sm' },
         { value: application.amount + '', twStyle: 'text-sm' },
-        { value: application.status, twStyle: 'w-36 text-center ml-auto text-sm' },
+        {
+          value: application.status,
+          twStyle: 'w-36 text-center ml-auto text-sm',
+        },
         { value: application.id, twStyle: 'ml-8' },
       ],
     })),
-  }
-})
+  };
+});
 </script>

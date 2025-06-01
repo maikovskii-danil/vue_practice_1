@@ -15,50 +15,50 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from 'vue';
 
 const { status, disabledTransition = false } = defineProps<{
-  status: string
-  disabledTransition?: boolean
-}>()
+  status: string;
+  disabledTransition?: boolean;
+}>();
 
 const statusDisplayName = computed(() => {
   switch (status) {
     case 'active': {
-      return 'Активен'
+      return 'Активен';
     }
     case 'completed': {
-      return 'Завершен'
+      return 'Завершен';
     }
     case 'rejected': {
-      return 'Отменен'
+      return 'Отменен';
     }
     case 'in_progress': {
-      return 'Выполняется'
+      return 'Выполняется';
     }
     default: {
-      return '== Unknown =='
+      return '== Unknown ==';
     }
   }
-})
+});
 
 const twStyle = computed(() => {
   switch (status) {
     case 'active': {
-      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
+      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500';
     }
     case 'completed': {
-      return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500'
+      return 'border-blue-700 text-blue-700 dark:border-blue-500 dark:text-blue-500';
     }
     case 'rejected': {
-      return 'border-red-500 text-red-500'
+      return 'border-red-500 text-red-500';
     }
     case 'in_progress': {
-      return 'border-yellow-500 text-yellow-500'
+      return 'border-yellow-500 text-yellow-500';
     }
     default: {
-      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500'
+      return 'border-green-700 text-green-700 dark:border-green-500 dark:text-green-500';
     }
   }
-})
+});
 </script>

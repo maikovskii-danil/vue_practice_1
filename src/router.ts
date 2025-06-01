@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory, type RouterOptions } from 'vue-router'
-import AuthPage from './views/AuthPage.vue'
-import ApplicationsPage from './views/ApplicationsPage.vue'
-import HelpPage from './views/HelpPage.vue'
-import useUserStore from './stores/user'
-import ApplicationPage from './views/ApplicationPage.vue'
+import { createRouter, createWebHistory, type RouterOptions } from 'vue-router';
+import AuthPage from './views/AuthPage.vue';
+import ApplicationsPage from './views/ApplicationsPage.vue';
+import HelpPage from './views/HelpPage.vue';
+import useUserStore from './stores/user';
+import ApplicationPage from './views/ApplicationPage.vue';
 
 const options: RouterOptions = {
   history: createWebHistory(),
@@ -35,18 +35,18 @@ const options: RouterOptions = {
       redirect: '/',
     },
   ],
-}
+};
 
-const router = createRouter(options)
+const router = createRouter(options);
 
 router.beforeEach((to) => {
-  const store = useUserStore()
+  const store = useUserStore();
 
-  const name = (to?.name ?? '').toString()
+  const name = (to?.name ?? '').toString();
 
   if (!store.isLoggedIn && !['auth'].includes(name)) {
-    return { name: 'auth' }
+    return { name: 'auth' };
   }
-})
+});
 
-export default router
+export default router;

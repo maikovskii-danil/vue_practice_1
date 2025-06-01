@@ -67,73 +67,73 @@
 </template>
 
 <script setup lang="ts">
-import { useEventListener, useToggle } from '@vueuse/core'
-import { computed, useTemplateRef, ref, nextTick } from 'vue'
+import { useEventListener, useToggle } from '@vueuse/core';
+import { computed, useTemplateRef, ref, nextTick } from 'vue';
 
 const { options } = defineProps<{
-  options: Array<{ id: string; displayName: string }>
-}>()
-const model = defineModel<string>()
+  options: Array<{ id: string; displayName: string }>;
+}>();
+const model = defineModel<string>();
 
 const optionsMap = computed(() => {
   return options.reduce(
     (acc, option) => ({ ...acc, [option.id]: option.displayName }),
     {} as Record<string, string>,
-  )
-})
+  );
+});
 
 const currentDisplayName = computed(() => {
   if (model && model.value) {
-    const key = model.value as keyof typeof optionsMap.value
-    const value = optionsMap.value[key]
+    const key = model.value as keyof typeof optionsMap.value;
+    const value = optionsMap.value[key];
 
     if (typeof value === 'string' && value) {
-      return value
+      return value;
     }
   }
 
-  return
-})
+  return;
+});
 
-const button = useTemplateRef('select-btn')
-const dropdown = useTemplateRef('select-dropdown')
-const refOptions = useTemplateRef<HTMLButtonElement[]>('select-options')
+const button = useTemplateRef('select-btn');
+const dropdown = useTemplateRef('select-dropdown');
+const refOptions = useTemplateRef<HTMLButtonElement[]>('select-options');
 
-const hasDropdown = ref(false)
-const toggleHasDropdown = useToggle(hasDropdown)
+const hasDropdown = ref(false);
+const toggleHasDropdown = useToggle(hasDropdown);
 
 const selectOption = (optionId: string) => {
-  model.value = optionId
+  model.value = optionId;
 
   if (!dropdown.value) {
-    return
+    return;
   }
 
-  toggleHasDropdown()
-}
+  toggleHasDropdown();
+};
 
 useEventListener(button, 'click', async () => {
   if (!dropdown.value) {
-    return
+    return;
   }
 
-  toggleHasDropdown()
-  await nextTick()
+  toggleHasDropdown();
+  await nextTick();
 
   if (refOptions.value) {
-    refOptions.value[0]?.focus()
+    refOptions.value[0]?.focus();
   }
-})
+});
 
 useEventListener(document, 'click', (evt) => {
   if (!button.value || !dropdown.value || !evt.target) {
-    return
+    return;
   }
 
-  const target = evt.target as Node
+  const target = evt.target as Node;
 
   if (!button.value.contains(target) && !dropdown.value.contains(target)) {
-    toggleHasDropdown(false)
+    toggleHasDropdown(false);
   }
-})
+});
 </script>

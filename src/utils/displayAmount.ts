@@ -1,4 +1,4 @@
-import currency from 'currency.js'
+import currency from 'currency.js';
 
 const displayAmount = (amount: number) => {
   return currency(amount, {
@@ -6,7 +6,7 @@ const displayAmount = (amount: number) => {
     pattern: '# !',
     separator: ' ',
     decimal: ',',
-  }).format()
-}
+  }).format();
+};
 
-export default displayAmount
+export default displayAmount;
