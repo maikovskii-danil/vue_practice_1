@@ -1,0 +1,9 @@
+name: prettier
+on: [push]
+permissions: {}
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          npm run prettier-check
