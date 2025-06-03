@@ -38,9 +38,7 @@ useFocus(useTemplateRef<HTMLInputElement>('email-input'), {
   initialValue: true,
 });
 
-const emit = defineEmits<{
-  (e: 'submit', form: IUserData): void;
-}>();
+const emit = defineEmits<{ (e: 'submit', form: IUserData): void }>();
 const { initialForm } = defineProps<{ initialForm: IUserData }>();
 
 const userForm = reactive<IUserData>(initialForm);

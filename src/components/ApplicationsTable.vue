@@ -30,9 +30,7 @@ import type { IApplication } from '@/types';
 import displayAmount from '@/utils/displayAmount';
 import Status from './Status.vue';
 
-defineEmits<{
-  (e: 'open-application', id: string): void;
-}>();
+defineEmits<{ (e: 'open-application', id: string): void }>();
 const { applications } = defineProps<{ applications: IApplication[] }>();
 
 const table = computed(() => {

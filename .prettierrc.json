@@ -5,5 +5,14 @@
   "tabWidth": 2,
   "useTabs": false,
   "experimentalTernaries": true,
-  "experimentalOperatorPosition": "start"
+  "experimentalOperatorPosition": "start",
+  "quoteProps": "consistent",
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "objectWrap": "preserve",
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "vueIndentScriptAndStyle": false,
+  "endOfLine": "lf",
+  "singleAttributePerLine": false
 }

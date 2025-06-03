@@ -15,8 +15,6 @@
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: 'close'): void;
-}>();
+const emit = defineEmits<{ (e: 'close'): void }>();
 const { visible } = defineProps<{ visible: boolean }>();
 </script>
