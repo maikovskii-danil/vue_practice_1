@@ -97,9 +97,8 @@ const isEmpty = computed(() => !computedTable.value.rows.length);
 const isEmptyThrottled = refThrottled<boolean>(isEmpty, DEBOUNCE_DELAY);
 
 const currentHeight = computed(() => {
-  const rowsLength = isEmpty.value
-    ? emptyHeightInRows
-    : computedTable.value.rows.length + 1;
+  const rowsLength =
+    isEmpty.value ? emptyHeightInRows : computedTable.value.rows.length + 1;
 
   return rowsLength * initialRowHeight;
 });

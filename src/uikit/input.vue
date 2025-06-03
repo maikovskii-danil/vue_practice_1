@@ -11,8 +11,8 @@
         'focus-within:outline-violet-500 focus-within:border-violet-500',
         'has-disabled:cursor-not-allowed',
         'has-disabled:bg-gray-200 dark:has-disabled:bg-gray-800',
-        error &&
-          'not-has-disabled:outline-2 outline-red-500 dark:outline-red-600',
+        error
+          && 'not-has-disabled:outline-2 outline-red-500 dark:outline-red-600',
       ]"
     >
       <input
