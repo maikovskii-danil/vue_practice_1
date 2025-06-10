@@ -1,8 +1,3 @@
-### Enviroment
-
-- NodeJS v24.1.0
-- npm v11.4.1
-
 ### Данные для входа
 
 - email: 'some.user@automation.testing'
