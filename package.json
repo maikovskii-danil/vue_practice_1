@@ -3,7 +3,7 @@
   "version": "1.0.0+no-semver",
   "private": true,
   "type": "module",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "prestart": "npm install",
     "start": "vite",
