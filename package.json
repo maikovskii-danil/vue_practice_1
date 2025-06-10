@@ -3,6 +3,7 @@
   "version": "1.0.0+no-semver",
   "private": true,
   "type": "module",
+  "license": "ISC",
   "scripts": {
     "prestart": "npm install",
     "start": "vite",
