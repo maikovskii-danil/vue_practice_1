@@ -25,7 +25,7 @@
 npm start
 ```
 
-###### в хуке prestart происходит 'npm install', если Вам это помешало, перед командой npm start выполните 'npm install' вручную
+###### в хуке `"prestart"` происходит `npm install`
 
 ## Project Setup & Type-Check, Compile and Minify for Production
 
@@ -33,4 +33,4 @@ npm start
 npm run build
 ```
 
-###### в хуке prebuild происходит 'npm install', если Вам это помешало, перед командой npm start выполните 'npm install' вручную
+###### в хуке `"prebuild"` происходит `npm install`
