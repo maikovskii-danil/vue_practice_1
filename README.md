@@ -3,19 +3,13 @@
 - email: 'some.user@automation.testing'
 - password: '123456'
 
-## Project Setup
+## Project Setup & Compile and Hot-Reload for Development
 
 ```sh
-npm install
+npm start
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
+### Project Setup & Type-Check, Compile and Minify for Production
 
 ```sh
 npm run build
