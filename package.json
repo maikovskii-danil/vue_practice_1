@@ -46,5 +46,18 @@
   "engines": {
     "node": "^24.1.0",
     "npm": "^11.4.1"
+  },
+  "os": [
+    "darwin"
+  ],
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "onFail": "error"
+    }
   }
 }
