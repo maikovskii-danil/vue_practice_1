@@ -1,9 +1,9 @@
-## Данные для входа
+### Данные для входа
 
 - email: 'some.user@automation.testing'
 - password: '123456'
 
-## Project Setup & Compile and Hot-Reload for Development
+### Project Setup & Compile and Hot-Reload for Development
 
 ```sh
 npm start
