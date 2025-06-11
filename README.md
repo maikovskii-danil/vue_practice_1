@@ -19,18 +19,18 @@
 - email: 'some.user@automation.testing'
 - password: '123456'
 
-## Project Setup & Compile and Hot-Reload for Development
+### Project Setup & Compile and Hot-Reload for Development
 
 ```sh
 npm start
 ```
 
-###### в хуке `"prestart"` происходит `npm install`
+###### Перед `"start"` npm запустит `npm clean-install`
 
-## Project Setup & Type-Check, Compile and Minify for Production
+### Project Setup & Type-Check, Compile and Minify for Production
 
 ```sh
 npm run build
 ```
 
-###### в хуке `"prebuild"` происходит `npm install`
+###### Перед `"build"` npm запустит `npm clean-install`
