@@ -5,9 +5,9 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "prestart": "npm clean-install",
+    "prestart": "npm clean-install --fund false",
     "start": "vite",
-    "prebuild": "npm clean-install",
+    "prebuild": "npm clean-install --fund false",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
