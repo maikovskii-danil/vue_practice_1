@@ -14,4 +14,6 @@ import TheNavbar from './TheNavbar.vue';
 import useUserStore from './stores/user';
 
 const userStore = useUserStore();
+
+const name = {};
 </script>
