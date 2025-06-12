@@ -21,14 +21,14 @@
     "currency.js": "^2.0.4",
     "pinia": "^3.0.2",
     "tailwindcss": "^4.1.7",
-    "vue": "^3.5.15",
+    "vue": "^3.5.16",
     "vue-router": "^4.5.1",
-    "zod": "^3.24.4"
+    "zod": "^3.25.63"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.7",
+    "@tailwindcss/vite": "^4.1.10",
     "@tsconfig/node22": "^22.0.1",
-    "@types/node": "^22.10.4",
+    "@types/node": "^22.15.31",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
     "husky": "^9.1.7",
