@@ -3,7 +3,7 @@ on: [push]
 permissions: {}
 jobs:
   prettier:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - run: |
