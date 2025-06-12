@@ -2,9 +2,12 @@ name: audit
 on: [push]
 permissions: {}
 jobs:
-  prettier:
+  audit:
     runs-on: macos-14
     steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
       - uses: actions/checkout@v4
       - run: |
           npm ci
