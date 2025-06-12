@@ -10,5 +10,5 @@ jobs:
           node-version: '22.16.0'
       - uses: actions/checkout@v4
       - run: |
-          npm ci
+          npm ci --audit false --fund false
           npm audit
