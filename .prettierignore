@@ -1,5 +1,3 @@
-# Ignore artifacts:
-build
+dist
 coverage
 package.json
-.prettierrc.json
