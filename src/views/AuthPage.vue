@@ -11,7 +11,7 @@
     />
     <Teleport to="#alerts">
       <app-alert
-        :visible="!!userStore.error"
+        :visible="Boolean(userStore.error)"
         style-strategy="danger"
         title="Ошибка!"
         :text="userStore.error"
