@@ -5,7 +5,10 @@
     <h1 class="cursor-default my-16 text-2xl dark:text-gray-100">
       Войдите в систему
     </h1>
-    <AuthForm :initial-form="{ email: '', password: '' }" @submit="submit" />
+    <AuthForm
+      :initial-form="{ email: '', password: '' }"
+      @submit="submit"
+    />
     <Teleport to="#alerts">
       <app-alert
         :visible="!!userStore.error"
@@ -14,19 +17,20 @@
         :text="userStore.error"
         class="fixed top-8 right-8 w-175"
         @click="userStore.error = ''"
-      ></app-alert>
+      />
     </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import useUserStore from '@/stores/user';
 import AuthForm from '@/forms/AuthForm.vue';
-import type { IUserData } from '@/types';
+import useUserStore from '@/stores/user';
+
+import type { TUserData } from '@/types';
 
 const userStore = useUserStore();
 
-const submit = (userForm: IUserData) => {
+const submit = (userForm: TUserData) => {
   userStore.tryLoginProcess(userForm);
 };
 </script>

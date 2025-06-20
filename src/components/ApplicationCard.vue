@@ -13,7 +13,10 @@
       <div class="flex gap-4 items-center">
         <div class="dark:text-gray-100">Статус:</div>
         <div>
-          <Status class="w-40 text-center" :status="application.status" />
+          <ApplicationStatus
+            class="w-40 text-center"
+            :status="application.status"
+          />
         </div>
       </div>
       <div class="flex gap-4">
@@ -25,8 +28,8 @@
       <div>
         <div class="mb-4 dark:text-gray-100">Изменить статус:</div>
         <app-select
-          :options="APPLICATION_STATUS_OPTIONS"
           v-model="applicationStatus"
+          :options="APPLICATION_STATUS_OPTIONS"
         />
       </div>
       <div class="flex gap-4">
@@ -50,11 +53,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { IApplication } from '@/types';
-import { APPLICATION_STATUS_OPTIONS } from '@/consts';
+
 import displayAmount from '@/utils/displayAmount';
 import { statusUnion } from '@/types/validation';
-import Status from './Status.vue';
+
+import ApplicationStatus from './ApplicationStatus.vue';
+
+import { APPLICATION_STATUS_OPTIONS } from '@/consts';
+import type { IApplication } from '@/types';
 
 const emit = defineEmits<{
   (e: 'change-application', application: IApplication): void;

@@ -12,10 +12,18 @@
         'focus:outline-violet-500 focus:border-violet-500',
       ]"
     >
-      <div v-if="currentDisplayName" class="text-gray-950 dark:text-white">
+      <div
+        v-if="currentDisplayName"
+        class="text-gray-950 dark:text-white"
+      >
         {{ currentDisplayName }}
       </div>
-      <div v-else class="text-gray-400">Не выбрано</div>
+      <div
+        v-else
+        class="text-gray-400"
+      >
+        Не выбрано
+      </div>
       <div
         :class="[
           'absolute top-2/4 -translate-1/2 right-3',
@@ -32,7 +40,7 @@
           'after:rounded',
           hasDropdown && 'rotate-90',
         ]"
-      ></div>
+      />
     </button>
     <div
       ref="select-dropdown"
@@ -45,7 +53,10 @@
         !hasDropdown && 'hidden',
       ]"
     >
-      <template v-for="option in options" :key="option.id">
+      <template
+        v-for="option in options"
+        :key="option.id"
+      >
         <button
           v-if="option.displayName"
           ref="select-options"
@@ -67,23 +78,23 @@
 </template>
 
 <script setup lang="ts">
+import { computed, nextTick, ref, useTemplateRef } from 'vue';
 import { useEventListener, useToggle } from '@vueuse/core';
-import { computed, useTemplateRef, ref, nextTick } from 'vue';
 
 const { options } = defineProps<{
   options: Array<{ id: string; displayName: string }>;
 }>();
 const model = defineModel<string>();
 
-const optionsMap = computed(() => {
-  return options.reduce(
+const optionsMap = computed(() =>
+  options.reduce(
     (acc, option) => ({ ...acc, [option.id]: option.displayName }),
     {} as Record<string, string>,
-  );
-});
+  ),
+);
 
 const currentDisplayName = computed(() => {
-  if (model && model.value) {
+  if (model.value) {
     const key = model.value as keyof typeof optionsMap.value;
     const value = optionsMap.value[key];
 
@@ -92,7 +103,7 @@ const currentDisplayName = computed(() => {
     }
   }
 
-  return;
+  return undefined;
 });
 
 const button = useTemplateRef('select-btn');

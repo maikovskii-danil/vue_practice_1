@@ -1,9 +1,10 @@
-import { createRouter, createWebHistory, type RouterOptions } from 'vue-router';
-import AuthPage from './views/AuthPage.vue';
+import { type RouterOptions, createRouter, createWebHistory } from 'vue-router';
+
+import ApplicationPage from './views/ApplicationPage.vue';
 import ApplicationsPage from './views/ApplicationsPage.vue';
+import AuthPage from './views/AuthPage.vue';
 import HelpPage from './views/HelpPage.vue';
 import useUserStore from './stores/user';
-import ApplicationPage from './views/ApplicationPage.vue';
 
 const options: RouterOptions = {
   history: createWebHistory(),
@@ -47,6 +48,8 @@ router.beforeEach((to) => {
   if (!store.isLoggedIn && !['auth'].includes(name)) {
     return { name: 'auth' };
   }
+
+  return undefined;
 });
 
 export default router;

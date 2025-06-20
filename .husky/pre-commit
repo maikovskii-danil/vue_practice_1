@@ -1,3 +1,5 @@
-npx lint-staged
+npm clean-install --fund false --audit false
+npm run prettierCheck
+npm run lintOnly
 npm audit
 npm doctor

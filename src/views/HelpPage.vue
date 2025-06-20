@@ -10,7 +10,10 @@
       Что есть в данной системе?
     </button>
     <Transition name="opacity">
-      <div class="mt-4 dark:text-gray-100" v-if="isOpenedQuestion1">
+      <div
+        v-if="isOpenedQuestion1"
+        class="mt-4 dark:text-gray-100"
+      >
         Тут есть все, для того, чтобы смотреть, какие заявки человек добавлял
       </div>
     </Transition>
@@ -21,7 +24,10 @@
       Как тут работает авторизация?
     </button>
     <Transition name="opacity">
-      <div class="mt-4 dark:text-gray-100" v-if="isOpenedQuestion2">
+      <div
+        v-if="isOpenedQuestion2"
+        class="mt-4 dark:text-gray-100"
+      >
         Через localStorage с использованием Zod
       </div>
     </Transition>

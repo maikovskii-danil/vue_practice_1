@@ -1,12 +1,17 @@
 <template>
   <label class="flex items-center gap-4 cursor-pointer">
-    <input type="checkbox" class="checkbox" :="$attrs" v-model="model" />
+    <input
+      v-model="model"
+      type="checkbox"
+      class="checkbox"
+      :="$attrs"
+    />
     <div><slot /></div>
   </label>
 </template>
 
 <script setup lang="ts">
-const model = defineModel();
+const model = defineModel<boolean>();
 </script>
 
 <style scoped>

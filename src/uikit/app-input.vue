@@ -16,6 +16,7 @@
       ]"
     >
       <input
+        v-model="model"
         :class="[
           'w-full p-4 outline-0 dark:text-gray-100',
           'placeholder:text-gray-400',
@@ -24,7 +25,6 @@
           error && 'placeholder:text-red-500',
         ]"
         :="$attrs"
-        v-model="model"
       />
     </div>
     <div
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-const [model, modifiers] = defineModel({
+const [model, modifiers] = defineModel<string>({
   set(value: string) {
     if (modifiers.num) {
       if (value === '') {
@@ -46,10 +46,12 @@ const [model, modifiers] = defineModel({
 
       const newValue =
         Array.from(value)
-          .filter((letter) => !isNaN(+letter))
+          .filter((letter) => !isNaN(Number(letter)))
           .join('') || '0';
 
-      return modifiers.positive ? Math.abs(+newValue).toString() : newValue;
+      return modifiers.positive ?
+          Math.abs(Number(newValue)).toString()
+        : newValue;
     }
 
     return value;

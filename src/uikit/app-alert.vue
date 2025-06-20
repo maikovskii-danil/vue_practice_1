@@ -15,7 +15,7 @@
       <app-button
         type="button"
         :style-strategy="styleStrategy"
-        @click="$emit('close')"
+        @click="emit('close')"
       >
         Закрыть
       </app-button>
@@ -26,6 +26,8 @@
 <script setup lang="ts">
 import { computed, useTemplateRef } from 'vue';
 import { useFocus } from '@vueuse/core';
+
+const emit = defineEmits<{ (e: 'close'): void }>();
 
 useFocus(useTemplateRef<HTMLDivElement>('before-close-button'), {
   initialValue: true,
@@ -43,7 +45,7 @@ const {
   visible?: boolean;
 }>();
 
-const textCache = computed((previous) => (text ? text : previous));
+const textCache = computed((previous) => text || previous);
 const twCSS = computed(() => {
   switch (styleStrategy) {
     case 'danger': {

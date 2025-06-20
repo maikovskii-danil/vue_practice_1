@@ -2,16 +2,18 @@ import '@fontsource/inter';
 import './assets/main.css';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
+
 import App from './App.vue';
-import Button from './uikit/button.vue';
-import Input from './uikit/input.vue';
-import Checkbox from './uikit/checkbox.vue';
-import Radio from './uikit/radio.vue';
-import Select from './uikit/select.vue';
-import Alert from './uikit/alert.vue';
-import Loader from './uikit/loader.vue';
-import Modal from './uikit/modal.vue';
-import Table from './uikit/table.vue';
+
+import AppAlert from './uikit/app-alert.vue';
+import AppButton from './uikit/app-button.vue';
+import AppCheckbox from './uikit/app-checkbox.vue';
+import AppInput from './uikit/app-input.vue';
+import AppLoader from './uikit/app-loader.vue';
+import AppModal from './uikit/app-modal.vue';
+import AppRadio from './uikit/app-radio.vue';
+import AppSelect from './uikit/app-select.vue';
+import AppTable from './uikit/app-table.vue';
 import router from './router';
 
 const pinia = createPinia();
@@ -19,28 +21,28 @@ const app = createApp(App);
 
 declare module 'vue' {
   interface GlobalComponents {
-    AppButton: typeof Button;
-    AppInput: typeof Input;
-    AppCheckbox: typeof Checkbox;
-    AppRadio: typeof Radio;
-    AppSelect: typeof Select;
-    AppAlert: typeof Alert;
-    AppLoader: typeof Loader;
-    AppModal: typeof Modal;
-    AppTable: typeof Table;
+    AppButton: typeof AppButton;
+    AppInput: typeof AppInput;
+    AppCheckbox: typeof AppCheckbox;
+    AppRadio: typeof AppRadio;
+    AppSelect: typeof AppSelect;
+    AppAlert: typeof AppAlert;
+    AppLoader: typeof AppLoader;
+    AppModal: typeof AppModal;
+    AppTable: typeof AppTable;
   }
 }
 
 app
-  .component('AppButton', Button)
-  .component('AppInput', Input)
-  .component('AppCheckbox', Checkbox)
-  .component('AppRadio', Radio)
-  .component('AppSelect', Select)
-  .component('AppAlert', Alert)
-  .component('AppLoader', Loader)
-  .component('AppModal', Modal)
-  .component('AppTable', Table)
+  .component('AppButton', AppButton)
+  .component('AppInput', AppInput)
+  .component('AppCheckbox', AppCheckbox)
+  .component('AppRadio', AppRadio)
+  .component('AppSelect', AppSelect)
+  .component('AppAlert', AppAlert)
+  .component('AppLoader', AppLoader)
+  .component('AppModal', AppModal)
+  .component('AppTable', AppTable)
   .use(pinia)
   .use(router)
   .mount('#app');

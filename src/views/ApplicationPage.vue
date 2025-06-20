@@ -8,7 +8,7 @@
         class="fixed w-175 top-6 right-6"
         :visible="isOpenedAlertUpdated"
         @close="isOpenedAlertUpdated = false"
-      ></app-alert>
+      />
     </Teleport>
     <div>
       <button
@@ -28,10 +28,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, type ComputedRef } from 'vue';
+import { type ComputedRef, computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 import ApplicationCard from '@/components/ApplicationCard.vue';
 import useApplicationsStore from '@/stores/applications';
+
 import type { IApplication } from '@/types';
 
 const { applicationId } = defineProps<{ applicationId: string }>();

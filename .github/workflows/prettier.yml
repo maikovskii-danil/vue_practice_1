@@ -11,4 +11,4 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           npm ci --audit false --fund false
-          npm run prettier-check
+          npm run prettierCheck

@@ -1,5 +1,8 @@
 <template>
-  <app-table :table="table" empty-text="Заявок нет">
+  <app-table
+    :table="table"
+    empty-text="Заявок нет"
+  >
     <template #phone="{ cell }">
       <div :class="cell.twStyle">{{ '+' + cell.value }}</div>
     </template>
@@ -8,7 +11,11 @@
     </template>
     <template #status="{ cell }">
       <div :class="cell.twStyle">
-        <Status class="w-40" :status="cell.value" disabledTransition />
+        <ApplicationStatus
+          disabled-transition
+          class="w-40"
+          :status="cell.value"
+        />
       </div>
     </template>
     <template #action="{ cell }">
@@ -26,40 +33,40 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { IApplication } from '@/types';
 import displayAmount from '@/utils/displayAmount';
-import Status from './Status.vue';
+
+import ApplicationStatus from './ApplicationStatus.vue';
+
+import type { IApplication } from '@/types';
 
 defineEmits<{ (e: 'open-application', id: string): void }>();
 const { applications } = defineProps<{ applications: IApplication[] }>();
 
-const table = computed(() => {
-  return {
-    headers: [
-      { id: 'id', displayName: 'ID', twStyle: 'w-48 cursor-default' },
-      { id: 'name', displayName: 'Имя', twStyle: 'w-48' },
-      { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
-      { id: 'amount', displayName: 'Сумма', twStyle: '' },
+const table = computed(() => ({
+  headers: [
+    { id: 'id', displayName: 'ID', twStyle: 'w-48 cursor-default' },
+    { id: 'name', displayName: 'Имя', twStyle: 'w-48' },
+    { id: 'phone', displayName: 'Телефон', twStyle: 'w-64' },
+    { id: 'amount', displayName: 'Сумма', twStyle: '' },
+    {
+      id: 'status',
+      displayName: 'Статус',
+      twStyle: 'w-36 text-center ml-auto mr-6',
+    },
+    { id: 'action', displayName: 'Действие', twStyle: 'ml-8' },
+  ],
+  rows: applications.map((application) => ({
+    cells: [
+      { value: application.id, twStyle: 'w-48 cursor-default text-sm' },
+      { value: application.name, twStyle: 'w-48 text-sm' },
+      { value: application.phone, twStyle: 'w-64 text-sm' },
+      { value: String(application.amount), twStyle: 'text-sm' },
       {
-        id: 'status',
-        displayName: 'Статус',
-        twStyle: 'w-36 text-center ml-auto mr-6',
+        value: application.status,
+        twStyle: 'w-36 text-center ml-auto text-sm',
       },
-      { id: 'action', displayName: 'Действие', twStyle: 'ml-8' },
+      { value: application.id, twStyle: 'ml-8' },
     ],
-    rows: applications.map((application) => ({
-      cells: [
-        { value: application.id, twStyle: 'w-48 cursor-default text-sm' },
-        { value: application.name, twStyle: 'w-48 text-sm' },
-        { value: application.phone, twStyle: 'w-64 text-sm' },
-        { value: application.amount + '', twStyle: 'text-sm' },
-        {
-          value: application.status,
-          twStyle: 'w-36 text-center ml-auto text-sm',
-        },
-        { value: application.id, twStyle: 'ml-8' },
-      ],
-    })),
-  };
-});
+  })),
+}));
 </script>

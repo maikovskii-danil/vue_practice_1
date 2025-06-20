@@ -1,5 +1,9 @@
 <template>
-  <Transition appear name="opacity" mode="out-in">
+  <Transition
+    appear
+    name="opacity"
+    mode="out-in"
+  >
     <header
       v-if="visible"
       :class="[
@@ -10,31 +14,59 @@
       ]"
     >
       <h1 class="cursor-default text-3xl font-bold dark:text-blue-100">
-        <router-link :to="{ name: 'applications' }" custom #="{ navigate }">
-          <button class="cursor-pointer" @click="navigate">Vue.js App</button>
+        <router-link
+          :to="{ name: 'applications' }"
+          custom
+          #="{ navigate }"
+        >
+          <button
+            class="cursor-pointer"
+            @click="navigate"
+          >
+            Vue.js App
+          </button>
         </router-link>
       </h1>
       <ul class="flex gap-6">
-        <li v-for="link in routerLinks" :key="link.displayName">
-          <router-link :to="link.to" custom #="{ navigate }">
-            <app-button style-strategy="neutral" @click="navigate">
+        <li
+          v-for="link in routerLinks"
+          :key="link.displayName"
+        >
+          <router-link
+            :to="link.to"
+            custom
+            #="{ navigate }"
+          >
+            <app-button
+              style-strategy="neutral"
+              @click="navigate"
+            >
               {{ link.displayName }}
             </app-button>
           </router-link>
         </li>
         <li>
-          <app-button style-strategy="neutral" @click="toggleIsDark()">
+          <app-button
+            style-strategy="neutral"
+            @click="toggleIsDark()"
+          >
             {{ isDark ? 'Светлая тема' : 'Темная тема' }}
           </app-button>
         </li>
         <li>
-          <app-button style-strategy="neutral" @click="userStore.logout">
+          <app-button
+            style-strategy="neutral"
+            @click="userStore.logout"
+          >
             Выйти
           </app-button>
         </li>
       </ul>
     </header>
-    <div v-else class="h-28 mb-20"></div>
+    <div
+      v-else
+      class="h-28 mb-20"
+    ></div>
   </Transition>
 </template>
 

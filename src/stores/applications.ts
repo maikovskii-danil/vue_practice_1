@@ -1,7 +1,8 @@
-import { defineStore } from 'pinia';
 import { reactive, ref } from 'vue';
-import type { IApplication } from '@/types';
+import { defineStore } from 'pinia';
+
 import { INITIAL_APPLICATIONS, INITIAL_LAST_ID } from '@/consts';
+import type { IApplication } from '@/types';
 
 const useApplicationsStore = defineStore('applications', () => {
   const lastId = ref(INITIAL_LAST_ID);
@@ -9,13 +10,13 @@ const useApplicationsStore = defineStore('applications', () => {
 
   const create = (newApplication: Omit<IApplication, 'id'>) => {
     lastId.value += 1;
-    applications.push({ id: lastId.value + '', ...newApplication });
+    applications.push({ id: String(lastId.value), ...newApplication });
   };
 
   const change = (updatedApplication: IApplication) => {
-    const index = applications.findIndex((application) => {
-      return application.id === updatedApplication.id;
-    });
+    const index = applications.findIndex(
+      (application) => application.id === updatedApplication.id,
+    );
 
     if (index !== -1) {
       applications.splice(index, 1, updatedApplication);
@@ -23,9 +24,9 @@ const useApplicationsStore = defineStore('applications', () => {
   };
 
   const remove = (id: string) => {
-    const index = applications.findIndex((application) => {
-      return application.id === id;
-    });
+    const index = applications.findIndex(
+      (application) => application.id === id,
+    );
 
     if (index !== -1) {
       applications.splice(index, 1);

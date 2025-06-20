@@ -2,7 +2,11 @@
   <TheNavbar :visible="userStore.isLoggedIn" />
   <div class="flex justify-center">
     <router-view #="{ Component: Page }">
-      <Transition appear name="opacity" mode="out-in">
+      <Transition
+        appear
+        name="opacity"
+        mode="out-in"
+      >
         <Component :is="Page" />
       </Transition>
     </router-view>

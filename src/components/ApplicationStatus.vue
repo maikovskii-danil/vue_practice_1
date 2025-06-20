@@ -1,5 +1,8 @@
 <template>
-  <Transition name="opacity" mode="out-in">
+  <Transition
+    name="opacity"
+    mode="out-in"
+  >
     <div
       :key="disabledTransition ? 'default' : status"
       class="inline-block relative border-2 rounded-xl p-2 px-3 text-[10px] leading-[initial] font-bold cursor-default z-0 shadow-xl/10"

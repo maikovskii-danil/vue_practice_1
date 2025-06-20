@@ -3,8 +3,14 @@
     class="overflow-hidden transition-[height] duration-1000"
     :style="`height: ${currentHeightDebounced}px`"
   >
-    <Transition name="opacity" mode="out-in">
-      <div v-if="!isEmptyThrottled" class="w-full flex flex-col">
+    <Transition
+      name="opacity"
+      mode="out-in"
+    >
+      <div
+        v-if="!isEmptyThrottled"
+        class="w-full flex flex-col"
+      >
         <div
           :class="[
             'flex items-center',
@@ -23,7 +29,10 @@
           </div>
         </div>
         <div class="w-full flex flex-col">
-          <template v-for="row in computedTable.rows" :key="row.id">
+          <template
+            v-for="row in computedTable.rows"
+            :key="row.id"
+          >
             <div
               :class="[
                 'flex items-center',
@@ -62,16 +71,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import type { ITable, ITableProps } from '@/types/table';
 import { refDebounced, refThrottled } from '@vueuse/core';
 import { DEBOUNCE_DELAY } from '@/consts';
-import type { ITable, ITableProps } from '@/types/table';
+import { computed } from 'vue';
+
+const EMPTY_HEIGHT_IN_ROWS = 6;
+const INITIAL_ROW_HEIGHT = 52;
 
 const {
-  table,
+  table = { headers: [], rows: [] },
   emptyText = 'Ничего нет',
-  emptyHeightInRows = 6,
-  initialRowHeight = 52,
+  emptyHeightInRows = EMPTY_HEIGHT_IN_ROWS,
+  initialRowHeight = INITIAL_ROW_HEIGHT,
 } = defineProps<{
   table?: ITableProps | ITable;
   emptyText?: string;
@@ -97,8 +109,11 @@ const isEmpty = computed(() => !computedTable.value.rows.length);
 const isEmptyThrottled = refThrottled<boolean>(isEmpty, DEBOUNCE_DELAY);
 
 const currentHeight = computed(() => {
+  const HEADER_ROW_LENGTH = 1;
   const rowsLength =
-    isEmpty.value ? emptyHeightInRows : computedTable.value.rows.length + 1;
+    isEmpty.value ? emptyHeightInRows : (
+      computedTable.value.rows.length + HEADER_ROW_LENGTH
+    );
 
   return rowsLength * initialRowHeight;
 });
