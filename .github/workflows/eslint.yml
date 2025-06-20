@@ -1,8 +1,8 @@
-name: prettier
+name: eslint
 on: [push]
 permissions: {}
 jobs:
-  prettier:
+  eslint:
     runs-on: macos-14
     steps:
       - uses: actions/setup-node@v4
@@ -13,7 +13,5 @@ jobs:
       - name: Install specific npm version
         run: npm install -g npm@11.4.2
       - uses: actions/checkout@v4
-      - name: Prettier Check
-      - run: |
-          npm ci --audit false --fund false
-          npm run prettierCheck
+      - name: Eslint Check
+      - run: npm run lint
