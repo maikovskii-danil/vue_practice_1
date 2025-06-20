@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.16.0'
+      - name: Install specific npm version
+        run: npm install -g npm@11.4.2
       - uses: actions/checkout@v4
       - run: |
           npm ci --audit false --fund false
