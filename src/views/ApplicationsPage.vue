@@ -27,7 +27,7 @@
         type="primary"
         title="Успешно!"
         text="Заявка создана"
-        class="fixed w-175 top-6 right-6"
+        class="fixed z-2 w-175 top-6 right-6"
         @close="isSuccessfullyCreated = false"
       />
     </Teleport>

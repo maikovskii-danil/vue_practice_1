@@ -11,5 +11,13 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    extensions: ['.js', '.ts', '.json'],
+  },
+  envPrefix: 'APP_',
+  appType: 'spa',
+  server: {
+    port: 5173,
+    strictPort: true,
+    open: true,
   },
 });
