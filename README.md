@@ -58,7 +58,7 @@ npm start
 
 ###### Перед `"start"` npm запустит `npm clean-install`
 
-### Project Setup & Type-Check, Compile and Minify for Production
+### Project Setup, Compile and Minify for Production
 
 ```sh
 npm run build
