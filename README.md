@@ -25,8 +25,6 @@
 
 ##### После запустите `npm install`
 
-##### В поле "engines" в package.json также содержатся подробности о поддерживаемых версиях NodeJS и npm
-
 ## How to sign in (данные для входа)
 
 - email: 'some.user@automation.testing'
