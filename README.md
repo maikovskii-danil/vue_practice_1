@@ -1,9 +1,27 @@
-# 🌗 My Vue.js App
+# 🌗 Pet-проект на Vue: Демо UI + Honeypot
 
 ![Светлая тема](./screenshots/light.png)
 ![Тёмная тема](./screenshots/dark.png)
 
-## About Enviroment
+## 🧰 Stack
+
+- Vue 3 + Composition API
+- Vue Router
+- Pinia
+- TypeScript
+- Vite
+- TailwindCSS + тёмная/светлая тема
+- ESLint, Prettier
+- GitHub Actions + Vercel (деплой)
+
+## ⚙️ Features
+
+- Ручная настройка Vite (alias, envPrefix, paths и т.д.)
+- Honeypot `.env.fake` доступен по прямой ссылке
+- Собственный uikit
+- ESLint + Prettier (ручная конфигурация)
+
+## 🛠 About Enviroment
 
 🖥️ Проект разработан и протестирован на macOS/linux для Chrome (Рекомендованная ширина экрана: 1440px)
 
@@ -25,10 +43,12 @@
 
 ##### После запустите `npm install`
 
-## How to sign in (данные для входа)
+## 🔐 Авторизация
 
-- email: 'some.user@automation.testing'
-- password: '123456'
+Авторизация работает с фейковыми учётными данными (имитация входа).
+
+- Email: `some.user@automation.testing`
+- Password: `123456`
 
 ### Project Setup & Compile and Hot-Reload for Development
 
@@ -47,3 +67,8 @@ npm run build
 ###### Перед `"build"` npm запустит `npm clean-install`
 
 ###### Есть honeypot-утечка .env в проекте, чисто ради фана. Но при этом всё по уму и безопасно.
+
+###### Если что-то заинтересовало — можете написать мне.
+
+- maikovsky.danil@gmail.com
+- Telegram: [@danilmaikovsky](https://t.me/danilmaikovsky)
