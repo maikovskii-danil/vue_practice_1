@@ -9,7 +9,10 @@ import type { TUserData } from '@/types';
 const useUserStore = defineStore('user', () => {
   const router = useRouter();
 
-  const currentUser = useStorage('user-storage', { email: '', password: '' });
+  const currentUser = useStorage('user-storage', {
+    email: '',
+    password: '',
+  });
 
   const isLoggedIn = computed(() =>
     Boolean(currentUser.value.email && currentUser.value.password),
@@ -20,18 +23,17 @@ const useUserStore = defineStore('user', () => {
     const foundUser: TUserData | undefined =
       REGISTERED_USERS_DATA_MAP[user.email];
 
-    const isValidUser =
-      Boolean(foundUser) && foundUser.password === user.password;
+    const isInvalidEmail = Boolean(!foundUser);
     const isInvalidPassword = foundUser?.password !== user.password;
 
     let errorValue: string;
 
-    if (isValidUser) {
-      errorValue = '';
+    if (isInvalidEmail) {
+      errorValue = 'Нет пользователя с таким email';
     } else if (isInvalidPassword) {
       errorValue = 'Неверный пароль';
     } else {
-      errorValue = 'Нет пользователя с таким email';
+      errorValue = '';
     }
 
     error.value = errorValue;
