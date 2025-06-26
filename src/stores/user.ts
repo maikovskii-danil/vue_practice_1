@@ -17,21 +17,26 @@ const useUserStore = defineStore('user', () => {
   const error = ref('');
 
   const apiValidation = (user: TUserData) => {
-    const foundUser = REGISTERED_USERS_DATA_MAP[user.email];
+    const foundUser: TUserData | undefined =
+      REGISTERED_USERS_DATA_MAP[user.email];
 
     const isValidUser =
       Boolean(foundUser) && foundUser.password === user.password;
-    const isInvalidPassword = foundUser.password !== user.password;
+    const isInvalidPassword = foundUser?.password !== user.password;
+
+    let errorValue: string;
 
     if (isValidUser) {
-      error.value = '';
+      errorValue = '';
     } else if (isInvalidPassword) {
-      error.value = 'Неверный пароль';
+      errorValue = 'Неверный пароль';
     } else {
-      error.value = 'Нет пользователя с таким email';
+      errorValue = 'Нет пользователя с таким email';
     }
 
-    return !error.value;
+    error.value = errorValue;
+
+    return !errorValue;
   };
 
   const login = (user: TUserData) => {
