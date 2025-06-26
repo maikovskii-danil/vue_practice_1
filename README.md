@@ -16,7 +16,7 @@
 
 ## ⚙️ Features
 
-- Ручная настройка Vite (alias, envPrefix, paths и т.д.)
+- Ручная настройка Vite
 - Honeypot `.env.fake` доступен по прямой ссылке
 - Собственный uikit
 - ESLint + Prettier (ручная конфигурация)
