@@ -29,7 +29,6 @@
     "zod": "^3.25.63"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
     "@maikovskii-danil/eslint-config-js": "^4.0.1",
     "@maikovskii-danil/prettier-config-vue": "^3.0.0",
     "@tailwindcss/vite": "^4.1.10",
