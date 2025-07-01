@@ -71,6 +71,11 @@ const formData = reactive<ToString<typeof initialForm>>({
 });
 const formErrors = ref({ name: '', phone: '', amount: '' });
 
+const isFormErrorKey = (
+  key: string | number,
+): key is keyof typeof formErrors.value =>
+  typeof key === 'string' && Object.keys(formErrors.value).includes(key);
+
 const submit = () => {
   const preparedToSubmitFormData = {
     ...formData,
@@ -87,8 +92,11 @@ const submit = () => {
     const foundErrors = { name: '', phone: '', amount: '' };
 
     error.errors.forEach((zodErrorRecord) => {
-      const key = zodErrorRecord.path[0] as keyof typeof foundErrors;
-      foundErrors[key] = zodErrorRecord.message;
+      const key = zodErrorRecord.path[0];
+
+      if (isFormErrorKey(key)) {
+        foundErrors[key] = zodErrorRecord.message;
+      }
     });
     formErrors.value = foundErrors;
   }

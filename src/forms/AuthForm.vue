@@ -45,6 +45,11 @@ const { initialForm } = defineProps<{ initialForm: TUserData }>();
 const userForm = reactive<TUserData>(initialForm);
 const formErrors = ref({ email: '', password: '' });
 
+const isFormErrorKey = (
+  key: string | number,
+): key is keyof typeof formErrors.value =>
+  typeof key === 'string' && Object.keys(formErrors.value).includes(key);
+
 const submit = () => {
   const { success, error } = userSchema.safeParse(userForm);
 
@@ -54,8 +59,10 @@ const submit = () => {
     const foundErrors = { email: '', password: '' };
 
     error.errors.forEach((zodErrorRecord) => {
-      const key = zodErrorRecord.path[0] as keyof typeof foundErrors;
-      foundErrors[key] = zodErrorRecord.message;
+      const key = zodErrorRecord.path[0];
+      if (isFormErrorKey(key)) {
+        foundErrors[key] = zodErrorRecord.message;
+      }
     });
     formErrors.value = foundErrors;
   }
