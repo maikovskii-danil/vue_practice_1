@@ -16,7 +16,14 @@ export default defineConfig({
   envPrefix: 'APP_',
   appType: 'spa',
   server: {
+    host: false,
     port: 5173,
+    strictPort: true,
+    open: true,
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 5174,
     strictPort: true,
     open: true,
   },

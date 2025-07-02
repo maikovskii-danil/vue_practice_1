@@ -8,6 +8,8 @@
   "scripts": {
     "prestart": "npm clean-install --fund false; npx kill-port 5173",
     "start": "vite --port 5173",
+    "prepreview": "npm clean-install --fund false; vite build --sourcemap; npx kill-port 5174",
+    "preview": "vite preview --port 5174",
     "prebuild": "npm clean-install --fund false",
     "build": "npm run buildOnly",
     "buildOnly": "vite build",
