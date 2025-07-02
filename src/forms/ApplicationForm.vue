@@ -71,10 +71,13 @@ const formData = reactive<ToString<typeof initialForm>>({
 });
 const formErrors = ref({ name: '', phone: '', amount: '' });
 
-const isFormErrorKey = (
-  key: string | number,
-): key is keyof typeof formErrors.value =>
-  typeof key === 'string' && Object.keys(formErrors.value).includes(key);
+const isFormErrorKey = (key: unknown): key is keyof typeof formErrors.value => {
+  if (typeof key !== 'string') {
+    return false;
+  }
+
+  return key in formErrors.value;
+};
 
 const submit = () => {
   const preparedToSubmitFormData = {
