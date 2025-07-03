@@ -30,21 +30,20 @@ const routes = Object.entries(pages)
       return null;
     }
 
-    return {
+    const route: RouteRecordRaw = {
       path: `/${fileName}`,
       name: fileName,
       ...(isPageMetaKey(fileName) ? pageMeta[fileName] : {}),
       component: loader,
     };
+
+    return route;
   })
-  .filter(Boolean);
+  .filter((route): route is Exclude<typeof route, null> => route !== null);
 
 const options: RouterOptions = {
   history: createWebHistory(),
-  routes: [
-    ...(routes as RouteRecordRaw[]),
-    { path: '/:notFound(.*)', redirect: '/' },
-  ],
+  routes: [...routes, { path: '/:notFound(.*)', redirect: '/' }],
 };
 
 const router = createRouter(options);
