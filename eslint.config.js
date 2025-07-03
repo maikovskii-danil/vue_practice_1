@@ -30,4 +30,10 @@ export default defineConfig([
     },
     languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
+  {
+    files: ['src/views/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 0,
+    },
+  },
 ]);
