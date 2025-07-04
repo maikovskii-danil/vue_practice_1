@@ -4,10 +4,14 @@ import {
   createRouter,
   createWebHistory,
 } from 'vue-router';
+import type { Component } from 'vue';
 
 import useUserStore from './stores/user';
 
-const pages = import.meta.glob('./views/*.vue');
+const pages = import.meta.glob('./views/*.vue', { eager: true }) as Record<
+  string,
+  { default: Component }
+>;
 
 const pageMeta = {
   applications: {
@@ -23,7 +27,7 @@ const isPageMetaKey = (fileName: string): fileName is keyof typeof pageMeta =>
   fileName in pageMeta;
 
 const routes = Object.entries(pages)
-  .map(([path, loader]) => {
+  .map(([path, component]) => {
     const fileName = path.match(/\.\/views\/(.*)\.vue$/)?.[1];
 
     if (!fileName) {
@@ -34,7 +38,7 @@ const routes = Object.entries(pages)
       path: `/${fileName}`,
       name: fileName,
       ...(isPageMetaKey(fileName) ? pageMeta[fileName] : {}),
-      component: loader,
+      component: component.default,
     };
 
     return route;
