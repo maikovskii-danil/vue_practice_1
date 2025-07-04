@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --spacing: 2px;
 }
-
-@custom-variant dark (&:where([color-scheme=dark], [color-scheme=dark] *));
 
 #app {
   margin: 0 auto;

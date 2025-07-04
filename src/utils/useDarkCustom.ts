@@ -3,9 +3,9 @@ import { useDark, useToggle } from '@vueuse/core';
 const useDarkCustom = () => {
   const isDark = useDark({
     selector: 'html',
-    attribute: 'color-scheme',
+    attribute: 'class',
     valueDark: 'dark',
-    valueLight: 'light',
+    valueLight: '',
   });
   const toggleIsDark = useToggle(isDark);
 
