@@ -11,8 +11,13 @@ import * as UIFramework from '@maikovskii-danil/ui-framework-vue';
 const pinia = createPinia();
 const app = createApp(App);
 
+const isUIFrameworkKey = (
+  key: unknown,
+): key is keyof typeof UIFramework & string =>
+  typeof key === 'string' && key in UIFramework;
+
 Object.keys(UIFramework).forEach((key: keyof typeof UIFramework) => {
-  if (typeof key === 'string') {
+  if (isUIFrameworkKey(key)) {
     app.component(key, UIFramework[key]);
   }
 });
