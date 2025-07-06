@@ -11,8 +11,10 @@ import * as UIFramework from '@maikovskii-danil/ui-framework-vue';
 const pinia = createPinia();
 const app = createApp(App);
 
-Object.keys(UIFramework).forEach((key) => {
-  app.component(key, UIFramework[key]);
+Object.keys(UIFramework).forEach((key: keyof typeof UIFramework) => {
+  if (typeof key === 'string') {
+    app.component(key, UIFramework[key]);
+  }
 });
 
 app.use(pinia).use(router).mount('#app');
