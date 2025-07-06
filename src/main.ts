@@ -16,7 +16,7 @@ const isUIFrameworkKey = (
 ): key is keyof typeof UIFramework & string =>
   typeof key === 'string' && key in UIFramework;
 
-Object.keys(UIFramework).forEach((key: keyof typeof UIFramework) => {
+Object.keys(UIFramework).forEach((key) => {
   if (isUIFrameworkKey(key)) {
     app.component(key, UIFramework[key]);
   }
