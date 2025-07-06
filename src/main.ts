@@ -5,26 +5,14 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 
-import {
-  AppAlert,
-  AppButton,
-  AppInput,
-  AppModal,
-  AppSelect,
-  AppTable,
-} from '@maikovskii-danil/ui-framework-vue';
 import router from './router';
+import * as UIFramework from '@maikovskii-danil/ui-framework-vue';
 
 const pinia = createPinia();
 const app = createApp(App);
 
-app
-  .component('AppButton', AppButton)
-  .component('AppInput', AppInput)
-  .component('AppSelect', AppSelect)
-  .component('AppAlert', AppAlert)
-  .component('AppModal', AppModal)
-  .component('AppTable', AppTable)
-  .use(pinia)
-  .use(router)
-  .mount('#app');
+Object.keys(UIFramework).forEach((key) => {
+  app.component(key, UIFramework[key]);
+});
+
+app.use(pinia).use(router).mount('#app');
