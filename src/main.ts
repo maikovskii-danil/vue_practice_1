@@ -5,23 +5,37 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 
+import {
+  AppAlert,
+  AppButton,
+  AppInput,
+  AppModal,
+  AppSelect,
+  AppTable,
+} from '@maikovskii-danil/ui-framework-vue';
 import router from './router';
-import * as UIFramework from '@maikovskii-danil/ui-framework-vue';
 
 const pinia = createPinia();
 const app = createApp(App);
 
-const isUIFrameworkKey = (
-  key: unknown,
-): key is keyof typeof UIFramework & string =>
-  typeof key === 'string' && key in UIFramework;
-
-Object.keys(UIFramework).forEach((key) => {
-  if (isUIFrameworkKey(key)) {
-    app.component(key, UIFramework[key]);
+declare module 'vue' {
+  interface GlobalComponents {
+    AppButton: typeof AppButton;
+    AppInput: typeof AppInput;
+    AppSelect: typeof AppSelect;
+    AppAlert: typeof AppAlert;
+    AppModal: typeof AppModal;
+    AppTable: typeof AppTable;
   }
-});
+}
 
-app.use(pinia);
-app.use(router);
-app.mount('#app');
+app
+  .component('AppButton', AppButton)
+  .component('AppInput', AppInput)
+  .component('AppSelect', AppSelect)
+  .component('AppAlert', AppAlert)
+  .component('AppModal', AppModal)
+  .component('AppTable', AppTable)
+  .use(pinia)
+  .use(router)
+  .mount('#app');
