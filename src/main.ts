@@ -22,4 +22,6 @@ Object.keys(UIFramework).forEach((key) => {
   }
 });
 
-app.use(pinia).use(router).mount('#app');
+app.use(pinia);
+app.use(router);
+app.mount('#app');
