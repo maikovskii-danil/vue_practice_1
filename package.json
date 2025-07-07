@@ -35,7 +35,7 @@
   "devDependencies": {
     "@maikovskii-danil/eslint-config-js": "^4.0.1",
     "@maikovskii-danil/prettier-config-vue": "^3.0.0",
-    "@maikovskii-danil/ui-framework-vue": "^1.0.0-alpha.2",
+    "@maikovskii-danil/ui-framework-vue": "^1.0.0",
     "@tailwindcss/vite": "^4.1.10",
     "@tsconfig/node22": "^22.0.1",
     "@types/node": "^22.15.31",

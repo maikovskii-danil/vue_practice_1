@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@source '../../node_modules/@maikovskii-danil/ui-framework-vue';
+@source '../../node_modules/@maikovskii-danil/ui-framework-vue/dist/index.js';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
