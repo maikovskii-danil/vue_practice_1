@@ -1,5 +1,7 @@
 # 🌗 Pet-проект на Vue: Демо UI + Honeypot
 
+###### [Ссылка на Vercel деплой](https://vue-practice-1-lilac.vercel.app/)
+
 ![Светлая тема](./screenshots/light.png)
 ![Тёмная тема](./screenshots/dark.png)
 
