@@ -5,12 +5,14 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 
-import AppAlert from './uikit/app-alert.vue';
-import AppButton from './uikit/app-button.vue';
-import AppInput from './uikit/app-input.vue';
-import AppModal from './uikit/app-modal.vue';
-import AppSelect from './uikit/app-select.vue';
-import AppTable from './uikit/app-table.vue';
+import {
+  AppAlert,
+  AppButton,
+  AppInput,
+  AppModal,
+  AppSelect,
+  AppTable,
+} from '@maikovskii-danil/ui-framework-vue';
 import router from './router';
 
 const pinia = createPinia();

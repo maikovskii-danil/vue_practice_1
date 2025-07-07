@@ -24,10 +24,11 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
+    "@maikovskii-danil/ui-framework-vue": "^1.0.0",
     "@vueuse/core": "^13.2.0",
     "currency.js": "^2.0.4",
     "pinia": "^3.0.2",
-    "tailwindcss": "^4.1.7",
+    "tailwindcss": "^4.1.11",
     "vue": "^3.5.16",
     "vue-router": "^4.5.1",
     "zod": "^3.25.63"

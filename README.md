@@ -18,7 +18,7 @@
 
 - Ручная настройка Vite
 - Honeypot `.env.fake` доступен по прямой ссылке
-- Собственный uikit
+- Собственный [ui framework](https://www.npmjs.com/package/@maikovskii-danil/ui-framework-vue)
 - ESLint + Prettier (ручная конфигурация)
 
 ## 🛠 About Enviroment
