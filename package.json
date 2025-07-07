@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
-    "@maikovskii-danil/ui-framework-vue": "^1.0.0",
+    "@maikovskii-danil/ui-framework-vue": "^1.0.1",
     "@vueuse/core": "^13.2.0",
     "currency.js": "^2.0.4",
     "pinia": "^3.0.2",
@@ -34,7 +34,7 @@
     "zod": "^3.25.63"
   },
   "devDependencies": {
-    "@maikovskii-danil/eslint-config-js": "^4.0.1",
+    "@maikovskii-danil/eslint-config-js": "^4.0.2",
     "@maikovskii-danil/prettier-config-vue": "^3.0.0",
     "@tailwindcss/vite": "^4.1.10",
     "@tsconfig/node22": "^22.0.1",
