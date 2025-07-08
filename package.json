@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.5",
-    "@maikovskii-danil/ui-framework-vue": "^1.1.1",
+    "@maikovskii-danil/ui-framework-vue": "^2.0.0",
     "@vueuse/core": "^13.2.0",
     "currency.js": "^2.0.4",
     "pinia": "^3.0.2",
