@@ -10,6 +10,7 @@
         <div class="w-250 p-6 rounded-xl bg-white dark:bg-gray-700">
           <h3 class="text-2xl pt-8 dark:text-gray-100">Создать заявку</h3>
           <ApplicationForm
+            :key="String(isOpenedModal)"
             :initial-form="{
               name: '',
               phone: '',
