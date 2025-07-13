@@ -8,6 +8,7 @@ import App from './App.vue';
 import {
   AppAlert,
   AppButton,
+  AppDropdown,
   AppInput,
   AppModal,
   AppSelect,
@@ -20,20 +21,22 @@ const app = createApp(App);
 
 declare module 'vue' {
   interface GlobalComponents {
+    AppAlert: typeof AppAlert;
     AppButton: typeof AppButton;
+    AppDropdown: typeof AppDropdown;
     AppInput: typeof AppInput;
     AppSelect: typeof AppSelect;
-    AppAlert: typeof AppAlert;
     AppModal: typeof AppModal;
     AppTable: typeof AppTable;
   }
 }
 
 app
+  .component('AppAlert', AppAlert)
   .component('AppButton', AppButton)
+  .component('AppDropdown', AppDropdown)
   .component('AppInput', AppInput)
   .component('AppSelect', AppSelect)
-  .component('AppAlert', AppAlert)
   .component('AppModal', AppModal)
   .component('AppTable', AppTable)
   .use(pinia)
